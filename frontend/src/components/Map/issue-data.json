@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "Issue One",
+      "content": "This is an issue",
+      "category": "damage",
+      "latitude": 47.3769,
+      "longitude": 8.5417
+    },
+    {
+      "id": 2,
+      "title": "Issue Two",
+      "content": "This is an issue",
+      "category": "graffiti",
+      "latitude": 47.3809,
+      "longitude": 8.5417
+    },
+    {
+      "id": 3,
+      "title": "Issue Three",
+      "content": "This is an issue",
+      "category": "items with no owner",
+      "latitude": 47.3849,
+      "longitude": 8.5417
+    },
+    {
+      "id": 4,
+      "title": "Issue Four",
+      "content": "This is an issue",
+      "category": "litter",
+      "latitude": 47.3889,
+      "longitude": 8.5417
+    },
+    {
+      "id": 5,
+      "title": "Issue Five",
+      "content": "This is an issue",
+      "category": "damages",
+      "latitude": 47.3929,
+      "longitude": 8.5417
+    },
+    {
+      "id": 6,
+      "title": "Issue Six",
+      "content": "i can see a really ugly graffiti",
+      "category": "graffiti",
+      "latitude": 47.3969,
+      "longitude": 8.5417
+    }
+  ]
+}

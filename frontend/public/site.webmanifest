@@ -1,0 +1,20 @@
+{
+    "name": "FixMyCity",
+    "short_name": "FixMyCity",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#fffdf8",
+    "background_color": "#fffdf8",
+    "start_url": "https://fix-my-city.propulsion-learn.ch",
+    "display": "standalone"
+}

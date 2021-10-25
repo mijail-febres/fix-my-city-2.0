@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  backend:
+    image: fix_my_city_dev_image:latest
+    ports:
+      - 8000:8000
+    env_file:
+      - ./env/dev.env
+    volumes:
+      - ./backend:/backend
+      - media-files:/media-files
+      - static-files:/static-files
+    command: "tail -f /dev/null"
+    #command: "sh /scripts/dev.sh"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13
+    ports:
+      - 5432:5432
+    env_file:
+      - ./env/dev.env
+    volumes:
+    - postgres_volume:/var/lib/postgresql/data
+
+volumes:
+  postgres_volume:
+  static-files:
+  media-files:
+  frontend:
+
