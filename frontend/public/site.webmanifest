@@ -15,6 +15,6 @@
     ],
     "theme_color": "#fffdf8",
     "background_color": "#fffdf8",
-    "start_url": "https://fix-my-city.propulsion-learn.ch",
+    "start_url": "https://fix-my-city.app.propulsion-learn.ch",
     "display": "standalone"
 }
