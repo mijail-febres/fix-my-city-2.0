@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.http import HttpResponse
-from rest_framework.generics import CreateAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, UpdateAPIView, GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from registration.models import Registration, code_generator
-from registration.serializers import RegistrationSerializer, ValidationSerializer
+from registration.serializers import RegistrationSerializer, ValidationSerializer, PasswordResetSerializer, PasswordResetValidationSerializer
 from project.settings import DEFAULT_FROM_EMAIL
 
 User = get_user_model()
@@ -43,59 +44,41 @@ class ValidationView(UpdateAPIView):
         return Response(status.HTTP_200_OK)
 
 
-class PasswordResetView(CreateAPIView):
-    serializer_class = RegistrationSerializer
+class PasswordResetView(GenericAPIView):
+    serializer_class = PasswordResetSerializer
     permission_classes = []
 
     def post(self, request, *args, **kwargs):
-        registration = User.objects.get(email=request.data['email']).registration
-        registration.subject = "P"
-        if registration.is_used:
-            new_code = code_generator()
-            registration.code = new_code
-            registration.is_used = False
-            registration.save()
-            send_mail(
-                'fixmycity password reset',
-                f'Here is your password reset code: {new_code}. You will need it to change your password.',
-                DEFAULT_FROM_EMAIL,
-                [request.data['email']],
-                fail_silently=False,
-            )
-        else:
-            registration.save()
-            send_mail(
-                'fixmycity password reset',
-                f'Here is your password reset code: {registration.code}. You will need it to change your password.',
-                DEFAULT_FROM_EMAIL,
-                [request.data['email']],
-                fail_silently=False,
-            )
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        instance = Registration.objects.get(email=request.data['email'])
+        instance.code = code_generator()
+        instance.save()
+        send_mail(
+            'fixmycity password reset',
+            f'Here is your password reset code: {instance.code}. You will need it to change your password.',
+            DEFAULT_FROM_EMAIL,
+            [request.data['email']],
+            fail_silently=False,
+        )
         return HttpResponse(status=201)
 
 
-class PasswordResetValidationView(UpdateAPIView):
-    serializer_class = ValidationSerializer
+class PasswordResetValidationView(GenericAPIView):
+    serializer_class = PasswordResetValidationSerializer
     permission_classes = []
 
-    def get_object(self):
-        return User.objects.get(email=self.request.data['email'])
-
-    def patch(self, request, *args, **kwargs):
-        user = self.get_object()
-        if request.data['email'] == user.email:
-            if user.registration.code == request.data['code'] and user.registration.is_used is False:
-                if request.data['password'] == request.data['password_repeat']:
-                    user.set_password(request.data['password'])
-                else:
-                    return Response({'detail': 'password did not match'}, status=404)
-                user.save()
-                registration = user.registration
-                registration.is_used = True
-                registration.save()
-                serializer = self.get_serializer(user)
-                return Response(serializer.data)
-            else:
-                return Response({'detail': 'code is not correct'}, status=404)
-        else:
-            return Response({'detail': 'email is not correct'}, status=404)
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            user = User.objects.get(email=serializer.validated_data['email'])
+            user.password = make_password(serializer.validated_data['password'])
+            user.save()
+            send_mail(
+                'Password reset',
+                'Your password was successfully reset\nCongratulations!!!',
+                'team2.luna@gmail.com',
+                [request.data['email']],
+                fail_silently=False,
+            )
+            return Response(status.HTTP_200_OK)
