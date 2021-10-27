@@ -31,15 +31,15 @@ push latest:
     - docker tag "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" "$CI_REGISTRY_IMAGE":latest
     - docker push "$CI_REGISTRY_IMAGE":latest
 
-push dev:
-  stage: push
-  only:
-    - dev
-#  tags:
-#    - test
-  script:
-    - docker tag "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" "$CI_REGISTRY_IMAGE":dev
-    - docker push "$CI_REGISTRY_IMAGE":dev
+#push dev:
+#  stage: push
+#  only:
+#    - dev
+##  tags:
+##    - test
+#  script:
+#    - docker tag "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" "$CI_REGISTRY_IMAGE":dev
+#    - docker push "$CI_REGISTRY_IMAGE":dev
 
 push:
   stage: push
