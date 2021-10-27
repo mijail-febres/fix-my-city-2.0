@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from datetime import timedelta
+import ast
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1fce4kdo81rwkd^t2kah5xxh3$^*-@v1r9m2*bd!kpho2lk=yu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = ast.literal_eval(os.environ.get('DJANGO_DEBUG'))
 
 ALLOWED_HOSTS = ['*']
 
@@ -54,9 +55,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -66,15 +67,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'project.urls'
 
-CORS_ALLOWED_ORIGINS = [
-        "https://fix-my-city.propulsion-learn.ch",
-        "http://localhost:8000",
-        "http://localhost:3000",
-        "http://127.0.0.1:8000",
-        "http://127.0.0.1:3000",
-        "http://192.168.178.30:3000",
-        "http://192.168.1.9:3000"
-]
+# CORS_ALLOWED_ORIGINS = [
+#         "https://fix-my-city.app.propulsion-learn.ch",
+#         "http://localhost:8000",
+#         "http://localhost:3000",
+#         "http://127.0.0.1:8000",
+#         "http://127.0.0.1:3000",
+#         "http://192.168.178.30:3000",
+#         "http://192.168.1.9:3000"
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
     {

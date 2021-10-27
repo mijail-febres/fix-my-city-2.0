@@ -6,7 +6,7 @@ export const getToken = () => {
   return token;
 }
 
-const baseURL = "https://fix-my-city.propulsion-learn.ch/backend/api/";
+const baseURL = "https://fix-my-city.app.propulsion-learn.ch/backend/api/";
 
 const Axios = axios.create({
   baseURL: baseURL,

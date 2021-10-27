@@ -11,15 +11,15 @@ services:
       - ./backend:/backend
       - media-files:/media-files
       - static-files:/static-files
-    command: "tail -f /dev/null"
-    #command: "sh /scripts/dev.sh"
+#    command: "tail -f /dev/null"
+    command: "sh /scripts/dev.sh"
     depends_on:
       - postgres
 
   postgres:
     image: postgres:13
     ports:
-      - 5432:5432
+      - 5433:5432
     env_file:
       - ./env/dev.env
     volumes:

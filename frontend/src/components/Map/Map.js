@@ -215,7 +215,7 @@ const Map = (props) => {
   // useEffects
 
   useEffect(() => {
-    const urlIssues = `https://fix-my-city.propulsion-learn.ch/backend/api/issues/`;
+    const urlIssues = `https://fix-my-city.app.propulsion-learn.ch/backend/api/issues/`;
 
     fetch(urlIssues)
       .then((res) => res.json())
@@ -240,7 +240,7 @@ const Map = (props) => {
 
   // Fetching issues every time when fetchIssues has been changed
   useEffect(() => {
-    const urlIssues = `https://fix-my-city.propulsion-learn.ch/backend/api/issues/`;
+    const urlIssues = `https://fix-my-city.app.propulsion-learn.ch/backend/api/issues/`;
 
     fetch(urlIssues)
       .then((res) => res.json())
