@@ -1,93 +1,111 @@
 import styled from "styled-components";
+import {LoginSignUpButton} from "../../globalstyles/ButtonStyles";
+
 
 export const MainContainer = styled.div`
     display: flex;
-    justify-content: flex-start;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     width: 100vw;
-    background-color: ${(props) => props.theme.yellowColor};
-
-    #logoWrapper {
-        height: 30%; 
-        width: 100%;  
-        margin-top: 20px;
-        margin-left: 150px;  
-
-    }  
-
-    #titleWrapper {
-        height: 10%;
-        width: 100%;
-        margin-left: 150px; 
-        font-weight: bold;
-        font-size: 35px;
-        line-height: 41px;
-        color: #000000;
-    }
-    
-    #formWrapper {
-        margin-top: 50px;
-        height: 60%;
-        display: flex;
-        flex-direction: column;        
-        justify-content: flex-start;        
-        align-items: center;
-      
-        #inputWrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;            
-            align-items: center;
-
-            #emailField {
-                background-color: transparent;
-                border: none;
-                border-bottom: 2px solid black;              
-                width: 254px;
-                height: 51px;
-                margin-bottom: 20px;
-            }
-            #passwordField{                
-                width: 254px;
-                height: 51px;
-                background-color: transparent;
-                border: none;
-                border-bottom: 2px solid black;  
-                margin-bottom: 50px;   
-            }
-        }
-
-
-        #buttonAndImage{
-            #loginButton {
-            width: 125px;
-            height: 39px;
-            border-radius: 4px;
-            z-index: 1;        
-            border: none;
-            outline: none;
-            color: black;
-            background-color: white;
-        
-            &:active {
-                transform: translateY(4px);
-                }   
-            }
-            #house{
-            width: 250px;
-            height: auto;
-            position: fixed;
-            } 
-        }
-                
-    } 
-  
-    
+    background-color: ${(props) => props.theme.greyColor};
 `;
 
+export const Header = styled.div`
+    display:flex;
+    height: 35%;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+`;
 
+export const LogoWrapper = styled.img`
+    z-index: 0; 
+    opacity: 0.9;
 
+    @media (min-width: 800px) {
+        width: 100vw;
+    }
+`;
 
+export const Logo = styled.img`
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    z-index: 1;
+    filter: invert(29%) sepia(10%) saturate(2444%) hue-rotate(124deg) brightness(94%) contrast(86%);
+`;
+    
+
+export const FormWrapper = styled.form`
+    display: flex;
+    height: 50%;
+    flex-direction: column;             
+    align-items: center;
+    justify-content: space-around;
+`;
+
+export const TitleWrapper = styled.div`
+    width: 100%;
+    font-weight: bold;
+    font-size: ${(props) => props.theme.fontSizeM};
+    color: ${(props) => props.theme.darkGreyColor};
+`;
+
+export const InputWrapper = styled.div`
+    display: flex;
+    margin-top:5%;
+    flex-direction: column;
+    justify-content: center;            
+    align-items: center;
+`;
+
+export const EmailField = styled.input`
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid ${(props) => props.theme.darkGreyColor};
+    font-style: ${(props) => props.theme.greyColor};
+    font-size: ${(props) => props.theme.fontSizeM};              
+    width: 254px;
+    height: 51px;
+`;
+
+export const PasswordField = styled.input`                
+    width: 254px;
+    height: 51px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid ${(props) => props.theme.darkGreyColor}; 
+    font-size: ${(props) => props.theme.fontSizeM};   
+`;      
+
+export const ButtonAndImage = styled.div`
+`;
+
+export const LoginButton = styled(LoginSignUpButton)`
+    &:active {
+        transform: translateY(4px);
+        }    
+
+`;
+
+export const DontHaveAccount = styled.div`
+    display:flex;
+    height: 15%;
+    flex-direction: column;
+    align-items: center;
+`;
+
+export const Question = styled.div`
+    color: ${(props) => props.theme.darkGreyColor};
+    font-weight: bold;
+    font-size: ${(props) => props.theme.fontSizeM};
+    margin-bottom: 5px;
+`;
+
+export const CreateAccount = styled.div`
+    color: ${(props) => props.theme.greenColor};
+    font-weight: bold;
+    font-size: ${(props) => props.theme.fontSizeM};
+`;

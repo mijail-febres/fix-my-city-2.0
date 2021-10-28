@@ -4,11 +4,24 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Axios from "../../Axios/index";
-import { EmailPasswordField } from "../../globalstyles/Input";
-import { LoginSignUpButton } from "../../globalstyles/ButtonStyles";
 import fixmycitylogo from "../../assets/svgs/fixmycitylogonew.svg";
-import house from '../../../src/assets/svgs/logo_house.svg';
-import {MainContainer} from "./LoginStyled"
+import map from "../../../src/assets/images/map-login-large.png";
+import {
+  Header,
+  MainContainer, 
+  LogoWrapper,
+  Logo,
+  TitleWrapper,
+  FormWrapper,
+  InputWrapper,
+  EmailField,
+  PasswordField,
+  ButtonAndImage,
+  LoginButton,
+  DontHaveAccount,
+  Question,
+  CreateAccount
+} from "./LoginStyled"
 
 
 const Login = () => {
@@ -25,6 +38,11 @@ const Login = () => {
   const onPasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
+  const onCreateAccountClick = (event) => {
+    event.preventDefault();
+    //add link to account creation page
+  }
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
@@ -58,32 +76,36 @@ const Login = () => {
 
   return (
     <MainContainer>
-      <div id="logoWrapper">
-        <img src={fixmycitylogo} alt="logo" />
-      </div>
-      <div id="titleWrapper">
-        Welcome <br />
-        back.
-      </div>
-      <form id="formWrapper" onSubmit={onHandleSubmit}>
-        <div id="inputWrapper">
-          <input id="emailField"
-            placeholder="Email"
-            type="email"
-            required="This field is required"
-            onChange={onUsernameChange}
-          />
-          <input id="passwordField"
-            placeholder="Password"
-            type="password"
-            required="This field is required"
-            onChange={onPasswordChange}
-          />
-        </div>
-        <div id="buttonAndImage">
-          <button id="loginButton" type={"submit"}>Login</button>         
-        </div>        
-      </form>  
+        <Header>
+            <LogoWrapper src={map} alt="map Zurich"></LogoWrapper>
+            <Logo src={fixmycitylogo} alt="logo" />
+        </Header>
+        <FormWrapper onSubmit={onHandleSubmit}>
+            <TitleWrapper>
+              Log in to continue
+            </TitleWrapper>
+            <InputWrapper>
+              <EmailField
+                placeholder="Email"
+                type="email"
+                required="This field is required"
+                onChange={onUsernameChange}
+              />
+              <PasswordField
+                placeholder="Password"
+                type="password"
+                required="This field is required"
+                onChange={onPasswordChange}
+              />
+            </InputWrapper>
+            <ButtonAndImage>
+              <LoginButton type={"submit"}>Login</LoginButton>         
+            </ButtonAndImage>        
+        </FormWrapper>  
+        <DontHaveAccount>
+            <Question>Don't have an account yet?</Question>
+            <CreateAccount onClick={onCreateAccountClick}>Create account</CreateAccount>
+        </DontHaveAccount>
     </MainContainer>
   );
 };
