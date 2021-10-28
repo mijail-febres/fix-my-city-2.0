@@ -96,3 +96,16 @@ class GetIssuesByCategoryView(ListAPIView):
 
     def get_queryset(self):
         return Issue.objects.filter(category=self.kwargs['category'])
+
+
+class GetSolvedIssues(ListAPIView):
+    queryset = Issue.objects.filter(status='resolved')
+    serializer_class = IssueSerializer
+
+
+class GetSolvedIssuesByCategory(ListAPIView):
+    queryset = Issue.objects.all()
+    serializer_class = IssueSerializer
+
+    def get_queryset(self):
+        return Issue.objects.filter(category=self.kwargs['category'], status='resolved')
