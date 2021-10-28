@@ -3,16 +3,28 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+# Potential need to use choices for category
+
 
 def user_directory_path(instance, filename):
     return f'{instance.title}/{filename}'
 
+CATEGORY_CHOICES = [
+    ('litter', 'Litter'),
+    ('road_damage', 'Road Damage'),
+    ('damage_to_public_property', 'Damage to Public Property'),
+    ('graffiti', 'Graffiti'),
+    ('insects_and_animals', 'Insects and Animals'),
+    ('unmaintained_greenery', 'Unmaintained Greenery'),
+    ('street_sign_issues', 'Street Sign Issues'),
+    ('other', 'Other')
+]
 
 class Issue(models.Model):
     title = models.TextField(max_length=50)
     image = models.ImageField(upload_to=user_directory_path)
     content = models.TextField(max_length=300, null=True, blank=True)
-    category = models.TextField(max_length=300, default=None)
+    category = models.TextField(choices=CATEGORY_CHOICES, default='Litter')
     adress = models.TextField(max_length=300, default=None)
     zip = models.CharField(max_length=5)
     latitude = models.FloatField()
