@@ -1,18 +1,19 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
+from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
 
 from project.permissions import IsOwnerOrReadOnly
 from issue.models import Issue
 from issue.serializers import IssueSerializer, CreateIssueSerializer
+from issue.models import CATEGORY_CHOICES
 
 User = get_user_model()
 
 
 class CreateIssuesView(CreateAPIView):
-
     queryset = Issue.objects.all()
     serializer_class = CreateIssueSerializer
     permission_classes = [IsAuthenticated]
@@ -25,7 +26,6 @@ class CreateIssuesView(CreateAPIView):
 
 
 class ListIssuesView(ListAPIView):
-
     queryset = Issue.objects.all().exclude(status='resolved')
     serializer_class = IssueSerializer
     search_fields = ['title', 'category']
@@ -58,9 +58,9 @@ class ToggleUpvoteIssueView(UpdateAPIView):
         issue = self.get_object()
         user = self.request.user
 
-#        if user == issue.user:
-#            return Response({'error': 'Cannot upvote own post'},
-#                            status=status.HTTP_400_BAD_REQUEST)
+        #        if user == issue.user:
+        #            return Response({'error': 'Cannot upvote own post'},
+        #                            status=status.HTTP_400_BAD_REQUEST)
 
         if user in issue.upvoted_by.all():
             issue.upvoted_by.remove(user)
@@ -75,10 +75,24 @@ class ToggleUpvoteIssueView(UpdateAPIView):
 
 
 class ListUpvotedIssuesByUserView(ListAPIView):
-
     serializer_class = IssueSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         upvoted = self.request.user.upvoted_issues.all()
         return Issue.objects.filter(id__in=upvoted).order_by("-created")
+
+
+class ListCategoriesView(APIView):
+
+    def get(self, request):
+        categories_dict = {"categories": [x[1] for x in CATEGORY_CHOICES]}
+        return Response(categories_dict)
+
+
+class GetIssuesByCategoryView(ListAPIView):
+    serializer_class = IssueSerializer
+    queryset = Issue.objects.all()
+
+    def get_queryset(self):
+        return Issue.objects.filter(category=self.kwargs['category'])

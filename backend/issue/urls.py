@@ -1,6 +1,6 @@
 from django.urls import path
 from issue.views import CreateIssuesView, RetrieveUpdateDestroyIssueView, ListIssuesByUserView, ListIssuesView, \
-    ToggleUpvoteIssueView, ListUpvotedIssuesByUserView
+    ToggleUpvoteIssueView, ListUpvotedIssuesByUserView, ListCategoriesView, GetIssuesByCategoryView
 
 urlpatterns = [
     path('issues/new/', CreateIssuesView.as_view()),
@@ -9,4 +9,6 @@ urlpatterns = [
     path('issues/user/<int:pk>/', ListIssuesByUserView.as_view()),
     path('issues/upvote/<int:pk>/', ToggleUpvoteIssueView.as_view()),
     path('issues/upvoted/', ListUpvotedIssuesByUserView.as_view()),
+    path('issues/categories/', ListCategoriesView.as_view()),
+    path('issues/categories/<category>/', GetIssuesByCategoryView.as_view())
 ]
