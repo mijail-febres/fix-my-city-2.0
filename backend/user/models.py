@@ -6,6 +6,9 @@ def user_directory_path(instance, filename):
     return f'{instance.username}/{filename}'
 
 
+# Add a delete functionality that replicates to registration profile
+
+
 class User(AbstractUser):
     USERNAME_FIELD = 'email'
 

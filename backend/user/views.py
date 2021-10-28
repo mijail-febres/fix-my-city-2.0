@@ -1,5 +1,5 @@
 
-from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView
 from django.contrib.auth import get_user_model
 from project.permissions import IsOwnerOrReadOnly
 from user.serializers import UserSerializer
@@ -7,8 +7,7 @@ from user.serializers import UserSerializer
 User = get_user_model()
 
 
-class RetrieveUpdateMyUserProfileView(RetrieveUpdateAPIView):
-
+class RetrieveUpdateMyUserProfileView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsOwnerOrReadOnly]
 
@@ -41,4 +40,3 @@ class RetrieveUserByIdProfile(RetrieveAPIView):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
