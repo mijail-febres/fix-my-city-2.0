@@ -17,14 +17,18 @@ export const GlobalStyle = createGlobalStyle`
 export const defaultTheme = {
     
     // Colors:
-    redColor: '#E26236',
-    yellowColor: '#F8CE46',
-    blueColor: '#5D61F6',
+    blackColor: '#121212',
+    aquaColor: '#8affc1',
+    greenColor: '#329f5b',
+    brightGreenColor: '#5fff67',
+    darkGreenColor: '#245b55',
+    greyColor: '#f5f5f5',
+    darkGreyColor: '#A5A5A5',
 
     
-    // fontSizeS: "10px",
-    // fontSizeM: "14px",
-    // fontSizeL: "20px",
+    fontSizeS: "10px",
+    fontSizeM: "14px",
+    fontSizeL: "20px",
 
 
     // // Sizes

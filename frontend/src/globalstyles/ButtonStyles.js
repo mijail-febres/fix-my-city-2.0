@@ -27,19 +27,16 @@ export const SignUpButton = styled.button`
     left: 88px;
     top: 480px;
 `
-//smaller Login & Sign Up Button
+//smaller Login & Sign Up Button - Pearl rewrote this one
 export const LoginSignUpButton = styled.button`
-    position: absolute;
-    width: 125px;
+    width: 200px;
     height: 39px;
-    border-radius: 4px;
-    left: 117px;
-    top: 523px;
-    background: #5D61F6;    
+    border-radius: 20px;   
+    background-color: ${(props) => props.theme.greenColor};
     color: white;
-    display: grid;
     justify-items: center;
     align-items: center;
+    border: none;
 `
 //(Add filters to your search) (Apply filters) (Clear all) BUTTONS just the width must be changed!
 export const FilterButton = styled.button`
