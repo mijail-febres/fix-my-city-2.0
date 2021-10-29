@@ -41,7 +41,7 @@ const Login = () => {
 
   const onCreateAccountClick = (event) => {
     event.preventDefault();
-    //add link to account creation page
+    history.push(`/signup`)
   }
 
   const onHandleSubmit = async (e) => {
