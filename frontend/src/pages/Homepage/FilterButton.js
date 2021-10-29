@@ -129,9 +129,9 @@ const FilterButton = () => {
           </FilterContainer>
         </MainContainer>
       )}
-      <ReportButton onClick={() => setToggleFilter(true)}>
+      {/* <ReportButton onClick={() => setToggleFilter(true)}>
         Add filter to your search
-      </ReportButton>
+      </ReportButton> */}
     </>
   );
 };

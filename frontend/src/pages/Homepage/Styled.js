@@ -38,16 +38,17 @@ export const Search = styled.div`
   width: 85%;
   height: 40px;
   border-radius: 25px;
-  background-color: white;
+  background-color: ${(props) => props.theme.greyColor};
   text-align: center;
   border-bottom: 1px solid rgb(206, 206, 206);
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
 
   input {
     outline: none;
-    background-color: white;
+    background-color: ${(props) => props.theme.greyColor};
     border: none;
   }
 
