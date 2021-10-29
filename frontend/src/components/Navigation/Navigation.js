@@ -85,9 +85,9 @@ const Navigation = (props) => {
             <img id="leftArrow" src={leftArrow} alt="left_arrow"></img>
           </button>
         ) : null}
-        <button id="menu" onClick={menuIconOnClickHandler}>
+        {/* <button id="menu" onClick={menuIconOnClickHandler}>
           <img id="menu_img" src={MenuImage} alt="menu_icon"></img>
-        </button>
+        </button> */}
       </MainContainer>
       {showMenu && <Menu toggleShowMenu={toggleShowMenu} />}
     </>

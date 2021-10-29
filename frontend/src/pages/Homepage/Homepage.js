@@ -5,6 +5,7 @@ import { Main, ReportButton } from "./Styled";
 import Map from "../../components/Map/Map";
 import FilterButton from "./FilterButton";
 import { useDispatch } from "react-redux";
+import MenuFooter from "../../components/MenuFooter/MenuFooter";
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -17,18 +18,21 @@ const Homepage = () => {
   };
 
   return (
-    <Div100vh>
-      <Main>
-        <Map height={"100%"} width={"100%"} setCoordinates={setCoordinates} />
-        {coordinates === null ? (
-          <FilterButton />
-        ) : (
-          <ReportButton onClick={reportButtonOnClickHandler}>
-            Report
-          </ReportButton>
-        )}
-      </Main>
-    </Div100vh>
+    <>
+      <Div100vh>
+        <Main>
+          <Map height={"100%"} width={"100%"} setCoordinates={setCoordinates} />
+          {coordinates === null ? (
+            <FilterButton />
+          ) : (
+            <ReportButton onClick={reportButtonOnClickHandler}>
+              Report
+            </ReportButton>
+          )}
+        </Main>
+      </Div100vh>
+      <MenuFooter/>
+    </>
   );
 };
 
