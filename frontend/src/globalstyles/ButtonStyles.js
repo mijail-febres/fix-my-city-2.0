@@ -38,12 +38,3 @@ export const LoginSignUpButton = styled.button`
     align-items: center;
     border: none;
 `
-//(Add filters to your search) (Apply filters) (Clear all) BUTTONS just the width must be changed!
-export const FilterButton = styled.button`
-    position: absolute;
-    width: 181px;
-    height: 33px;
-    left: 90px;
-    top: 584px;
-`
-
