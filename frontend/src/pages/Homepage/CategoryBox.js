@@ -11,9 +11,12 @@ const CategoryBox = () => {
         <p>Category:</p>
           <select>   
             <option value="graffiti">[Hardcoded]Graffiti</option>
-            <option value="damages">[Hardcoded]Damages</option>
+            <option value="damage_to_public_property">[Hardcoded]Damage to public property</option>
             <option value="litter">[Hardcoded]Litter</option>
-            <option value="items with no owner">[Hardcoded]Items with no owner</option>
+            <option value="road_damage">[Hardcoded]Road Damage</option>
+            <option value="insects_and_animals">[Hardcoded]Insects and Animals</option>
+            <option value="unmaintained_greenery">[Hardcoded]Unmaintained Greenery</option>
+            <option value="street_sign_issues">[Hardcoded]Street Sign Issues</option>
           </select>
   
           {/* <p>Description:</p>

@@ -1,63 +1,24 @@
-import styled from "styled-components";
+import broken from "../../assets/images/broken.png";
+import damage from "../../assets/images/damage.png";
+import graffiti from "../../assets/images/graffiti.png";
+import insect from "../../assets/images/insect.png";
+import litter from "../../assets/images/litter.png";
+import plant from "../../assets/images/plant.png";
+import streetsign from "../../assets/images/street-sign.png";
+import {
+  AddressContainer,
+  FetchingContainer,
+  DateContainer,
+  UpvotesContainer,
+  InsectIcon,
+  LitterIcon,
+  GraffitiIcon,
+  PlantIcon,
+  StreetSignIcon,
+  DamageIcon,
+  BrokenIcon,
+} from "../IssueList/issuesComponentStyled";
 
-const AddressContainer = styled.div`
-  height: 96%;
-  width: 65%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 300;
-  padding-bottom: 3%;
-  padding-top: 3%;
-
-  .issue {
-    padding-top: 2%;
-    padding-bottom: 2%;
-    color: #e26236;
-  }
-`;
-
-const FetchingContainer = styled.div`
-  height: 10%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: solid black 2px;
-  margin-bottom: 20px;
-
-  .issue {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 16px;
-  }
-`;
-
-export const DateContainer = styled.div`
-  font-size: 14px;
-  font-weight: 300;
-  font-weight: bold;
-  margin-bottom: 1.5%;
-  margin-top: 1%;
-  padding-bottom: 5%;
-`;
-
-export const UpvotesContainer = styled.div`
-  height: 96%;
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: 3%;
-  padding-bottom: 3%;
-
-  p {
-    font-size: 13px;
-    font-weight: 300;
-    color: #e26236;
-  }
-`;
 
 const IssueComponent = (props) => {
   return (
@@ -72,6 +33,13 @@ const IssueComponent = (props) => {
         <AddressContainer>
           <p className="issue">{props.issue.title}</p>
           {props.issue.adress}, {props.issue.zip} {props.issue.city}
+          {props.issue.category === "insects and animals"? <InsectIcon src={insect} alt ="insect"/> : " "}
+          {props.issue.category === "litter"? <LitterIcon src={litter} alt ="litter"/> : " "}
+          {props.issue.category === "graffiti"? <GraffitiIcon src={graffiti} alt ="graffiti"/> : " "}
+          {props.issue.category === "damage_to_public_property"? <DamageIcon src={damage} alt ="damage"/> : " "}
+          {props.issue.category === "unmaintained_greenery"? <PlantIcon src={plant} alt ="plant"/> : " "}
+          {props.issue.category === "road_damage"? <BrokenIcon src={broken} alt ="broken road"/> : " "}
+          {props.issue.category === "street_sign_issues"? <StreetSignIcon src={streetsign} alt ="street sign"/> : " "}
         </AddressContainer>
 
         <UpvotesContainer>

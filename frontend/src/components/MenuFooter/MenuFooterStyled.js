@@ -60,7 +60,12 @@ export const IssueText = styled(Text)`
     font-weight : bold ;
 `
 
-export const IssueTextGrey = styled(Text)`
+export const IssuesText = styled(Text)`
+    color: ${(props) => props.theme.greenColor};  
+    font-weight : bold ;
+`
+
+export const IssueTextGreen = styled(Text)`
     display:flex;
     color: ${(props) => props.theme.greenColor};
     font-weight : bold ;

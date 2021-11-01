@@ -17,7 +17,7 @@ import {
     New,
     Issues,
     IssueText,
-    IssueTextGrey,
+    IssueTextGreen,
     Profile,
     Logo,
     Text,
@@ -96,7 +96,7 @@ const Homepage = () => {
                       <Text>Filter</Text>
                     </Filter>
                     <New>
-                      <IssueTextGrey>Choose Location To Report Issue</IssueTextGrey>
+                      <IssueTextGreen>Choose Location To Report Issue</IssueTextGreen>
                     </New>
                     <Issues>
                       <Logo src={list} alt="issues" onClick={handleListClick}/>
