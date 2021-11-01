@@ -1,6 +1,16 @@
 import styled from "styled-components";
 import { EmailPasswordField } from "../../globalstyles/Input";
-import { ReportButton } from "../../globalstyles/ButtonStyles";
+import { ReportButton, LoginSignUpButton } from "../../globalstyles/ButtonStyles";
+
+export const ProfilePage = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: ${(props) => props.theme.greyColor};
+`;
 
 export const Main = styled.div`
   width: 100%;
@@ -69,7 +79,7 @@ export const NameContainer = styled.div`
           font-weight: bold;
           font-size: 24px;
           line-height: 28px;
-          color: #e26236;
+          color: ${(props) => props.theme.greenColor};
         
         }
     }  
@@ -402,3 +412,9 @@ export const IconAndLevelContainer = styled.div`
   }
 
 `
+
+export const EditProfile = styled(LoginSignUpButton)`
+    &:active {
+        transform: translateY(4px);
+        }    
+`;

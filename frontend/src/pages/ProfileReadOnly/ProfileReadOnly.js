@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Main, SaveBox } from "./ProfileReadOnlyStyled";
+import { 
+  Main,
+  SaveBox,
+  ProfilePage,
+   } from "./ProfileReadOnlyStyled";
 import ProfileDetails from "./components/ProfileDetails";
 import ProfileMainInfoReadOnly from "./components/ProfileMainInfoReadOnly";
 import Navigation from "../../components/Navigation/Navigation";
@@ -26,7 +30,7 @@ const ProfileReadOnly = (props) => {
   
 
   return (
-    <>
+    <ProfilePage>
       <Navigation showBackButton={true} page={"profile"} />
       <Main>
         {userInfo.id ? (
@@ -40,7 +44,7 @@ const ProfileReadOnly = (props) => {
         ) : null}
         <SaveBox />
       </Main>
-    </>
+    </ProfilePage>
   );
 };
 export default ProfileReadOnly;
