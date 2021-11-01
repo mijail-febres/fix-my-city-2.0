@@ -8,6 +8,7 @@ import ReactMapGL, {
   NavigationControl,
   ScaleControl,
   FlyToInterpolator,
+  LinearInterpolator
 } from "react-map-gl";
 import useSupercluster from "use-supercluster";
 import "./Geocoder.css";
@@ -30,6 +31,8 @@ import PopupContent from "./Popup/PopupContent";
 import MoreDetails from "./Popup/MoreDetails";
 import Navigation from "../Navigation/Navigation";
 import { fetchProfileInfo } from "../../Axios/fetches";
+import { getBounds } from "viewport-mercator-project";
+import { getViewPort, findCentroid, findMaxDist  } from "./Calculations";
 
 const Map = (props) => {
   // Styles to place the buttons somewhere on the map (absolute position)
@@ -62,13 +65,18 @@ const Map = (props) => {
   // States & Ref & Selectors
 
   // Initial viewport for the first rendering
+//  const [viewport, setViewport] = useState({ // old initialization MFS 30.10.2021
+//    latitude: 47.3769,
+//    longitude: 8.5417,
+//    width: "100%",
+//    height: "100%",
+//    zoom: 15,
+//  });
   const [viewport, setViewport] = useState({
-    latitude: 47.3769,
-    longitude: 8.5417,
-    width: "100%",
-    height: "100%",
-    zoom: 15,
-  });
+    width: '100%',
+    height: '100vh',
+    ...getViewPort(47.3769,8.5417,0.2)
+  })
 
   const dispatch = useDispatch();
 
@@ -105,6 +113,12 @@ const Map = (props) => {
   // State to save the user's marker coordinates
   const [userMarker, setUserMarker] = useState(null);
 
+  // State that tells if a user marker has been set for the first time
+  const [userMarkerHappen, setUserMarkerHappen] = useState(-1);
+
+  // State that tells if a user marker is being dragged
+  const [userMarkerDrag, setUserMarkerDrag] = useState(false);
+
   // Prevents from modifing the cluster from userMarker
   const [expandCluster, setExpandCluster] = useState(false);
 
@@ -113,7 +127,7 @@ const Map = (props) => {
 
   // State to save the map styles
   const [mapStyle, setMapStyle] = useState(
-    "mapbox://styles/mapbox/streets-v11"
+    "mapbox://styles/mapbox/streets-v11?optimize=true"
   );
 
   // Toggling for refetching the issues
@@ -123,6 +137,28 @@ const Map = (props) => {
   const [toggleMoreDetails, setToggleMoreDetails] = useState(false);
 
   // Functions
+  const onMarkerDragStart = useCallback(event => {
+    setUserMarkerDrag(true)
+  }, []);
+
+  const onMarkerDrag = useCallback(event => {
+    setViewport({  // During issue location it's important only viewport and transition
+      ...viewport,
+      longitude: event.lngLat[0],
+      latitude: event.lngLat[1],
+      transitionInterpolator: new FlyToInterpolator(),
+      transitionDuration: 300,
+    });
+  }, []);
+
+  const onMarkerDragEnd = useCallback(event => {
+    setUserMarkerDrag(false)
+    setUserMarker({
+        id: 'user',
+        longitude: event.lngLat[0],
+        latitude: event.lngLat[1]
+    });
+  }, []);
   /*
   // Get the current location of the user & Set view (setViewport)
   const current_location = () => {
@@ -155,14 +191,16 @@ const Map = (props) => {
           latitude,
           longitude,
         });
+        setUserMarkerHappen(userMarkerHappen+1);
         setToggleUserMarker(true);
         setViewport({
           ...viewport,
-          latitude,
-          longitude,
-          zoom: 19,
+          ...getViewPort(latitude,longitude,0.05),
+          //latitude,
+          //longitude,
+          //zoom: 19,
           transitionInterpolator: new FlyToInterpolator(),
-          transitionDuration: 500,
+          transitionDuration: 800,
         });
         // } else if (userMarker && toggleUserMarker) {
         //   setUserMarker({
@@ -205,6 +243,7 @@ const Map = (props) => {
   const hideUserMarker = () => {
     setToggleUserMarker(true);
     setUserMarker(null);
+    setUserMarkerHappen(-1);
   };
 
   // Random id generator
@@ -268,9 +307,9 @@ const Map = (props) => {
   // It changes the map style from street to satellite if the satellite button is clicked on the map and back
   useEffect(() => {
     if (toggleSatellite) {
-      setMapStyle("mapbox://styles/mapbox/satellite-streets-v11");
+      setMapStyle("mapbox://styles/mapbox/satellite-streets-v11?optimize=true");
     } else {
-      setMapStyle("mapbox://styles/mapbox/streets-v11");
+      setMapStyle("mapbox://styles/mapbox/streets-v11?optimize=true");
     }
   }, [toggleSatellite]);
 
@@ -294,7 +333,8 @@ const Map = (props) => {
       );
       if (filteredArray.length >= 1) {
         setFilteredIssues(
-          issues.filter((issue) => issue.category === filterValueRedux)
+          [...filteredArray]
+          // issues.filter((issue) => issue.category === filterValueRedux)
         );
       } else {
         setFilteredIssues([]);
@@ -303,14 +343,14 @@ const Map = (props) => {
 
     setSelectedIssue(null);
 
-    if (viewport.zoom >= 10) {
-      setViewport({
-        ...viewport,
-        zoom: 12,
-        transitionInterpolator: new FlyToInterpolator(),
-        transitionDuration: 500,
-      });
-    }
+    //if (viewport.zoom >= 10) { // old-viewport MFS 30.10.2021
+    //  setViewport({
+    //    ...viewport,
+    //    zoom: 12,
+    //    transitionInterpolator: new FlyToInterpolator(),
+    //    transitionDuration: 500,
+    //  });
+    //}
   }, [filterValueRedux]);
 
   // Clustering
@@ -318,6 +358,7 @@ const Map = (props) => {
   // Prepare data for clustering (from json to geojson)
   useEffect(() => {
     if (filteredIssues.length > 0) {
+      console.log('ii',filteredIssues)
       setPoints(
         filteredIssues.map((issue) => ({
           type: "Feature",
@@ -344,6 +385,18 @@ const Map = (props) => {
           },
         }))
       );
+      const [lat,long] = findCentroid(filteredIssues);
+      let dist = 0.0;
+      if (filteredIssues.length === 1) {
+        dist = 0.05;
+      } else {
+        dist = findMaxDist(filteredIssues, [lat, long])
+      }
+      setViewport({
+        ...getViewPort(lat,long,dist),
+        transitionInterpolator: new FlyToInterpolator(),
+        transitionDuration: 900,
+      })
     }
   }, [filteredIssues]);
 
@@ -359,6 +412,13 @@ const Map = (props) => {
     options: { radius: 50, maxZoom: 20 },
   });
 
+  const handleOnResult = () =>{
+    
+  }
+
+  const onClickNewMarker = () => {
+    console.log('hehe')
+  }
   return (
     <>
       <MainContainer height={props.height} width={props.width}>
@@ -370,22 +430,54 @@ const Map = (props) => {
           mapStyle={mapStyle}
           onClick={handleMapClick}
           onViewportChange={(viewport) => {
-            if (toggleUserMarker && userMarker) {
-              setViewport({
-                ...viewport,
-                latitude: userMarker.latitude,
-                longitude: userMarker.longitude,
-                zoom: 19,
+            if (toggleUserMarker && userMarker && !userMarkerDrag) { // Click to create new issue
+              
+              console.log('mhapen',userMarkerHappen);
+              if (userMarkerHappen === 0) {
+                setViewport({ // MFS 30.10.2021
+                  ...getViewPort(userMarker.latitude,userMarker.longitude,0.05),
+                  transitionInterpolator: new FlyToInterpolator(),
+                  transitionDuration: 400,
+                });
+              } else {
+                setViewport({ // MFS 30.10.2021
+                  ...viewport,
+                  transitionInterpolator: new FlyToInterpolator(),
+                  transitionDuration: 400,
+                });
+
+              }
+              setViewport({ // MFS 30.10.2021
+                // ...viewport,
+                // latitude: userMarker.latitude,
+                // longitude: userMarker.longitude,
+                // zoom: 19,
+                ...getViewPort(userMarker.latitude,userMarker.longitude,0.05),
                 transitionInterpolator: new FlyToInterpolator(),
-                transitionDuration: 500,
+                transitionDuration: 400,
+              });
+            } else if (userMarkerDrag) {
+              console.log('drag')
+              setViewport({ // MFS 30.10.2021
+                ...viewport,
+                // latitude: userMarker.latitude,
+                // longitude: userMarker.longitude,
+                // zoom: 19,
+                // ...getViewPort(userMarker.latitude,userMarker.longitude,0.05),
+                transitionInterpolator: new FlyToInterpolator(),
+                transitionDuration: 400,
               });
             }
             setViewport(viewport);
           }}
-          scrollZoom={toggleUserMarker && userMarker ? false : true}
-          touchZoom={toggleUserMarker && userMarker ? false : true}
-          doubleClickZoom={toggleUserMarker && userMarker ? false : true}
+          // scrollZoom={toggleUserMarker && userMarker ? false : true}
+          scrollZoom={ {speed: 0.02, smooth: true}}
+          dragPan={{inertia: 900}}
+          // touchZoom={toggleUserMarker && userMarker ? false : true}
+          // doubleClickZoom={toggleUserMarker && userMarker ? false : true}
           width="100%"
+          // dragPan="false"
+          dragPan={{inertia : 30}}
           height="100%"
           maxZoom={20}
           ref={mapRef}
@@ -397,6 +489,7 @@ const Map = (props) => {
             mapboxApiAccessToken={MAPBOX_TOKEN}
             zoom={17}
             marker={false}
+            onResult={handleOnResult}
           />
           {/*<FullscreenControl style={fullscreenControlStyle} />*/}
           <GeolocateControl
@@ -557,6 +650,10 @@ const Map = (props) => {
                 longitude={userMarker.longitude}
                 offsetLeft={-18}
                 offsetTop={-30}
+                draggable
+                onDragStart={onMarkerDragStart}
+                onDrag={onMarkerDrag}
+                onDragEnd={onMarkerDragEnd}
               >
                 <MarkerImgStyle
                   src={BlueMarker}
@@ -564,15 +661,16 @@ const Map = (props) => {
                   onClick={(e) => {
                     e.preventDefault();
                     hideUserMarker();
-                    setViewport({
-                      ...viewport,
-                      latitude: userMarker.latitude,
-                      longitude: userMarker.longitude,
-                      zoom: 17,
-                      transitionInterpolator: new FlyToInterpolator(),
-                      transitionDuration: 500,
-                    });
                   }}
+                  //   setViewport({
+                  //     ...viewport,
+                  //     latitude: userMarker.latitude,
+                  //     longitude: userMarker.longitude,
+                  //     zoom: 17,
+                  //     transitionInterpolator: new FlyToInterpolator(),
+                  //     transitionDuration: 500,
+                  //   });
+                  // }}
                   style={{ cursor: "auto" }}
                 />
               </Marker>
