@@ -18,8 +18,12 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=20, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
     email = models.EmailField(unique=True)
+    home_address = models.CharField(max_length=100, null=True, blank=True)
+    home_latitude = models.FloatField(null=True, blank=True)
+    home_longitude = models.FloatField(null=True, blank=True)
     profile_picture = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
     points = models.IntegerField(default=0)
+    notifications = models.BooleanField(default=False)
 
     @property
     def status(self):
