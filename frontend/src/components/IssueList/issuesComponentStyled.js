@@ -1,5 +1,24 @@
 import styled from "styled-components";
 
+export const FetchingContainer = styled.div`
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid ${(props) => props.theme.darkGreyColor} 1px;
+  margin-bottom: 20px;
+
+  .issue {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 16px;
+  }
+`;
+
+export const Category = styled.div`
+`;
+
 export const AddressContainer = styled.div`
   height: 96%;
   width: 65%;
@@ -14,23 +33,7 @@ export const AddressContainer = styled.div`
   .issue {
     padding-top: 2%;
     padding-bottom: 2%;
-    color: #e26236;
-  }
-`;
-
-export const FetchingContainer = styled.div`
-  height: 10%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: solid black 2px;
-  margin-bottom: 20px;
-
-  .issue {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 16px;
+    color: ${(props) => props.theme.greenColor};
   }
 `;
 
@@ -55,13 +58,13 @@ export const UpvotesContainer = styled.div`
   p {
     font-size: 13px;
     font-weight: 300;
-    color: #e26236;
+    color: ${(props) => props.theme.greenColor};
+    font-weight: bold;
   }
 `;
 
 export const InsectIcon = styled.img`
-    width: 20px;
-    border-radius: 10px;
+     width: 30px;
 `;
 
 export const LitterIcon = styled(InsectIcon)`

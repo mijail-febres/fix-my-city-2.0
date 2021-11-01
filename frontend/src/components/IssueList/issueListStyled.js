@@ -25,4 +25,5 @@ export const Title = styled.div`
   width: 100%;
   font-size: 25px;
   font-weight: bold;
+  color: ${(props) => props.theme.darkGreyColor};
 `;
