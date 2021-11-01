@@ -30,6 +30,7 @@ const IssueComponent = (props) => {
           props.setToggleShowIssues(false);
         }}
       >
+        
         <AddressContainer>
           <p className="issue">{props.issue.title}</p>
           {props.issue.adress}, {props.issue.zip} {props.issue.city}
