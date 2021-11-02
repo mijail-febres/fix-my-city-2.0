@@ -1,9 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {NameContainer, IssueContainer, StatusConatiner } from '../ProfileReadOnlyStyled';
+import {
+    NameContainer, 
+    IssueContainer, 
+    StatusContainer,
+    GameIcon
+ } from '../ProfileReadOnlyStyled';
 import UploadPic from '../../../assets/svgs/upload_black.svg';
 import defaultAvatar from "../../../assets/images/default-avatar.png"
 import {patchProfileInfo} from "../../../Axios/fetches"
-
+import scout from "../../../assets/images/scout.png"
+import knight from "../../../assets/images/knight.png"
+import hero from "../../../assets/images/hero.png"
 
 const ProfileMainInfoReadOnly = (props) => {    
     const info = props.userInfo;
@@ -41,7 +48,7 @@ return (
             <img alt="profile_avatar" className="avatar" src={imageURL? imageURL : info.profile_picture? info.profile_picture : defaultAvatar}></img>            
         </aside>
         <aside className='right'>
-            <h1>{info.first_name} {info.last_name}</h1>
+            <h1>{info.username}</h1>
             <p>Member since {info.date_joined.substr(0,10)}</p>
             {props.showEditMode===true?
                 <>
@@ -59,7 +66,7 @@ return (
        
         </NameContainer>
 
-            <StatusConatiner>
+            <StatusContainer>
                 <aside className='left'>
                     
                     <p>Points</p>
@@ -70,17 +77,28 @@ return (
                     
                     <p>Level</p>
                     <p className='blackP'>{info.status}</p>
-                </div>                
-            </StatusConatiner>
+                </div>  
+
+                <div className='right'>
+                    
+                    <p className='gameIcon'>
+                        {info.status === "scout" ? <GameIcon src={scout} alt ="scout"/> : " "}
+                        {info.status === "hero" ? <GameIcon src={hero} alt ="hero"/> : " "}
+                        {info.status === "knight" ? <GameIcon src={knight} alt ="knight"/> : " "}
+                    </p>
+                </div>  
+
+
+            </StatusContainer>
 
             <IssueContainer>
             <aside className='left'>
-                <h2>Issues reported</h2>
-                <h2>Issues upvoted</h2>
+                <h2>Issues reported: {info.user_issues.length}</h2>
+                {/* <h2>Issues upvoted</h2> */}
             </aside>
             <aside className='right'>
-                <h2>{info.user_issues.length}</h2>
-                <h2>{info.upvoted_issues.length}</h2>
+                {/* <h2></h2> */}
+                <h2>Issues upvoted: {info.upvoted_issues.length}</h2>
             </aside>
             </IssueContainer>    
         </>       

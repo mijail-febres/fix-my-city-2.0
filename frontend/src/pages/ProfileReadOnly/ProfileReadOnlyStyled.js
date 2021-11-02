@@ -1,6 +1,18 @@
 import styled from "styled-components";
 import { ReportButton } from "../../globalstyles/ButtonStyles";
 
+export const ProfilePage = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    background-color: ${(props) => props.theme.greyColor};
+    padding-bottom: 10vh;
+`;
+
 export const Main = styled.div`
   width: 100%;
   height: 90%;
@@ -22,6 +34,7 @@ export const NameContainer = styled.div`
   justify-content: start;
   margin-top: 0%;
   margin-bottom: 2%;
+  border-bottom: solid 1px ${(props) => props.theme.darkGreyColor};
 
   .left {
     width: 35%;
@@ -45,7 +58,7 @@ export const NameContainer = styled.div`
   .right {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     margin-top: 5%;
   }
 
@@ -54,7 +67,7 @@ export const NameContainer = styled.div`
     font-weight: bold;
     font-size: 24px;
     line-height: 28px;
-    color: #e26236;
+    color: ${(props) => props.theme.greenColor};
   }
 
   p {
@@ -91,22 +104,24 @@ export const NameContainer = styled.div`
   }
 `;
 
-export const StatusConatiner = styled.div`
+export const StatusContainer = styled.div`
   width: 90%;
   height: 12%;
   display: flex;
+  justify-content: space-around;
+  border-bottom: solid 1px ${(props) => props.theme.darkGreyColor};
 
-  img {
+  /* img {
     width: 35%;
     height: 50%;
-  }
+  } */
 
   p {
     font-style: normal;
     font-weight: bold;
     font-size: 17px;
     line-height: 28px;
-    color: #e26236;
+    color: ${(props) => props.theme.darkGreenColor};
   }
 
   .blackP {
@@ -126,6 +141,10 @@ export const StatusConatiner = styled.div`
   }
 `;
 
+export const GameIcon = styled.img`
+  width: 50px;
+`;
+
 export const IssueContainer = styled.div`
   width: 90%;
   height: 15%;
@@ -135,7 +154,7 @@ export const IssueContainer = styled.div`
     width: 50%;
 
     h2 {
-      color: #e26236;
+      color: ${(props) => props.theme.greenColor};
       font-style: normal;
       font-weight: bold;
       font-size: 15px;
@@ -148,7 +167,7 @@ export const IssueContainer = styled.div`
   .right {
     width: 50%;
     h2 {
-      color: black;
+      color: ${(props) => props.theme.greenColor};
       font-style: normal;
       font-weight: bold;
       font-size: 15px;
@@ -345,7 +364,7 @@ export const FetschingContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: solid black 2px;
+  //border-bottom: solid black 2px;
 
   .issue {
     font-weight: bold;

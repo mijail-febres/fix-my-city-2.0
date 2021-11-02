@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Main, UserDetails, LastReported, SaveBox } from "./ProfileStyled";
+import { 
+  ProfilePage,
+  Main, 
+  //UserDetails, 
+  //LastReported, 
+  SaveBox,
+  EditProfile
+} from "./ProfileStyled";
 import ProfileDetails from "./components/ProfileDetails";
 import ProfileMainInfo from "./components/ProfileMainInfo";
 import Navigation from "../../components/Navigation/Navigation";
 import { fetchLatestProfileInfoAndUpdateRedux } from "../../middleware/fetchUpdateRedux";
 import IssueList from "../../components/IssueList/issueList";
-
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -21,7 +27,7 @@ const Profile = () => {
   const goBack = showEditMode === true ? "profileDetails" : "profile";
 
   return (
-    <>
+    <ProfilePage>
       <Navigation
         showBackButton={true}
         page={goBack}
@@ -42,7 +48,8 @@ const Profile = () => {
         ) : null}
         <SaveBox></SaveBox>
       </Main>
-    </>
+      <EditProfile>Edit Profile</EditProfile>
+    </ProfilePage>
   );
 };
 export default Profile;

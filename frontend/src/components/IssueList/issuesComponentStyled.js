@@ -1,13 +1,35 @@
 import styled from "styled-components";
 
+
+export const AddressContainer = styled.div`
+  height: 96%;
+  width: 65%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+  font-weight: 300;
+  padding-bottom: 1%;
+  padding-top: 3%;
+
+  .issue {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    color: ${(props) => props.theme.darkColor};
+  }
+`;
+
+export const Address = styled.div`
+  font-size: 12px;
+`
+
 export const FetchingContainer = styled.div`
   height: 10%;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  border-bottom: solid ${(props) => props.theme.darkGreyColor} 1px;
-  margin-bottom: 20px;
+  border-bottom: ${(props) => props.theme.darkGreyColor} 1px solid;
+  //margin-bottom: 5px;
 
   .issue {
     font-weight: bold;
@@ -16,55 +38,42 @@ export const FetchingContainer = styled.div`
   }
 `;
 
-export const Category = styled.div`
-`;
-
-export const AddressContainer = styled.div`
-  height: 96%;
-  width: 65%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 300;
-  padding-bottom: 3%;
-  padding-top: 3%;
-
-  .issue {
-    padding-top: 2%;
-    padding-bottom: 2%;
-    color: ${(props) => props.theme.greenColor};
-  }
-`;
-
 export const DateContainer = styled.div`
+  display:flex;
   font-size: 14px;
   font-weight: 300;
   font-weight: bold;
-  margin-bottom: 1.5%;
-  margin-top: 1%;
+  padding-top: 3%;
   padding-bottom: 5%;
 `;
 
 export const UpvotesContainer = styled.div`
+  display:flex;
   height: 96%;
   width: 25%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-top: 3%;
-  padding-bottom: 3%;
+  padding-bottom: 1%;
 
   p {
     font-size: 13px;
-    font-weight: 300;
-    color: ${(props) => props.theme.greenColor};
     font-weight: bold;
+    color: ${(props) => props.theme.greenColor};
   }
 `;
 
+export const IssueandAddress = styled.div`
+  display:flex;
+  flex-direction: column;
+  margin-left: 10px;
+`;
+
 export const InsectIcon = styled.img`
-     width: 30px;
+    display:flex;
+    //align-self: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
 `;
 
 export const LitterIcon = styled(InsectIcon)`
