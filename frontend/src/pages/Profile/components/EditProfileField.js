@@ -6,7 +6,6 @@ import { useState } from "react";
 import {patchProfileInfo} from "../../../Axios/fetches"
 import {fetchLatestProfileInfoAndUpdateRedux} from "../../../middleware/fetchUpdateRedux"
 
-
 const EditProfileField = (props) => {
 
     const dispatch = useDispatch();
