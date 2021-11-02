@@ -13,6 +13,7 @@ export const MenuContainer = styled.div`
     background-color: ${(props) => props.theme.greyColor};
     z-index:10;
     cursor: pointer;
+    border-top: 0.5px solid white;
 
     @media (min-width: 800px) {
         width: 30vw;
@@ -61,6 +62,11 @@ export const IssueText = styled(Text)`
 `
 
 export const IssuesText = styled(Text)`
+    color: ${(props) => props.theme.greenColor};  
+    font-weight : bold ;
+`
+
+export const ProfileText = styled(Text)`
     color: ${(props) => props.theme.greenColor};  
     font-weight : bold ;
 `

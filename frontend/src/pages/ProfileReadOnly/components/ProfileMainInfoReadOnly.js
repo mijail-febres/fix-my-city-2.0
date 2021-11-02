@@ -40,7 +40,6 @@ const ProfileMainInfoReadOnly = (props) => {
 
 return (
     
-    
     <>           
         <NameContainer>          
       

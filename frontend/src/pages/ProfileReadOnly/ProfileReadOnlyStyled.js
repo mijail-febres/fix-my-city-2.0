@@ -93,7 +93,7 @@ export const NameContainer = styled.div`
     font-size: 12px;
     justify-content: center;
     width: 100px;
-    border: 2px solid #f8ce46;
+    //border: 2px solid #f8ce46;
     background: none;
     padding: 5px 1px;
     #uploadIcon {

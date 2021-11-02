@@ -15,7 +15,6 @@ import {
     MenuContainer,
     Home,
     Filter,
-    
     New,
     Issues,
     Profile,
@@ -36,7 +35,6 @@ import {
     Option7,
     FilterButtons,
   } from "../../components/MenuFooter/MenuFooterStyled"
-
 import {
   ListWrapper,
   Main,
@@ -149,7 +147,7 @@ const IssueList = (props) => {
                   />
                 ))
             ) : (
-              <h1>Loading...</h1>
+              <h1>No issues reported</h1>
             )}
           </ListWrapper>
         )}

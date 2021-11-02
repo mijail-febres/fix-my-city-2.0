@@ -24,7 +24,7 @@ export const Address = styled.div`
 `
 
 export const FetchingContainer = styled.div`
-  height: 10%;
+  //height: 10%;
   width: 100%;
   display: flex;
   justify-content: space-between;
