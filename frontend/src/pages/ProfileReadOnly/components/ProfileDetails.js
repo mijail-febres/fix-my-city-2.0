@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
-import { UserDetails, ProfileDetailsSection } from '../ProfileReadOnlyStyled';
+import { 
+    UserDetails, 
+    ProfileDetailsSection,
+    ProfileDetailTitle,
+ } from '../ProfileReadOnlyStyled';
 import pen from "../../../assets/svgs/pen_black.svg"
 import EditProfileField from "./EditProfileField"
 
@@ -25,7 +29,7 @@ const ProfileDetails = (props) => {
     return (
         <>
             <ProfileDetailsSection>
-                <h2>Profile Details</h2>
+                <ProfileDetailTitle>Profile Details</ProfileDetailTitle>
             </ProfileDetailsSection>
             <UserDetails>
                 <aside className='left'>

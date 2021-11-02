@@ -187,9 +187,13 @@ export const ProfileDetailsSection = styled.div`
     font-size: 20px;
     line-height: 23px;
     margin-top: 5%;
-
-    color: #f8ce46;
   }
+`;
+
+export const ProfileDetailTitle = styled.div`
+  color: ${(props) => props.theme.darkGreenColor};
+  padding-top: 10px;
+  font-weight: bold;
 `;
 
 export const UserDetails = styled.div`
@@ -404,3 +408,12 @@ export const ButtonContainer = styled.div`
     }
   }
 `;
+
+export const PassWordInput = styled.input`
+  background-color: ${(props) => props.theme.greyColor};
+`
+
+export const Instruction = styled.div`
+  font-weight: bold;
+  font-size: 10px;
+`

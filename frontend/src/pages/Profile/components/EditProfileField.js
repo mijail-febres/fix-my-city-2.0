@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import {patchProfileInfo} from "../../../Axios/fetches"
 import {fetchLatestProfileInfoAndUpdateRedux} from "../../../middleware/fetchUpdateRedux"
-
+import { SaveButton} from "../ProfileStyled";
 
 const EditProfileField = (props) => {
 
@@ -43,7 +43,7 @@ const EditProfileField = (props) => {
                     <div id="main">                         
                         <h1>{props.currentEditFieldName}</h1>
                         <input type="text" id="fieldSection" value={fieldValue} onChange={fieldOnChangeHandler}></input>                   
-                        <button id="saveButton" type={"submit"} onClick={saveOnClickHandler}>Save</button>                          
+                        <SaveButton type={"submit"} onClick={saveOnClickHandler}>Save</SaveButton>                          
                     </div>                   
                 </EditProfileFieldContainer>
     
