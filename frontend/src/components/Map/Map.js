@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactMapGL, {
   Marker,
@@ -35,13 +35,6 @@ import { getBounds } from "viewport-mercator-project";
 import { getViewPort, findCentroid, findMaxDist  } from "./Calculations";
 
 const Map = (props) => {
-  // Styles to place the buttons somewhere on the map (absolute position)
-  /*
-  const fullscreenControlStyle = {
-    right: 15,
-    top: 15,
-  };
-  */
   const geolocateControlStyle = {
     left: "3%",
     top: "130px",
@@ -62,21 +55,12 @@ const Map = (props) => {
   const MAPBOX_TOKEN =
     "pk.eyJ1IjoiYWxleDI2MCIsImEiOiJja3FxazJuYnQwcnRxMzFxYXNpaHV2NHR3In0.sClUCkiGXj9AQubDvnv68A";
 
-  // States & Ref & Selectors
-
-  // Initial viewport for the first rendering
-//  const [viewport, setViewport] = useState({ // old initialization MFS 30.10.2021
-//    latitude: 47.3769,
-//    longitude: 8.5417,
-//    width: "100%",
-//    height: "100%",
-//    zoom: 15,
-//  });
   const [viewport, setViewport] = useState({
     width: '100%',
     height: '100vh',
     ...getViewPort(47.3769,8.5417,0.2)
   })
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -116,6 +100,9 @@ const Map = (props) => {
   // State that tells if a user marker has been set for the first time
   const [userMarkerHappen, setUserMarkerHappen] = useState(-1);
 
+  // State to take a screenshot
+  const [screenshot, setScreenshot] = useState(false);
+
   // State that tells if a user marker is being dragged
   const [userMarkerDrag, setUserMarkerDrag] = useState(false);
 
@@ -137,18 +124,16 @@ const Map = (props) => {
   const [toggleMoreDetails, setToggleMoreDetails] = useState(false);
 
   // Functions
+  const handleOnLoad = (evt) => {
+    setIsLoaded(true)
+  }
+
   const onMarkerDragStart = useCallback(event => {
+    event.preventDefault()
     setUserMarkerDrag(true)
   }, []);
 
   const onMarkerDrag = useCallback(event => {
-    setViewport({  // During issue location it's important only viewport and transition
-      ...viewport,
-      longitude: event.lngLat[0],
-      latitude: event.lngLat[1],
-      transitionInterpolator: new FlyToInterpolator(),
-      transitionDuration: 300,
-    });
   }, []);
 
   const onMarkerDragEnd = useCallback(event => {
@@ -159,29 +144,29 @@ const Map = (props) => {
         latitude: event.lngLat[1]
     });
   }, []);
-  /*
-  // Get the current location of the user & Set view (setViewport)
-  const current_location = () => {
-    if ("geolocation" in navigator) {
-      console.log("Geolocation is available");
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setViewport({
-            ...viewport,
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            error: null,
-          });
-          console.log(position.coords.latitude, position.coords.longitude);
-        },
-        (error) => setViewport({ ...viewport, error: error.message }),
-        { enableHighAccuracy: true, timeout: 10000 }
-      );
-    } else {
-      console.log("Geolocation is not Available");
-    }
-  };
-  */
+  
+  // // Get the current location of the user & Set view (setViewport)
+  // const current_location = () => {
+  //   if ("geolocation" in navigator) {
+  //     console.log("Geolocation is available");
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         setViewport({
+  //           ...viewport,
+  //           latitude: position.coords.latitude,
+  //           longitude: position.coords.longitude,
+  //           error: null,
+  //         });
+  //         console.log(position.coords.latitude, position.coords.longitude);
+  //       },
+  //       (error) => setViewport({ ...viewport, error: error.message }),
+  //       { enableHighAccuracy: true, timeout: 10000 }
+  //     );
+  //   } else {
+  //     console.log("Geolocation is not Available");
+  //   }
+  // };
+  
   // onClick event handle, to get the coordinates if the user clicks on the map and wants to set his/her marker location, hide and set the marker location
   const handleMapClick = ({ lngLat: [longitude, latitude] }) => {
     if (expandCluster === false) {
@@ -196,26 +181,9 @@ const Map = (props) => {
         setViewport({
           ...viewport,
           ...getViewPort(latitude,longitude,0.05),
-          //latitude,
-          //longitude,
-          //zoom: 19,
           transitionInterpolator: new FlyToInterpolator(),
           transitionDuration: 800,
         });
-        // } else if (userMarker && toggleUserMarker) {
-        //   setUserMarker({
-        //     id: "user",
-        //     latitude,
-        //     longitude,
-        //   });
-        //   setViewport({
-        //     ...viewport,
-        //     latitude,
-        //     longitude,
-        //     zoom: 17,
-        //     transitionInterpolator: new FlyToInterpolator(),
-        //     transitionDuration: 500,
-        //   });
       } else if (toggleUserMarker && userMarker === null) {
         setToggleUserMarker(false);
       }
@@ -229,7 +197,6 @@ const Map = (props) => {
   // Handle geocoder's viewport change
   const handleGeocoderViewportChange = useCallback((viewport) => {
     /*onViewportChange*/
-    //console.log(viewport);
     setToggleUserMarker(false);
     setUserMarker(null);
     setViewport({
@@ -251,7 +218,22 @@ const Map = (props) => {
     return Math.floor(Math.random() * 10000000) + 1;
   };
 
+  // const mapRef = useRef(null);
+  
   // useEffects
+  useEffect(() => {
+    const map = mapRef.current.getMap()
+
+    if(props.newIssue) {
+      map.once('render', () => {
+        const img = map.getCanvas().toDataURL()
+        console.log('algo?',img)
+        // do your thing
+      });
+    }
+    
+    // return () => {/* map.off everything */}
+  })
 
   useEffect(() => {
     const urlIssues = `https://fix-my-city.app.propulsion-learn.ch/backend/api/issues/`;
@@ -271,7 +253,6 @@ const Map = (props) => {
       const fetchProfile = async () => {
         const data = await fetchProfileInfo();
         setCurrentUser(data);
-        console.log(data);
       };
       fetchProfile();
     }
@@ -343,14 +324,6 @@ const Map = (props) => {
 
     setSelectedIssue(null);
 
-    //if (viewport.zoom >= 10) { // old-viewport MFS 30.10.2021
-    //  setViewport({
-    //    ...viewport,
-    //    zoom: 12,
-    //    transitionInterpolator: new FlyToInterpolator(),
-    //    transitionDuration: 500,
-    //  });
-    //}
   }, [filterValueRedux]);
 
   // Clustering
@@ -358,7 +331,6 @@ const Map = (props) => {
   // Prepare data for clustering (from json to geojson)
   useEffect(() => {
     if (filteredIssues.length > 0) {
-      console.log('ii',filteredIssues)
       setPoints(
         filteredIssues.map((issue) => ({
           type: "Feature",
@@ -413,74 +385,35 @@ const Map = (props) => {
   });
 
   const handleOnResult = () =>{
-    
   }
 
-  const onClickNewMarker = () => {
-    console.log('hehe')
-  }
   return (
     <>
       <MainContainer height={props.height} width={props.width}>
         <Navigation position="absolute" />
         <div ref={geocoderContainerRef} />
         <ReactMapGL
+          id = 'react-map-capture'
           {...viewport}
           mapboxApiAccessToken={MAPBOX_TOKEN}
           mapStyle={mapStyle}
           onClick={handleMapClick}
           onViewportChange={(viewport) => {
-            if (toggleUserMarker && userMarker && !userMarkerDrag) { // Click to create new issue
-              
-              console.log('mhapen',userMarkerHappen);
-              if (userMarkerHappen === 0) {
-                setViewport({ // MFS 30.10.2021
-                  ...getViewPort(userMarker.latitude,userMarker.longitude,0.05),
-                  transitionInterpolator: new FlyToInterpolator(),
-                  transitionDuration: 400,
-                });
-              } else {
-                setViewport({ // MFS 30.10.2021
-                  ...viewport,
-                  transitionInterpolator: new FlyToInterpolator(),
-                  transitionDuration: 400,
-                });
-
-              }
-              setViewport({ // MFS 30.10.2021
-                // ...viewport,
-                // latitude: userMarker.latitude,
-                // longitude: userMarker.longitude,
-                // zoom: 19,
-                ...getViewPort(userMarker.latitude,userMarker.longitude,0.05),
-                transitionInterpolator: new FlyToInterpolator(),
-                transitionDuration: 400,
-              });
-            } else if (userMarkerDrag) {
-              console.log('drag')
-              setViewport({ // MFS 30.10.2021
-                ...viewport,
-                // latitude: userMarker.latitude,
-                // longitude: userMarker.longitude,
-                // zoom: 19,
-                // ...getViewPort(userMarker.latitude,userMarker.longitude,0.05),
-                transitionInterpolator: new FlyToInterpolator(),
-                transitionDuration: 400,
-              });
-            }
-            setViewport(viewport);
+            setViewport({
+              ...viewport,
+              latitude: viewport.latitude,
+              longitude: viewport.longitude,
+              transitionInterpolator: new FlyToInterpolator(),
+              transitionDuration: 300,
+            });
           }}
-          // scrollZoom={toggleUserMarker && userMarker ? false : true}
           scrollZoom={ {speed: 0.02, smooth: true}}
-          dragPan={{inertia: 900}}
-          // touchZoom={toggleUserMarker && userMarker ? false : true}
-          // doubleClickZoom={toggleUserMarker && userMarker ? false : true}
           width="100%"
-          // dragPan="false"
-          dragPan={{inertia : 30}}
+          // dragPan={{inertia : 30}}
           height="100%"
-          maxZoom={20}
+          maxZoom={50}
           ref={mapRef}
+          onLoad = {handleOnLoad}
         >
           <Geocoder
             mapRef={mapRef}
@@ -498,7 +431,7 @@ const Map = (props) => {
             trackUserLocation={true}
             showAccuracyCircle={false}
             fitBoundsOptions={{ maxZoom: 17 }}
-            auto
+            // auto
           />
           <NavigationControl style={navControlStyle} />
           <ScaleControl
@@ -541,14 +474,14 @@ const Map = (props) => {
                         supercluster.getClusterExpansionZoom(cluster.id),
                         20
                       );
-                      setViewport({
-                        ...viewport,
-                        latitude,
-                        longitude,
-                        zoom: expansionZoom,
-                        transitionInterpolator: new FlyToInterpolator(),
-                        transitionDuration: 500,
-                      });
+                      // setViewport({
+                      //   ...viewport,
+                      //   latitude,
+                      //   longitude,
+                      //   zoom: expansionZoom,
+                      //   transitionInterpolator: new FlyToInterpolator(),
+                      //   transitionDuration: 500,
+                      // });
                       setExpandCluster(true);
                     }}
                   >

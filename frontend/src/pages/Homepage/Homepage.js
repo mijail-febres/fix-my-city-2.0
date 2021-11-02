@@ -40,6 +40,8 @@ const Homepage = () => {
 
     const dispatch = useDispatch();
 
+    const [newIssue, setNewIssue] = useState(false); // it will trigger a snapshot of Map
+
     const filterValueRedux = useSelector((state) => state.filterReducer.filter);
 
     const [toggleFilter, setToggleFilter] = useState(false);
@@ -63,8 +65,10 @@ const Homepage = () => {
     const [coordinates, setCoordinates] = useState(null);
 
     const handleNewIssueClick = () => {
+        setNewIssue(!newIssue);
         dispatch({ type: "setCoordinates", payload: coordinates });
         history.push("/createissue");
+        console.log(newIssue);
     };
 
     const history = useHistory();
@@ -84,7 +88,7 @@ const Homepage = () => {
     return (
     <Div100vh>
         <Main>
-            <Map height={"100%"} width={"100%"} setCoordinates={setCoordinates} />
+            <Map height={"100%"} width={"100%"} setCoordinates={setCoordinates} newIssue={newIssue}/>
             {coordinates === null ? (
                 <MenuContainer>
                     <Home>

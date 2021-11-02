@@ -55,7 +55,6 @@
       lngMax = Math.max(lngMax,list_markers[i].longitude);
     }
 
-    console.log('minmax',[[lngMin, latMin], [lngMax, latMax]]);
     return [[lngMin, latMin], [lngMax, latMax]];
   } 
 
@@ -68,17 +67,21 @@
 
   export const findMaxDist = (issues, [cLat, cLng]) => {
     let dist = -1000000000;
-    const R = 6371;
     const cLatrad = cLat * Math.PI / 180.0;
     const cLngrad = cLng * Math.PI / 180.0;
-    console.log('is',issues,cLatrad,cLngrad)
     for (let i=0; i<issues.length; i++) {
       let lat2 = issues[i].latitude * Math.PI / 180.0;
       let lng2 = issues[i].longitude * Math.PI / 180.0;
-      // Haversine formula
-      dist=Math.max(dist, 2.0*R*Math.asin(Math.sqrt(Math.sin(0.5*(lat2-cLatrad))*Math.sin(0.5*(lat2-cLatrad))
-                                                    +Math.cos(cLatrad)*Math.cos(lat2)
-                                                    *Math.sin(0.5*(lng2-cLngrad))*Math.sin(0.5*(lng2-cLngrad)))));
+      dist=Math.max(dist,distanceTwoPoints(cLatrad,cLngrad,lat2,lng2));
     }
-    return dist;
+    return dist + 0.02; // plus 20 meters, for visualization purposes
+  }
+
+  export const distanceTwoPoints = (lat1, lng1, lat2, lng2) => {
+    // lat1,lng1,lat2,lng2, are given in rads
+    const R = 6371; //Earth 'constant' radius
+    // Haversine formula
+    return 2.0*R*Math.asin(Math.sqrt(Math.sin(0.5*(lat2-lat1))*Math.sin(0.5*(lat2-lat1))
+                                                 +Math.cos(lat1)*Math.cos(lat2)
+                                                 *Math.sin(0.5*(lng2-lng1))*Math.sin(0.5*(lng2-lng1))));
   }
