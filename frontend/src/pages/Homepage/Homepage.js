@@ -34,7 +34,8 @@ import {
     Option6,
     Option7,
     FilterButtons,
-  } from "../../components/MenuFooter/MenuFooterStyled"
+  } from "../../components/MenuFooter/MenuFooterStyled";
+import {defaultTheme} from '../../globalstyles/Styles.js';
 
 const Homepage = () => {
 
@@ -47,8 +48,14 @@ const Homepage = () => {
     const [toggleFilter, setToggleFilter] = useState(false);
 
     const [filterValue, setFilterValue] = useState(
-        filterValueRedux === "default" ? "default" : filterValueRedux
+        filterValueRedux[0] === "default" ? ["default"] : [filterValueRedux]
     );
+
+    const optionValue = ["litter","graffiti","road_damage","damage_to_public_property","insects_and_animals",
+                        "unmaintained_greenery","street_sign_issues"];
+    const optionContent = ["Litter","Graffiti","Road Damage","Damage to Public Property","Insects and Animals",
+                        "Unmaintained Greenery","Street Sign Issues"]
+    const [optionColor, setOptionColor] = useState(Array(7).fill(false));
 
     const ApplyClickEvent = () => {
         handleFilter();
@@ -62,13 +69,35 @@ const Homepage = () => {
         });
     };
 
+    const handleClickOnFilter = (item,ind) => {
+        let currentFilterValue = [...filterValue];
+        if (currentFilterValue) {
+            if (currentFilterValue.length === 1 && currentFilterValue[0] === 'default') {
+                currentFilterValue = [];
+                currentFilterValue.push(item);
+            } else {
+                if (currentFilterValue.indexOf(item) === -1) {
+                    currentFilterValue.push(item);
+                } else {
+                    currentFilterValue.splice(currentFilterValue.indexOf(item),1);
+                    if (currentFilterValue.length === 0) { // In case the array is empty, default should be the default value
+                        currentFilterValue.push('default');
+                    }
+                }
+            }
+            let colors = [...optionColor];
+            colors[ind] = !colors[ind];
+            setOptionColor([...colors]);
+        }
+        setFilterValue([...currentFilterValue]);
+    }
+
     const [coordinates, setCoordinates] = useState(null);
 
     const handleNewIssueClick = () => {
         setNewIssue(!newIssue);
         dispatch({ type: "setCoordinates", payload: coordinates });
         history.push("/createissue");
-        console.log(newIssue);
     };
 
     const history = useHistory();
@@ -153,13 +182,18 @@ const Homepage = () => {
                     <FilterContainer>
                         <SubContainerButtons>
                             <FilterButtons>
-                                <Option1 value="litter" onClick={(e) => setFilterValue(e.target.value)} >Litter</Option1>
-                                <Option2 value="graffiti" onClick={(e) => setFilterValue(e.target.value)} >Graffiti</Option2>
-                                <Option3 value="road_damage" onClick={(e) => setFilterValue(e.target.value)} >Road Damage</Option3>
-                                <Option4 value="damage_to_public_property" onClick={(e) => setFilterValue(e.target.value)} >Damage to Public Property</Option4>
-                                <Option5 value="insects_and_animals" onClick={(e) => setFilterValue(e.target.value)} >Insects and Animals</Option5>
-                                <Option6 value="unmaintained_greenery" onClick={(e) => setFilterValue(e.target.value)} >Unmaintained Greenery</Option6>
-                                <Option7 value="street_sign_issues" onClick={(e) => setFilterValue(e.target.value)} >Street Sign Issues</Option7>
+                                {optionContent.map((option,index) => {
+                                    return(
+                                        <Option1
+                                            key={index}
+                                            value={optionValue[index]}
+                                            onClick={(e) => handleClickOnFilter(e.target.value,index)}
+                                            style={{backgroundColor : optionColor[index]?defaultTheme.greenColor:defaultTheme.grayColor}}
+                                        > 
+                                            {option}
+                                        </Option1>
+                                    )
+                                })}
                             </FilterButtons>
                         </SubContainerButtons>
                         <SubContainer>
