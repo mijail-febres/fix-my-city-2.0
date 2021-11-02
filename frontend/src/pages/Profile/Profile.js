@@ -48,7 +48,6 @@ const Profile = () => {
         ) : null}
         <SaveBox></SaveBox>
       </Main>
-      <EditProfile>Edit Profile</EditProfile>
     </ProfilePage>
   );
 };

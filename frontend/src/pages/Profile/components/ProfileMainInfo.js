@@ -1,13 +1,35 @@
 import React, {useState} from 'react';
-import {NameContainer, IssueContainer, StatusConatiner, IconAndLevelContainer} from '../ProfileStyled';
+import {
+    NameContainer, 
+    IssueContainer, 
+    StatusContainer, 
+    MenuContainer,
+    IconAndLevelContainer,
+    GameIcon,
+} from '../ProfileStyled';
+import {
+    Home,
+    New,
+    Issues,
+    Profile,
+    Logo,
+    ProfileText,
+    Text,
+} from '../../../components/MenuFooter/MenuFooterStyled';
+import home from "../../../assets/images/home.png";
+import userGreen from "../../../assets/images/user-LG.png";
+import newIssue from "../../../assets/images/new.png";
+import list from "../../../assets/images/list.png";
+//import filter from "../../assets/images/filter.png";
 import UploadPic from '../../../assets/svgs/upload_black.svg';
 import defaultAvatar from "../../../assets/images/default-avatar.png"
 import {patchProfileInfo} from "../../../Axios/fetches"
 import pen from "../../../assets/svgs/pen_black.svg"
-import scout from "../../../assets/svgs/scout.svg"
-import knight from "../../../assets/svgs/knight.svg"
-import hero from "../../../assets/svgs/hero.svg"
-
+import scout from "../../../assets/images/scout.png"
+import knight from "../../../assets/images/knight.png"
+import hero from "../../../assets/images/hero.png"
+import { useHistory } from "react-router-dom";
+//import { MdList } from 'react-icons/md';
 
 
 const ProfileMainInfo = (props) => {
@@ -37,6 +59,24 @@ const ProfileMainInfo = (props) => {
           }
     }
 
+    const history = useHistory();
+  
+    const handleHomeClick = () => {
+        history.push("/");
+    };
+
+    const handleNewIssueClick = () => {
+      history.push("/");
+    };
+
+    const handleListClick = () => {
+        history.push("/issues");
+    };
+
+    const handleUserClick = () => {
+        history.push("/profile");
+    };
+
 
 return (
     <>
@@ -53,20 +93,21 @@ return (
                 </>              
             :null}            
         </aside>
-        <aside className='right'>
+        <aside className='middle'>
             <div id="nameAndStatus">            
-                <h1>{info.firstName} {info.lastName}
-                {props.showEditMode===false?
-                <button id="editButton" onClick={()=>editProfileOnClickHandler("userName","Username","username")}><img id="editIcon" src={pen} alt="edit"></img></button>
-                :null}            
-                </h1>                
+                <h1>{info.firstName} {info.lastName}</h1>                
             </div>
-            
+
             <p>Member since {info.dateJoined.substr(0,10)}</p>
             
-        </aside>  
+        </aside> 
+        <aside className='right'>
+            {props.showEditMode===false?
+                <button id="editButton" onClick={()=>editProfileOnClickHandler("userName","Username","username")}><img id="editIcon" src={pen} alt="edit"></img>Edit Profile</button>
+                :null}  
+        </aside> 
         </NameContainer>
-            <StatusConatiner>
+            <StatusContainer>
                 <aside className='left'>
                     {/* <img alt="points" src={PointsPic}></img> */}
                     <p>Points</p>
@@ -80,23 +121,48 @@ return (
                         <p className='blackP'>{info.level}</p>
                     </div>                    
                 </div>  
-                <div className = "right">
-                    
-                </div>    
+                <div className='right'>
+                    <p className='gameIcon'>
+                        {info.status === "scout" ? <GameIcon src={scout} alt ="scout"/> : " "}
+                        {info.status === "hero" ? <GameIcon src={hero} alt ="hero"/> : " "}
+                        {info.status === "knight" ? <GameIcon src={knight} alt ="knight"/> : " "}
+                    </p>
+                </div>  
                            
-            </StatusConatiner>
+            </StatusContainer>
             
             
             <IssueContainer>
             <aside className='left'>
-                <h2>Issues reported</h2>
-                <h2>Issues upvoted</h2>
+                <h2>Issues reported: {info.issuesReported.length}</h2>
             </aside>
             <aside className='right'>
-                <h2>{info.issuesReported.length}</h2>
-                <h2>{info.issuesUpvoted.length}</h2>
+                <h2>Issues upvoted: {info.issuesUpvoted.length}</h2>
             </aside>
             </IssueContainer>
+
+            <MenuContainer>
+                    <Home>
+                        <Logo src={home} alt="home" onClick={handleHomeClick}/>
+                        <Text>Map</Text>
+                    </Home>
+                    {/* <Filter>
+                        <Logo src={filter} alt="filter" onClick={() => setToggleFilter(true)} />
+                        <Text>Filter</Text>
+                    </Filter> */}
+                    <New>
+                        <Logo src={newIssue} alt="new issue" onClick={handleNewIssueClick}/>
+                        <Text>New Issue</Text>
+                    </New>
+                    <Issues>
+                        <Logo src={list} alt="issues" onClick={handleListClick}/>
+                        <Text>Issues</Text>
+                    </Issues>
+                    <Profile>
+                        <Logo src={userGreen} alt="profile" onClick={handleUserClick}/>
+                        <ProfileText>Profile</ProfileText>
+                    </Profile>
+            </MenuContainer>
         </>
 )
 

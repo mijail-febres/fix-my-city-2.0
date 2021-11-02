@@ -9,7 +9,9 @@ export const ProfilePage = styled.div`
     align-items: center;
     height: 100vh;
     width: 100vw;
+    overflow: scroll;
     background-color: ${(props) => props.theme.greyColor};
+    padding-bottom: 10vh;
 `;
 
 export const Main = styled.div`
@@ -26,25 +28,18 @@ export const Main = styled.div`
 
 export const NameContainer = styled.div`
   width: 90%;
-  height: 150px;
+  //height: 150px;
+  height: 22%;
   min-height: 150px;
   margin-top: 2%;
   color: black;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   margin-top: 0%;
   margin-bottom: 2%;
+  border-bottom: solid 1px ${(props) => props.theme.darkGreyColor};
 
-  #editButton {
-    display: inline;
-    background: none;
-    border: none;
-    #editIcon {
-      width: 18px;
-      height: 18px;
-      margin-left: 5px;
-    }
-  }
+
 
   .left {
     width: 35%;
@@ -65,10 +60,11 @@ export const NameContainer = styled.div`
     }
   }
 
-  .right {
+  .middle {
     display: flex;
+    width:40%;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     margin-top: 5%;
     #nameAndStatus{
       display: flex;
@@ -117,12 +113,36 @@ export const NameContainer = styled.div`
       margin-right: 10px;
     }
   }
+
+.right {
+  display:flex;
+  justify-content: end;
+  width:25%;
+  
+  #editButton {
+    display:flex;
+    //display: inline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    
+    #editIcon {
+      width: 18px;
+      height: 18px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+  }
+}
 `;
 
-export const StatusConatiner = styled.div`
+export const StatusContainer = styled.div`
   width: 90%;
   height: 12%;
   display: flex;
+  justify-content: space-around;
+  border-bottom: solid 1px ${(props) => props.theme.darkGreyColor};
 
   img {
     width: 35%;
@@ -134,7 +154,7 @@ export const StatusConatiner = styled.div`
     font-weight: bold;
     font-size: 17px;
     line-height: 28px;
-    color: #e26236;
+    color: ${(props) => props.theme.darkGreenColor};
   }
 
   .blackP {
@@ -159,8 +179,11 @@ export const StatusConatiner = styled.div`
 
   .right {
     width: 32%;
-   
-  }
+      }
+`;
+
+export const GameIcon = styled.img`
+  width: 50px;
 `;
 
 export const IssueContainer = styled.div`
@@ -172,7 +195,7 @@ export const IssueContainer = styled.div`
     width: 50%;
 
     h2 {
-      color: #e26236;
+      color: ${(props) => props.theme.greenColor};
       font-style: normal;
       font-weight: bold;
       font-size: 15px;
@@ -185,7 +208,7 @@ export const IssueContainer = styled.div`
   .right {
     width: 50%;
     h2 {
-      color: black;
+      color: ${(props) => props.theme.greenColor};
       font-style: normal;
       font-weight: bold;
       font-size: 15px;
@@ -258,6 +281,26 @@ export const UserDetails = styled.div`
     //margin-top: 2%;
   }
 `;
+
+export const MenuContainer = styled.div`
+    display:flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    bottom: 0px;
+    width: 100vw;
+    height: 10vh;
+    border-radius: 20px;
+    background-color: ${(props) => props.theme.greyColor};
+    z-index:11;
+    cursor: pointer;
+    border-top: 0.5px solid white;
+
+    @media (min-width: 800px) {
+        width: 30vw;
+        left:35vw;
+    }
+`
 
 export const SaveBox = styled.div`
   width: 90%;
@@ -413,8 +456,8 @@ export const IconAndLevelContainer = styled.div`
 
 `
 
-export const EditProfile = styled(LoginSignUpButton)`
-    &:active {
-        transform: translateY(4px);
-        }    
-`;
+// export const EditProfile = styled(LoginSignUpButton)`
+//     &:active {
+//         transform: translateY(4px);
+//         }    
+// `;
