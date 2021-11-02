@@ -76,7 +76,6 @@ export const IssueTextGreen = styled(Text)`
     color: ${(props) => props.theme.greenColor};
     font-weight : bold ;
     justify-self: center;
-    //border: solid 1px ${(props) => props.theme.greenColor};
     border-radius: 20px;
 `
 
