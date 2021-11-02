@@ -221,19 +221,19 @@ const Map = (props) => {
   // const mapRef = useRef(null);
   
   // useEffects
-  useEffect(() => {
-    const map = mapRef.current.getMap()
+  // useEffect(() => {
+  //   const map = mapRef.current.getMap()
 
-    if(props.newIssue) {
-      map.once('render', () => {
-        const img = map.getCanvas().toDataURL()
-        console.log('algo?',img)
-        // do your thing
-      });
-    }
+  //   if(props.newIssue) {
+  //     map.once('render', () => {
+  //       const img = map.getCanvas().toDataURL()
+  //       console.log('algo?',img)
+  //       // do your thing
+  //     });
+  //   }
     
-    // return () => {/* map.off everything */}
-  })
+  //   // return () => {/* map.off everything */}
+  // })
 
   useEffect(() => {
     const urlIssues = `https://fix-my-city.app.propulsion-learn.ch/backend/api/issues/`;
@@ -306,17 +306,12 @@ const Map = (props) => {
 
   // Filtering
   useEffect(() => {
-    if (filterValueRedux === "default") {
+    if (filterValueRedux[0] === "default") {
       setFilteredIssues(issues);
     } else {
-      const filteredArray = issues.filter(
-        (issue) => issue.category === filterValueRedux
-      );
+      const filteredArray = issues.filter((issue) => filterValueRedux.indexOf(issue.category) > -1);
       if (filteredArray.length >= 1) {
-        setFilteredIssues(
-          [...filteredArray]
-          // issues.filter((issue) => issue.category === filterValueRedux)
-        );
+        setFilteredIssues([...filteredArray]);
       } else {
         setFilteredIssues([]);
       }
@@ -403,8 +398,6 @@ const Map = (props) => {
               ...viewport,
               latitude: viewport.latitude,
               longitude: viewport.longitude,
-              transitionInterpolator: new FlyToInterpolator(),
-              transitionDuration: 300,
             });
           }}
           scrollZoom={ {speed: 0.02, smooth: true}}

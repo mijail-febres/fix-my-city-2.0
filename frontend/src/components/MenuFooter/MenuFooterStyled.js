@@ -136,10 +136,15 @@ export const Option1 = styled.button`
         border: 2px solid ${(props) => props.theme.greenColor};
     }
 
-    &:focus {
+    /* &:focus {
         background-color: ${(props) => props.theme.greenColor};
         color: white;
-    }
+    } */
+
+    /* &:checked {
+        background-color: ${(props) => props.theme.greenColor};
+        color: white;
+    } */
 `;
 
 export const Option2 = styled(Option1)`
