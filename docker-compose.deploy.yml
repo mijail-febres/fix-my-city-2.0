@@ -29,6 +29,7 @@ services:
       - 443:443
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - static-files:/static-files
       - media-files:/media-files
       - /etc/letsencrypt:/etc/letsencrypt
