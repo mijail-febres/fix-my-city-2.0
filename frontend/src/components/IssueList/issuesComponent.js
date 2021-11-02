@@ -34,7 +34,7 @@ const IssueComponent = (props) => {
       >
         
         <AddressContainer>
-          {props.issue.category === "insects and animals"? <InsectIcon src={insect} alt ="insect"/> : " "}
+          {props.issue.category === "insects_and_animals"? <InsectIcon src={insect} alt ="insect"/> : " "}
           {props.issue.category === "litter"? <LitterIcon src={litter} alt ="litter"/> : " "}
           {props.issue.category === "graffiti"? <GraffitiIcon src={graffiti} alt ="graffiti"/> : " "}
           {props.issue.category === "damage_to_public_property"? <DamageIcon src={damage} alt ="damage"/> : " "}

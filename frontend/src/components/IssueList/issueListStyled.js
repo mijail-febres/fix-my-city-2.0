@@ -14,9 +14,7 @@ export const ListWrapper = styled.div`
 
 export const Main = styled.div`
   width: 90%;
-
   margin-left: 2%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
