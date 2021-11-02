@@ -129,11 +129,13 @@ const StepThree = (props) => {
               onChange={selectCategoryOnChangeHandler}
             >
               <option value="default">--select--</option>
-              <option>graffiti</option>
-              <option>damages</option>
-              <option>insects and animals</option>
-              <option>items with no owner</option>
-              <option>litter</option>
+              <option value="graffiti">Graffiti</option>
+              <option value="damage_to_public_property">Damage to Public Property</option>
+              <option value="litter">Litter</option>
+              <option value="road_damage">Road Damage</option>
+              <option value="insects_and_animals">Insects and Animals</option>
+              <option value="unmaintained_greenery">Unmaintained Greenery</option>
+              <option value="street_sign_issues">Street Sign Issues</option>
             </select>
           </div>
           <div id="descriptionContainer">
