@@ -22,6 +22,13 @@ import {
   SatelliteButton,
 } from "./MapStyled";
 import { FaSatelliteDish } from "react-icons/fa";
+import damage from "../../assets/images/damage.png";
+import graffiti from "../../assets/images/graffiti.png";
+import litter from "../../assets/images/litter.png";
+import insect from "../../assets/images/insect.png";
+import streetSign from "../../assets/images/street-sign.png";
+import broken from "../../assets/images/broken.png";
+import plant from "../../assets/images/plant.png";
 import RedMarker from "../../assets/map/markers/red-marker.png";
 import RedishOrangeMarker from "../../assets/map/markers/redish-orange-marker.png";
 import OrangeMarker from "../../assets/map/markers/orange-marker.png";
@@ -506,13 +513,21 @@ const Map = (props) => {
                   >
                     <MarkerImgStyle
                       src={
-                        cluster.properties.upvoteCount >= 3
-                          ? cluster.properties.upvoteCount >= 10
-                            ? RedMarker
-                            : cluster.properties.upvoteCount >= 5
-                            ? RedishOrangeMarker
-                            : OrangeMarker
-                          : YellowMarker
+                        cluster.properties.category === 'graffiti'?
+                        graffiti:
+                        cluster.properties.category === 'road_damage'?
+                        damage:
+                        cluster.properties.category === 'damage_to_public_property'?
+                        broken:
+                        cluster.properties.category === 'insects_and_animals'?
+                        insect:
+                        cluster.properties.category === 'street_sign_issues'?
+                        streetSign:
+                        cluster.properties.category === 'litter'?
+                        litter:
+                        cluster.properties.category === 'unmaintained_greenery'?
+                        plant:
+                        null
                       }
                       alt="marker"
                       onClick={(e) => {
