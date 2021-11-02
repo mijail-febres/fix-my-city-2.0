@@ -123,9 +123,9 @@ return (
                 </div>  
                 <div className='right'>
                     <p className='gameIcon'>
-                        {info.status === "scout" ? <GameIcon src={scout} alt ="scout"/> : " "}
-                        {info.status === "hero" ? <GameIcon src={hero} alt ="hero"/> : " "}
-                        {info.status === "knight" ? <GameIcon src={knight} alt ="knight"/> : " "}
+                        {info.level === "scout" ? <GameIcon src={scout} alt ="scout"/> : " "}
+                        {info.level === "hero" ? <GameIcon src={hero} alt ="hero"/> : " "}
+                        {info.level === "knight" ? <GameIcon src={knight} alt ="knight"/> : " "}
                     </p>
                 </div>  
                            

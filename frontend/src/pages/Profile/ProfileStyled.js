@@ -144,10 +144,10 @@ export const StatusContainer = styled.div`
   justify-content: space-around;
   border-bottom: solid 1px ${(props) => props.theme.darkGreyColor};
 
-  img {
+  /* img {
     width: 35%;
     height: 50%;
-  }
+  } */
 
   p {
     font-style: normal;
