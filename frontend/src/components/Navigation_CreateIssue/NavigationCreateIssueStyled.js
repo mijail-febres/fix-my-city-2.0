@@ -8,6 +8,7 @@ export const MainContainer = styled.div`
   height: 15%;
   position: relative;
   width: 100%;
+  background-color: ${(props) => props.theme.greyColor};
 
   #back{
     background: none;
@@ -26,25 +27,21 @@ export const MainContainer = styled.div`
     flex-grow: 1;
 
     .step{
-      background-color: #EBEAE9;
-      font-size: 18px;
-      color: #939393;
-      width: 50px;
-      height: 50px;
-      border-radius: 100%;
+      background-color: ${(props) => props.theme.greyColor};
+      font-size: 14px;
+      color: ${(props) => props.theme.darkGreyColor};
+      padding: 5px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
     .stepSelected{
-      background-color: #F8CE46;
-      color: black;
+      background-color: ${(props) => props.theme.greenColor};
+      color: white;
       font-weight: bold;
-      font-size: 18px;
-      width: 50px;
-      height: 50px;
-      border-radius: 100%;
+      font-size: 14px;
+      padding:5px;
       display: flex;
       justify-content: center;
       align-items: center;

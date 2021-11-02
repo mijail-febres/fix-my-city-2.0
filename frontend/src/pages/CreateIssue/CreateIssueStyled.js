@@ -7,14 +7,14 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    background-color: white;   
+    background-color: ${(props) => props.theme.greyColor};   
     color: black;
     
     
     #footer
     {
     display: flex;   
-    color: black;
+    color: ${(props) => props.theme.greyColor};
     height: 20%;
     justify-content: center;
     align-items: flex-start;
@@ -34,42 +34,35 @@ export const MainContainer = styled.div`
         margin-right: 50px;
         justify-content: center;
         align-items: center;
-
-        #nextButton {
-            border: 2px solid #5D61F6;
-            background-color: white;
-            font-size: 20px;
-            font-weight: bold;
-            width: 240px;
-            height: 60px;
-            margin-left: auto;
-            border-radius: 4px;
-        }  
-
-        #sendButton{
-            border: 2px solid #E26236;
-            background-color: white;
-            font-size: 20px;
-            font-weight: bold;
-            width: 240px;
-            height: 60px;
-            margin-left: auto;
-            border-radius: 4px;
-        }
-
-        #homeButton{
-            border: none;
-            background-color: white;
-            font-size: 20px;
-            font-weight: bold;
-            width: 240px;
-            height: 60px;
-            margin-left: auto;
-            border-radius: 4px;
-        }
     }    
 }
 `
+export const PageTitle = styled.div`
+    display: block;
+    align-self:center;
+    color: grey;
+`;
+
+export const NextButton = styled.div`
+    display:flex;
+    width: 200px;
+    height: 39px;
+    border-radius: 20px;   
+    background-color: ${(props) => props.theme.greenColor};
+    color: white;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+`;
+
+export const SendButton = styled(NextButton)`
+`;
+
+export const HomeButton = styled(NextButton)`
+`;
+
 export const StepOneContainer = styled.div`
        
     display: flex;
@@ -85,7 +78,8 @@ export const StepOneContainer = styled.div`
         font-size: 20px;
         margin-top: 20px;
         margin-left: 20px;
-        align-self: flex-start;
+        align-self: center;
+        color: grey;
     }
 
 `
@@ -98,6 +92,9 @@ export const StepTwoContainer = styled.div`
 
    
     .pageTitle{
+        display: : flex;
+        align-self: center;
+        color: grey;
         font-size: 20px;
         margin-left: 20px;
         margin-top: 40px;
@@ -113,16 +110,18 @@ export const StepThreeContainer = styled.div`
     margin-bottom: 30px;
    
     .pageTitle{
+        display:flex;
         font-size: 20px;
         margin-left: 20px;
         margin-top: 20px;
-        align-self: flex-start;
+        align-self: center;
+        color: grey;
     }   
 
     #titleCategoryDescriptionContainer{
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;  
+        justify-content: center;  
         border: none;
         width: 80%;
         height: 70%;
@@ -134,6 +133,7 @@ export const StepThreeContainer = styled.div`
 
             .fieldHeader{
                 font-size: 16px;
+                color: grey;
             }  
             
             margin-left: 20px;
@@ -143,7 +143,7 @@ export const StepThreeContainer = styled.div`
             font-size: 16px;
             width: 90%;
             height: 40px;           
-            border: 1px solid black;
+            border: none;
             }
         }
        
@@ -153,13 +153,14 @@ export const StepThreeContainer = styled.div`
             margin-bottom: 30px;
             //height: 10%;
             #selectCategory{                
-                border: 1px solid black;
+                border: none;
                 width: 90%;
                 height: 40px;
                 font-size: 16px;
             }
             .fieldHeader{
                 font-size: 16px;
+                color: grey;
             }  
         }
         #descriptionContainer{           
@@ -173,11 +174,12 @@ export const StepThreeContainer = styled.div`
                 width: 90%;     
                 min-height: 100px;
                 flex-grow: 1; 
-                border: 1px solid black;
+                border: none;
             }
 
             .fieldHeader{
                 font-size: 16px;
+                color: grey;
             }  
             
         }
@@ -188,27 +190,28 @@ export const StepThreeContainer = styled.div`
 export const ReviewContainer = styled.div`
     
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
-    color: black;
     height: 80%;    
     
     .pageTitle{
         font-size: 20px;
         margin-left: 20px;
         margin-top: 20px;
-        align-self: flex-start;
+        align-self: center;
     }  
     
-
     .itemTitle{
         margin: 5px;
         margin-left: 10px;
-        color: #E26236;    
-        font-size: 16px;    
+        color: ${(props) => props.theme.greenColor};    
+        font-size: 16px;   
     } 
+
     #powerTitle{
-        font-size: 30px;
+        font-size: 25px;
+        font-weight: bold;
     }
 
     .itemText{
@@ -217,6 +220,7 @@ export const ReviewContainer = styled.div`
         word-wrap: break-word;
         margin-right: 10px;
         font-size: 16px;
+        color: grey;
     }
 
     #reviewContainerBox{
@@ -265,7 +269,7 @@ export const ThankYouContainer = styled.div`
     align-items: center;
     color: black;
     height: 90%;
-    background-color: ${(props) => props.theme.yellowColor};
+    background-color: ${(props) => props.theme.greyColor};
    
     #message{
         margin-top: 30px;

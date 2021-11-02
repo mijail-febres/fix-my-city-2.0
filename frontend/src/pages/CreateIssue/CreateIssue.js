@@ -9,6 +9,10 @@ import {
   Box,
   ThankYouContainer,
   SomethingWentWrongContainer,
+  NextButton,
+  SendButton,
+  HomeButton,
+  PageTitle,
 } from "./CreateIssueStyled";
 import leftArrow from "../../assets/images/left-arrow.png";
 import rightArrow from "../../assets/images/right-arrow.png";
@@ -163,7 +167,7 @@ const Review = (props) => {
   return (
     <>
       <ReviewContainer>
-        <h3 className="pageTitle">Review and send to us! :)</h3>
+        <PageTitle>Review and send to us! :)</PageTitle>
         <div id="reviewContainerBox">
           <div className="itemTitleText">
             <h3 className="itemTitle" id="powerTitle">
@@ -183,7 +187,15 @@ const Review = (props) => {
           </Box>
           <div className="itemTitleText">
             <h3 className="itemTitle">Category</h3>
-            <p className="itemText">{props.category}</p>
+            <p className="itemText">
+              {props.category === "insects_and_animals" ? "Insects and Animals" : " "}
+              {props.category === "graffiti" ? "Graffiti" : " "}
+              {props.category === "road_damage" ? "Road Damage" : " "}
+              {props.category === "damage_to_public_property" ? "Damage to Public Property" : " "}
+              {props.category === "unmaintained_greenery" ? "Unmaintained Greenery" : " "}
+              {props.category === "litter" ? "Litter" : " "}
+              {props.category === "street_sign_issues" ? "Street Sign Issues" : " "}
+              </p>
           </div>
           {props.description ? (
             <div className="itemTitleText">
@@ -419,26 +431,26 @@ const CreateIssue = () => {
       {toggleShowSomethingWentWrong === true ? (
         <SomethingWentWrongPage />
       ) : null}
-      <div id="footer" style={{backgroundColor:toggleShowThankYou===true?'#F8CE46':'white'}}>
+      <div id="footer" style={{backgroundColor:'#f5f5f5'}}>
         <div id="buttonsContainer">
           {toggleShowReview === false &&
           toggleShowSomethingWentWrong === false &&
           toggleShowThankYou === false ? (
-            <button id="nextButton" onClick={nextButtonHandler}>
+            <NextButton onClick={nextButtonHandler}>
               Next
-            </button>
+            </NextButton>
           ) : null}
 
           {toggleShowReview === true ? (
-            <button id="sendButton" onClick={sendOnClickHandler}>
+            <SendButton onClick={sendOnClickHandler}>
               Send
-            </button>
+            </SendButton>
           ) : null}
           {toggleShowSomethingWentWrong === true ||
           toggleShowThankYou === true ? (
-            <button id="homeButton" onClick={homeOnClickHandler}>
+            <HomeButton onClick={homeOnClickHandler}>
               Home
-            </button>
+            </HomeButton>
           ) : null}
         </div>
       </div>
