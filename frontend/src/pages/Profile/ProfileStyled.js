@@ -309,7 +309,7 @@ export const SaveBox = styled.div`
 
 export const EditProfileFieldContainer = styled.div`
   top: 0px;
-  background-color: white;
+  background-color: ${(props) => props.theme.greyColor};
   position: absolute;
   z-index: 5;
   width: 100%;
@@ -340,17 +340,13 @@ export const EditProfileFieldContainer = styled.div`
       font-size: 18px;
       line-height: 21px;
       margin-top: 50px;
-    }
-
-    #saveButton {
-      margin-top: 100px;
-      font-weight: bold;
-      font-size: 18px;
-      padding: 10px 60px;
-      background-color: white;
-      border: 2px solid #e26236;
+      background-color: ${(props) => props.theme.greyColor};
     }
   }
+`;
+
+export const SaveButton = styled(LoginSignUpButton)`
+      margin-top: 100px;
 `;
 
 export const FormContainer = styled.div`

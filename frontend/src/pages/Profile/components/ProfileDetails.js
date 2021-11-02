@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { UserDetails, ProfileDetailsSection } from "../ProfileStyled";
 import pen from "../../../assets/svgs/pen_black.svg";
 import EditProfileField from "./EditProfileField";
+import { 
+  ProfileDetailTitle,
+  Instruction,
+  PassWordInput
+ } from "../../ProfileReadOnly/ProfileReadOnlyStyled";
 
 const ProfileDetails = (props) => {
   const info = props.myProfileInfo;
@@ -24,7 +29,8 @@ const ProfileDetails = (props) => {
   return (
     <>
       <ProfileDetailsSection>
-        <h2>Profile Details</h2>
+        <ProfileDetailTitle>Profile Details</ProfileDetailTitle>
+        <Instruction>- make changes and return to previous page to save them -</Instruction>
       </ProfileDetailsSection>
       <UserDetails>
         <aside className="left">
@@ -63,7 +69,11 @@ const ProfileDetails = (props) => {
             <button
               id="editButton"
               onClick={() =>
-                editButtonOnClickHandler("lastName", "Last name", "last_name")
+                editButtonOnClickHandler(
+                  "lastName", 
+                  "Last name", 
+                  "last_name"
+                  )
               }
             >
               <img id="editIcon" src={pen} alt="edit"></img>
@@ -91,11 +101,11 @@ const ProfileDetails = (props) => {
               <img id="editIcon" src={pen} alt="edit"></img>
             </button>
           </div>
-          <input
+          <PassWordInput
             type="password"
             id="password"
             value="TO BE IMPLEMENTED"
-          ></input>
+          ></PassWordInput>
         </aside>
       </UserDetails>
       {showEditProfileField === true ? (
