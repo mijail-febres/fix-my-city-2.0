@@ -1,74 +1,26 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
 import { patchToggleUpvote } from "../../../Axios/fetches";
 import Navigation from "../../Navigation/Navigation";
 import StatusChanger from "./StatusChanger";
 import UpvoteSvg from "../../../assets/moredetails/voteup.svg";
-
-const MainContainer = styled.div`
-  width: 100vw;
-  min-height: 100%;
-  background-color: #ffffff;
-
-  position: absolute;
-  z-index: 5;
-  top: 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  box-sizing: border-box;
-`;
-
-const SubContainer = styled.div`
-  width: ${(props) => props.width || "100%"};
-  margin: ${(props) => props.margin || "0px"};
-  margin-top: ${(props) => props.marginTop || "0px"};
-  margin-bottom: ${(props) => props.marginBottom || "35px"};
-
-  display: flex;
-  flex-direction: ${(props) => props.flexDirection || "column"};
-  justify-content: ${(props) => props.justifyContent || "flex-start"};
-  align-items: ${(props) => props.alignItems || "flex-start"};
-`;
-
-const Title = styled.h1`
-  font-size: ${(props) => props.fontSize || "19px"};
-  font-weight: bold;
-  color: #e26236;
-  margin-top: ${(props) => props.marginTop || "0px"};
-  margin-bottom: ${(props) => props.marginBottom || "10px"};
-`;
-
-const Text = styled.p`
-  font-size: ${(props) => props.fontSize || "19px"};
-  margin-top: ${(props) => props.marginTop || "0px"};
-  margin-bottom: ${(props) => props.marginBottom || "0px"};
-`;
-
-const IssueImg = styled.img`
-  height: 100%;
-  width: auto;
-  object-fit: cover;
-`;
-
-const UpvoteButton = styled.button`
-  height: 50px;
-  width: 45%;
-  background-color: ${(props) => props.backgroundColor};
-  cursor: pointer;
-  outline-style: none;
-  border: 3px solid ${(props) => props.theme.yellowColor};
-  border-radius: 5px;
-  font-size: 19px;
-  font-weight: bold;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import{
+  MainContainer,
+  SubContainer,
+  Title,
+  Text,
+  IssueImg,
+  UpvoteButton,
+  CategoryField
+} from '../Popup/MoreDetailsStyled';
+import {InsectIcon} from "../../IssueList/issuesComponentStyled";
+import broken from "../../../assets/images/broken.png";
+import damage from "../../../assets/images/damage.png";
+import graffiti from "../../../assets/images/graffiti.png";
+import insect from "../../../assets/images/insect.png";
+import litter from "../../../assets/images/litter.png";
+import plant from "../../../assets/images/plant.png";
+import streetsign from "../../../assets/images/street-sign.png";
 
 const MoreDetails = (props) => {
   console.log(props);
@@ -105,22 +57,23 @@ const MoreDetails = (props) => {
       />
       <SubContainer width={"79%"} alignItems={"center"} marginBottom={"0px"}>
         <SubContainer marginTop={"15px"}>
-          <Title fontSize={"30px"}>{props.title}</Title>
+          <Title fontSize={"20px"}>{props.title}</Title>
           <Text>
-            Reported by{" "}
+            Reported by: <br/>{" "}
             <span
               style={{
                 cursor: "pointer",
                 fontWeight: "bold",
-                fontSize: "19px",
+                color: "#245b55",
+                fontSize: "18px",
               }}
               onClick={() => {
                 history.push(`/profile/${props.userId}/`);
               }}
             >
-              {props.author}
+              {props.author}<br/>
             </span>{" "}
-            on {issueCreated.toLocaleDateString("en-UK")}
+            on {issueCreated.toLocaleDateString("en-UK")}<br/><br/>
           </Text>
           <Text>
             {initialUpvoted
@@ -134,7 +87,7 @@ const MoreDetails = (props) => {
           </Text>
           <Text>
             Status:{" "}
-            <span style={{ fontWeight: "bold", fontSize: "19px" }}>
+            <span style={{ fontWeight: "bold", fontSize: "14px" }}>
               {status}
             </span>
           </Text>
@@ -147,15 +100,58 @@ const MoreDetails = (props) => {
           <IssueImg src={props.image} alt="image of the issue" />
         </SubContainer>
         <SubContainer>
-          <Title>Category</Title>
-          <Text>{props.category}</Text>
+            <Title>Category</Title>
+            <CategoryField>
+                  {props.category === "insects_and_animals" ? 
+                  (<>
+                  <InsectIcon src={insect} alt={"insect"}/> 
+                  <Text>Insects and Animals</Text> 
+                  </>)
+                  : " "}
+                  {props.category === "graffiti" ? 
+                  (<>
+                    <InsectIcon src={graffiti} alt={"graffiti"}/> 
+                    <Text>Graffiti</Text> 
+                    </>)
+                  : " "}
+                  {props.category === "road_damage" ? 
+                   (<>
+                    <InsectIcon src={damage} alt={"damage"}/> 
+                    <Text>Road Damage</Text> 
+                    </>) 
+                  : " "}
+                  {props.category === "damage_to_public_property" ? 
+                    (<>
+                    <InsectIcon src={broken} alt={"broken"}/> 
+                    <Text>Damage to Public Property</Text> 
+                    </>) 
+                  : " "}
+                  {props.category === "unmaintained_greenery" ? 
+                    (<>
+                    <InsectIcon src={plant} alt={"plant"}/> 
+                    <Text>Unmaintained Greenery</Text> 
+                    </>) 
+                  : " "}
+                  {props.category === "litter" ? 
+                    (<>
+                    <InsectIcon src={litter} alt={"litter"}/> 
+                    <Text>Litter</Text> 
+                    </>)                  
+                  : " "}
+                  {props.category === "street_sign_issues" ? 
+                    (<>
+                    <InsectIcon src={streetsign} alt={"street sign"}/> 
+                    <Text>Street Sign Issues</Text> 
+                    </>) 
+                  : " "}
+          </CategoryField>
         </SubContainer>
         <SubContainer>
           <Title>Description</Title>
           <Text>{props.description}</Text>
         </SubContainer>
         <SubContainer>
-          <Title>Where</Title>
+          <Title>Location</Title>
           <Text>{props.streetAndNumber}</Text>
           <Text>
             {props.zip} {props.city}

@@ -73,6 +73,7 @@ export const InsectIcon = styled.img`
     //align-self: center;
     width: 30px;
     height: 30px;
+    margin-right: 5px;
     border-radius: 10px;
 `;
 
