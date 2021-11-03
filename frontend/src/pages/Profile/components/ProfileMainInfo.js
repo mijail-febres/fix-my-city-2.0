@@ -6,6 +6,7 @@ import {
     MenuContainer,
     IconAndLevelContainer,
     GameIcon,
+    LogoutButton
 } from '../ProfileStyled';
 import {
     Home,
@@ -20,7 +21,6 @@ import home from "../../../assets/images/home.png";
 import userGreen from "../../../assets/images/user-LG.png";
 import newIssue from "../../../assets/images/new.png";
 import list from "../../../assets/images/list.png";
-//import filter from "../../assets/images/filter.png";
 import UploadPic from '../../../assets/svgs/upload_black.svg';
 import defaultAvatar from "../../../assets/images/default-avatar.png"
 import {patchProfileInfo} from "../../../Axios/fetches"
@@ -29,7 +29,6 @@ import scout from "../../../assets/images/scout.png"
 import knight from "../../../assets/images/knight.png"
 import hero from "../../../assets/images/hero.png"
 import { useHistory } from "react-router-dom";
-//import { MdList } from 'react-icons/md';
 
 
 const ProfileMainInfo = (props) => {
@@ -76,6 +75,12 @@ const ProfileMainInfo = (props) => {
     const handleUserClick = () => {
         history.push("/profile");
     };
+  
+    const handleLogout = () => {
+      localStorage.removeItem("token");
+      history.push("/");
+    };
+  
 
 
 return (
@@ -104,7 +109,8 @@ return (
         <aside className='right'>
             {props.showEditMode===false?
                 <button id="editButton" onClick={()=>editProfileOnClickHandler("userName","Username","username")}><img id="editIcon" src={pen} alt="edit"></img>Edit Profile</button>
-                :null}  
+                :null} 
+            <LogoutButton onClick={handleLogout}>Logout</LogoutButton> 
         </aside> 
         </NameContainer>
             <StatusContainer>

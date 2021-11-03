@@ -449,11 +449,17 @@ export const IconAndLevelContainer = styled.div`
     height: 40px;
     top: 24px;
   }
+`;
 
-`
-
-// export const EditProfile = styled(LoginSignUpButton)`
-//     &:active {
-//         transform: translateY(4px);
-//         }    
-// `;
+export const LogoutButton = styled.div`
+    display:flex;
+    width: 100px;
+    height: 30px;
+    border-radius: 20px;   
+    background-color: ${(props) => props.theme.greenColor};
+    color: white;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+`;
