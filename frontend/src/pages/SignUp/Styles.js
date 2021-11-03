@@ -78,7 +78,7 @@ export const SignUpContainer =styled.div`
         height: 19.81px;
         left: 64px;
         top: 283px;
-        color: ${props => props.theme.blueColor};
+        color: ${props => props.theme.oldBlueColor};
     }
 
     button {
@@ -92,8 +92,8 @@ export const SignUpContainer =styled.div`
     
 
     input {
-        border: solid ${props => props.theme.blueColor};
-        outline: ${props => props.theme.blueColor};
+        border: solid ${props => props.theme.oldBlueColor};
+        outline: ${props => props.theme.oldBlueColor};
         border-radius: 4px;
     }
 `

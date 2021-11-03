@@ -20,14 +20,15 @@ export const Header = styled.div`
     width: 100%;
 `;
 
-export const LogoWrapper = styled.img`
-    z-index: 0; 
-    opacity: 0.9;
-
-    @media (min-width: 800px) {
-        width: 100vw;
-    }
-`;
+export const LogoWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+    background-image: ${({image}) => `url(${image})`};
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    z-index: 0;
+`
 
 export const Logo = styled.img`
     position: absolute;

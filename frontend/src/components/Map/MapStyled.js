@@ -13,12 +13,12 @@ export const MarkerDivStyle = styled.div`
   height: ${(props) => props.height};
   width: ${(props) => props.width};
   line-height: ${(props) => props.lineHeight};
-  background-color: ${(props) => props.theme.blueColor};
+  background-color: ${(props) => props.theme.oldBlueColor};
   color: #ffffff;
   border-radius: 50%;
   font-size: 22px;
   text-align: center;
-  border: 2px solid ${(props) => props.theme.blueColor};
+  border: 2px solid ${(props) => props.theme.oldBlueColor};
 `;
 
 export const MarkerImgStyle = styled.img`
