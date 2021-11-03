@@ -109,4 +109,5 @@ export const CreateAccount = styled.div`
     color: ${(props) => props.theme.greenColor};
     font-weight: bold;
     font-size: ${(props) => props.theme.fontSizeM};
+    cursor: pointer;
 `;

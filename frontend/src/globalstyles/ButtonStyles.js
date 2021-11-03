@@ -37,4 +37,5 @@ export const LoginSignUpButton = styled.button`
     justify-items: center;
     align-items: center;
     border: none;
+    cursor: pointer;
 `
