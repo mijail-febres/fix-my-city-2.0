@@ -1,5 +1,5 @@
-import React, { useState }from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect }from "react";
+import { useDispatch, useSelector, } from "react-redux";
 import { useHistory } from "react-router-dom";
 import home from "../../assets/images/home.png";
 import user from "../../assets/images/user.png";
@@ -57,17 +57,16 @@ const Homepage = () => {
                         "Unmaintained Greenery","Street Sign Issues"]
     const [optionColor, setOptionColor] = useState(Array(7).fill(false));
 
-    const ApplyClickEvent = () => {
-        handleFilter();
-        setToggleFilter(false);
-    }
-
     const handleFilter = () => {
         dispatch({
         type: "applyFilter",
         payload: filterValue,
         });
     };
+
+    useEffect(() => {
+        handleFilter();
+    }, [filterValue])
 
     const handleClickOnFilter = (item,ind) => {
         let currentFilterValue = [...filterValue];
@@ -125,7 +124,7 @@ const Homepage = () => {
                       <Text>Map</Text>
                     </Home>
                     <Filter>
-                      <Logo src={filter} alt="filter" onClick={() => setToggleFilter(true)} />
+                      <Logo src={filter} alt="filter" onClick={() => setToggleFilter(!toggleFilter)} />
                       <Text>Filter</Text>
                     </Filter>
                     <New>
@@ -169,16 +168,6 @@ const Homepage = () => {
 
             {toggleFilter && (
                 <PopUpContainer>
-                    <MdKeyboardArrowDown
-                    style={{
-                        position: "absolute",
-                        right: "3%",
-                        height: "35px",
-                        width: "auto",
-                        cursor: "pointer",
-                    }}
-                    onClick={() => setToggleFilter(false)}
-                    />
                     <FilterContainer>
                         <SubContainerButtons>
                             <FilterButtons>
@@ -187,7 +176,7 @@ const Homepage = () => {
                                         <Option1
                                             key={index}
                                             value={optionValue[index]}
-                                            onClick={(e) => handleClickOnFilter(e.target.value,index)}
+                                            onClick={(e) => handleClickOnFilter(e.target.value, index)}
                                             style={{backgroundColor : optionColor[index]?defaultTheme.greenColor:defaultTheme.grayColor}}
                                         > 
                                             {option}
@@ -196,11 +185,6 @@ const Homepage = () => {
                                 })}
                             </FilterButtons>
                         </SubContainerButtons>
-                        <SubContainer>
-                        <FilterButtonStyle onClick={ApplyClickEvent}>
-                            Apply filter
-                        </FilterButtonStyle>
-                        </SubContainer>
                     </FilterContainer>
                 </PopUpContainer>
             )}

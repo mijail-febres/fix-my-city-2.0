@@ -44,18 +44,6 @@ const MenuFooter = () => {
         filterValueRedux === "default" ? "default" : filterValueRedux
     );
 
-    const ApplyClickEvent = () => {
-        handleFilter();
-        setToggleFilter(false);
-    }
-
-    const handleFilter = () => {
-        dispatch({
-        type: "applyFilter",
-        payload: filterValue,
-        });
-    };
-
     const [coordinates, setCoordinates] = useState(null);
 
     const handleNewIssueClick = () => {
@@ -79,39 +67,7 @@ const MenuFooter = () => {
 
     return (
         <>
-        {toggleFilter && (
-            <PopUpContainer>
-                <MdKeyboardArrowDown
-                style={{
-                    position: "absolute",
-                    right: "3%",
-                    height: "35px",
-                    width: "auto",
-                    cursor: "pointer",
-                }}
-                onClick={() => setToggleFilter(false)}
-                />
-                <FilterContainer>
-                    <SubContainerButtons>
-                        <FilterButtons>
-                            <Option1 value="litter"                    onClick={(e) => setFilterValue(e.target.value)} >Litter</Option1>
-                            <Option2 value="graffiti"                  onClick={(e) => setFilterValue(e.target.value)} >Graffiti</Option2>
-                            <Option3 value="road_damage"               onClick={(e) => setFilterValue(e.target.value)} >Road Damage</Option3>
-                            <Option4 value="damage_to_public_property" onClick={(e) => setFilterValue(e.target.value)} >Damage to Public Property</Option4>
-                            <Option5 value="insects_and_animals"       onClick={(e) => setFilterValue(e.target.value)} >Insects and Animals</Option5>
-                            <Option6 value="unmaintained_greenery"     onClick={(e) => setFilterValue(e.target.value)} >Unmaintained Greenery</Option6>
-                            <Option7 value="street_sign_issues"        onClick={(e) => setFilterValue(e.target.value)} >Street Sign Issues</Option7>
-                        </FilterButtons>
-                    </SubContainerButtons>
-                    <SubContainer>
-                    <FilterButtonStyle onClick={ApplyClickEvent}>
-                        Apply filter
-                    </FilterButtonStyle>
-                    </SubContainer>
-                </FilterContainer>
-            </PopUpContainer>
-            )}
-
+        
             <MenuContainer>
                     <Home>
                         <Logo src={home} alt="home" onClick={handleHomeClick}/>
