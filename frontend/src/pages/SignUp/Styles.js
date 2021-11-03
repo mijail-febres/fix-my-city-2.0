@@ -54,7 +54,7 @@ export const SignUpContainer =styled.div`
         height: 19.81px;
         left: 64px;
         top: 283px;
-        color: ${props => props.theme.blueColor};
+        color: ${props => props.theme.oldBlueColor};
     }
 `;
 

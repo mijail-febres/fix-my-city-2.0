@@ -8,7 +8,7 @@ export const MainContainer = styled.div`
   position: absolute;
   z-index: 5;
   top: 0;
-  border: 1px solid white;
+  border: 3px solid white;
   border-radius: 30px;
   padding-bottom:10vh;
 

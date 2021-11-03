@@ -135,15 +135,17 @@ const Map = (props) => {
     setIsLoaded(true)
   }
 
-  const onMarkerDragStart = useCallback(event => {
+  const onMarkerDragStart =  useCallback(event => {
     event.preventDefault()
     setUserMarkerDrag(true)
   }, []);
 
   const onMarkerDrag = useCallback(event => {
+    event.preventDefault()
   }, []);
 
   const onMarkerDragEnd = useCallback(event => {
+    event.preventDefault()
     setUserMarkerDrag(false)
     setUserMarker({
         id: 'user',

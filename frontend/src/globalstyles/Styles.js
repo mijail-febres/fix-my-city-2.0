@@ -24,7 +24,7 @@ export const defaultTheme = {
     darkGreenColor: '#245b55',
     greyColor: '#f5f5f5',
     darkGreyColor: '#A5A5A5',
-
+    oldBlueColor: '#5D61F6',
     
     fontSizeS: "10px",
     fontSizeM: "14px",

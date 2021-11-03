@@ -4,55 +4,57 @@ import { patchIssue } from "../../../Axios/fetches";
 import StatusSvg from "../../../assets/moredetails/status.svg";
 
 const MainContainer = styled.div`
-  width: 60%;
+  width: 30%;
   border-radius: 5px;
-  border: 3px solid ${(props) => props.theme.yellowColor};
   background-color: #ffffff;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  position: absolute;
-  left: 50%;
-  top: 50%;
+  /* position: absolute;
+  left: 80%;
+  bottom: 10vh; */
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  border-radius: 20px;   
+  border: 2px solid ${(props) => props.theme.greenColor};
+  color: white;
 `;
 
 const SubContainer = styled.div`
   width: 100%;
-  height: 50px;
-  border-bottom: ${(props) =>
-    props.borderBottom || `3px solid ${props.theme.yellowColor}`};
-  border-top: ${(props) =>
-    props.borderTop || `3px solid ${props.theme.yellowColor}`};
-
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  &:hover {
+        cursor: pointer;
+    }
 `;
 
 const Text = styled.p`
   font-size: 19px;
   font-weight: bold;
   text-align: center;
+  &:hover {
+        cursor: pointer;
+        color: ${(props) => props.theme.greenColor};
+    }
 `;
 
 const StatusButton = styled.button`
-  height: 50px;
-  width: 45%;
-  background-color: #ffffff;
-  cursor: pointer;
-  outline-style: none;
-  border: 3px solid ${(props) => props.theme.yellowColor};
-  border-radius: 5px;
-  font-size: 19px;
-  font-weight: bold;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display:flex;
+    width: 200px;
+    height: 39px;
+    border-radius: 20px;   
+    background-color: ${(props) => props.theme.greenColor};
+    color: white;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
 `;
 
 const StatusChanger = (props) => {
