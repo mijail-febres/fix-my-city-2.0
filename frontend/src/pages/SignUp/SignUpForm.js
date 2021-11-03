@@ -1,9 +1,25 @@
 import React, {useState} from 'react';
-import { RegistrationForm, CongratsContainer } from './Styles';
-import { SignUpField } from '../../globalstyles/Input';
+import { 
+    RegistrationForm, 
+    CongratsContainer,
+    SignUpWrapper,
+    ImageWrapper, 
+} from './Styles';
 import { LoginSignUpButton } from '../../globalstyles/ButtonStyles';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import {
+    Header,
+    Logo,
+    LogoWrapper,
+    EmailField
+} from "../../pages/Login/LoginStyled";
+import map from "../../assets/images/map-login-large.png";
+import fixmycitylogo from "../../assets/svgs/fixmycitylogonew.svg";
+import scout from "../../assets/images/scout.png"
+import knight from "../../assets/images/knight.png"
+import hero from "../../assets/images/hero.png"
+import {GameIcon} from "../../pages/Profile/ProfileStyled"
 
 const SignUpForm = () => {
 
@@ -19,6 +35,13 @@ const SignUpForm = () => {
     const history = useHistory();
 
     const signUpOnClickHandler = async () => {
+
+        if (password !== password2){
+            alert("your passwords do not match");
+            setShowCongrats(false);
+            setShowRegistration(true);
+        }
+        else {
         setShowRegistration(false)
         setShowCongrats(true)
         await axios.post(
@@ -33,6 +56,7 @@ const SignUpForm = () => {
                 password_repeat: password2,
             }
         )
+        }
     }
 
     const loginOnClickHandler = (event) => {
@@ -45,33 +69,32 @@ const SignUpForm = () => {
         <>
             {
                 showRegistration === true?
+                <SignUpWrapper>
+                    <Header>
+                        <LogoWrapper src={map} alt="map Zurich"></LogoWrapper>
+                        <Logo src={fixmycitylogo} alt="logo" />
+                    </Header>
                     <RegistrationForm>
-                        <h1>Sign Up</h1>
+                        <h1>Sign Up to Fix My City!</h1>
 
-                        <p>Username</p>
-                        <SignUpField type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)}/>
+                        <EmailField type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)}/>
 
-                        <p>First Name</p>
-                        <SignUpField type="text" placeholder="First name" onChange={(e) => setFirstName(e.target.value)}/>
+                        <EmailField type="text" placeholder="First name" onChange={(e) => setFirstName(e.target.value)}/>
 
-                        <p>Last Name</p>
-                        <SignUpField type="text" placeholder="Last name" onChange={(e) => setLastName(e.target.value)}/>
+                        <EmailField type="text" placeholder="Last name" onChange={(e) => setLastName(e.target.value)}/>
 
-                        <p>Email</p>
-                        <SignUpField type="email" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)}/>
+                        <EmailField type="email" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)}/>
 
-                        <p>Code</p>
-                        <SignUpField type="text" placeholder="Validation code" onChange={(e) => setCode(e.target.value)}/>
+                        <EmailField type="text" placeholder="Validation code" onChange={(e) => setCode(e.target.value)}/>
 
-                        <p>Password</p>
-                        <SignUpField type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                        <EmailField type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
 
-                        <p>Password repeat</p>
-                        <SignUpField type="password" placeholder="Password repeat" onChange={(e) => setPassword2(e.target.value)}/>
-
+                        <EmailField type="password" placeholder="Password repeat" onChange={(e) => setPassword2(e.target.value)}/>
+                        <br/>
                         <LoginSignUpButton onClick={signUpOnClickHandler} type={"submit"}>Sign Up</LoginSignUpButton>
 
                     </RegistrationForm>
+                </SignUpWrapper>
                 :null}
 
             {
@@ -79,8 +102,19 @@ const SignUpForm = () => {
                     <CongratsContainer>
 
                         <h1>You’re all set, congrats!</h1>
+                        <h2>You can now start gathering points while fixing this city:
+                            <br/>
+                            <br/>
+                            move up from scout to knight to hero and get rewarded for your good work!
+                        </h2>
+
+                        <ImageWrapper>
+                            <GameIcon src={scout} alt ="scout"/>
+                            <GameIcon src={hero} alt ="hero"/>
+                            <GameIcon src={knight} alt ="knight"/>
+                        </ImageWrapper>
             
-                        <LoginSignUpButton onClick={loginOnClickHandler} type={"submit"}>Sign Up</LoginSignUpButton>
+                        <LoginSignUpButton onClick={loginOnClickHandler} type={"submit"}>Go to Login</LoginSignUpButton>
 
                     </CongratsContainer>
                 :null}
