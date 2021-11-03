@@ -83,7 +83,7 @@ const MoreDetails = (props) => {
               : upvoted
               ? props.upvoteCount + 1
               : props.upvoteCount}{" "}
-            Upvotes
+              {props.upvoteCount===1 ? " upvote" : " upvotes"}
           </Text>
           <Text>
             Status:{" "}
