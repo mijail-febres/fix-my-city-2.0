@@ -22,7 +22,9 @@ class RegistrationView(CreateAPIView):
         instance = serializer.save()
         send_mail(
             'Thank you for signing up for fixmycity',
-            f'Here is your e-mail validation code: {instance.code}. You will need it to create a new profile.',
+            f'Here is your e-mail validation code: {instance.code}.\n'
+            'Please click on the following link to access validation:\n'
+            'https://fix-my-city.app.propulsion-learn.ch/signupform',
             DEFAULT_FROM_EMAIL,
             [request.data['email']],
             fail_silently=False,
