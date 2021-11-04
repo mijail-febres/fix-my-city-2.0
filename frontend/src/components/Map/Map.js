@@ -398,7 +398,6 @@ const Map = (props) => {
     <>
 
       <MainContainer height={props.height} width={props.width}>
-        <Navigation position="absolute" />
         <div ref={geocoderContainerRef} />
         <ReactMapGL
           id = 'react-map-capture'
@@ -428,6 +427,7 @@ const Map = (props) => {
             mapboxApiAccessToken={MAPBOX_TOKEN}
             zoom={17}
             marker={false}
+            countries = 'ch'
           />
           {/* <FullscreenControl style={fullscreenControlStyle} /> */}
           <GeolocateControl
@@ -438,7 +438,6 @@ const Map = (props) => {
             fitBoundsOptions={{ maxZoom: 17 }}
             // auto
           />
-          <NavigationControl style={navControlStyle} />
           <ScaleControl
             maxWidth={100}
             unit="metric"
