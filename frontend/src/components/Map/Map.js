@@ -39,6 +39,13 @@ import { getBounds } from "viewport-mercator-project";
 import { getViewPort, findCentroid, findMaxDist  } from "./Calculations";
 import { SvgAnimation } from "./MapStyled";
 import svgPlant from "../../assets/svgs/plant.svg"
+import svgBroken from "../../assets/svgs/broken.svg"
+import svgDamage from "../../assets/svgs/damage.svg"
+import svgInsect from "../../assets/svgs/insect.svg"
+import svgStreetSign from "../../assets/svgs/street-sign.svg"
+import svgLitter from "../../assets/svgs/litter.svg"
+import svgGraffiti from "../../assets/svgs/graffiti.svg"
+import svgNewMarker from "../../assets/svgs/new-marker.svg"
 
 const Map = (props) => {
   const geolocateControlStyle = {
@@ -426,7 +433,7 @@ const Map = (props) => {
             marker={false}
             onResult={handleOnResult}
           />
-          {/*<FullscreenControl style={fullscreenControlStyle} />*/}
+          {/* <FullscreenControl style={fullscreenControlStyle} /> */}
           <GeolocateControl
             style={geolocateControlStyle}
             positionOptions={{ enableHighAccuracy: true }}
@@ -514,24 +521,23 @@ const Map = (props) => {
                     offsetTop={-30}
                   >
                     <MarkerImgStyle
-                      image={svgPlant}
-                      // src={
-                      //   // cluster.properties.category === 'graffiti'?
-                      //   // graffiti:
-                      //   // cluster.properties.category === 'road_damage'?
-                      //   // damage:
-                      //   // cluster.properties.category === 'damage_to_public_property'?
-                      //   // broken:
-                      //   // cluster.properties.category === 'insects_and_animals'?
-                      //   // insect:
-                      //   // cluster.properties.category === 'street_sign_issues'?
-                      //   // streetSign:
-                      //   // cluster.properties.category === 'litter'?
-                      //   // litter:
-                      //   cluster.properties.category === 'unmaintained_greenery'?
-                      //   plant:
-                      //   null
-                      // }
+                      image={
+                        cluster.properties.category === 'graffiti'?
+                        svgGraffiti:
+                        cluster.properties.category === 'road_damage'?
+                        svgDamage:
+                        cluster.properties.category === 'damage_to_public_property'?
+                        svgBroken:
+                        cluster.properties.category === 'insects_and_animals'?
+                        svgInsect:
+                        cluster.properties.category === 'street_sign_issues'?
+                        svgStreetSign:
+                        cluster.properties.category === 'litter'?
+                        svgLitter: //
+                        cluster.properties.category === 'unmaintained_greenery'?
+                        svgPlant:
+                        null
+                      }
 
                       // alt="marker"
                       onClick={(e) => {
@@ -603,7 +609,7 @@ const Map = (props) => {
                 onDragEnd={onMarkerDragEnd}
               >
                 <MarkerImgStyle
-                  // src={BlueMarker}
+                  image={svgNewMarker}
                   alt="marker"
                   onClick={(e) => {
                     e.preventDefault();
