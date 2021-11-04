@@ -4,12 +4,11 @@ export const MainContainer = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: scroll;
-  background-color: #f5f5f5;
+  background-color: #EBEBEB;
   position: absolute;
   z-index: 5;
   top: 0;
-  border: 3px solid white;
-  border-radius: 30px;
+  border: 1px solid white;
   padding-bottom:10vh;
 
   display: flex;
@@ -20,6 +19,7 @@ export const MainContainer = styled.div`
 
   @media (min-width: 800px) {
     width: 50vw;
+    left: 25vw;
     }
  
 `;

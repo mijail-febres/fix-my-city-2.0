@@ -108,7 +108,7 @@ return (
         </aside> 
         <aside className='right'>
             {props.showEditMode===false?
-                <button id="editButton" onClick={()=>editProfileOnClickHandler("userName","Username","username")}><img id="editIcon" src={pen} alt="edit"></img>Edit Profile</button>
+            <button id="editButton" onClick={()=>editProfileOnClickHandler("userName","Username","username")}><img id="editIcon" src={pen} alt="edit"></img>Edit Profile</button>
                 :null} 
             <LogoutButton onClick={handleLogout}>Logout</LogoutButton> 
         </aside> 

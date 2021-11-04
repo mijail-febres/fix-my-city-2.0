@@ -41,6 +41,11 @@ const SignUpForm = () => {
             setShowCongrats(false);
             setShowRegistration(true);
         }
+        else if (username === "" || email === "" || code === "" || firstName === "" || lastName === "" || password === "" || password2 === "") {
+            alert("please complete all fields");
+            setShowCongrats(false);
+            setShowRegistration(true);
+        }
         else {
         setShowRegistration(false)
         setShowCongrats(true)
