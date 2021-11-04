@@ -76,7 +76,7 @@ const SignUpForm = () => {
                 showRegistration === true?
                 <SignUpWrapper>
                     <Header>
-                        <LogoWrapper src={map} alt="map Zurich"></LogoWrapper>
+                        <LogoWrapper image={map} alt="map Zurich"></LogoWrapper>
                         <Logo src={fixmycitylogo} alt="logo" />
                     </Header>
                     <RegistrationForm>
