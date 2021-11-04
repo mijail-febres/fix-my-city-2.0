@@ -14,16 +14,16 @@ import{
   CategoryField
 } from '../Popup/MoreDetailsStyled';
 import {InsectIcon} from "../../IssueList/issuesComponentStyled";
-import broken from "../../../assets/images/broken.png";
-import damage from "../../../assets/images/damage.png";
-import graffiti from "../../../assets/images/graffiti.png";
-import insect from "../../../assets/images/insect.png";
-import litter from "../../../assets/images/litter.png";
-import plant from "../../../assets/images/plant.png";
-import streetsign from "../../../assets/images/street-sign.png";
+import broken from "../../../assets/svgs/broken.svg";
+import damage from "../../../assets/svgs/damage.svg";
+import graffiti from "../../../assets/svgs/graffiti.svg";
+import insect from "../../../assets/svgs/insect.svg";
+import litter from "../../../assets/svgs/litter.svg";
+import plant from "../../../assets/svgs/plant.svg";
+import streetsign from "../../../assets/svgs/street-sign.svg";
 
 const MoreDetails = (props) => {
-  console.log(props);
+  console.log('props',props);
   const issueCreated = new Date(props.created);
 
   const history = useHistory();
@@ -74,16 +74,6 @@ const MoreDetails = (props) => {
               {props.author}<br/>
             </span>{" "}
             on {issueCreated.toLocaleDateString("en-UK")}<br/><br/>
-          </Text>
-          <Text>
-            {initialUpvoted
-              ? upvoted
-                ? props.upvoteCount
-                : props.upvoteCount - 1
-              : upvoted
-              ? props.upvoteCount + 1
-              : props.upvoteCount}{" "}
-              {props.upvoteCount===1 ? " upvote" : " upvotes"}
           </Text>
           <Text>
             Status:{" "}
@@ -167,7 +157,13 @@ const MoreDetails = (props) => {
               alt="upvote icon"
               style={{ marginRight: "7px" }}
             />{" "}
-            Up-vote
+            {initialUpvoted
+              ? upvoted
+                ? props.upvoteCount
+                : props.upvoteCount - 1
+              : upvoted
+              ? props.upvoteCount + 1
+              : props.upvoteCount}{" "}
           </UpvoteButton>
           {props.currentUser !== undefined ? (
             props.currentUser.is_superuser ? (

@@ -1,10 +1,10 @@
-import broken from "../../assets/images/broken.png";
-import damage from "../../assets/images/damage.png";
-import graffiti from "../../assets/images/graffiti.png";
-import insect from "../../assets/images/insect.png";
-import litter from "../../assets/images/litter.png";
-import plant from "../../assets/images/plant.png";
-import streetsign from "../../assets/images/street-sign.png";
+import broken from "../../assets/svgs/broken.svg";
+import damage from "../../assets/svgs/damage.svg";
+import graffiti from "../../assets/svgs/graffiti.svg";
+import insect from "../../assets/svgs/insect.svg";
+import litter from "../../assets/svgs/litter.svg";
+import plant from "../../assets/svgs/plant.svg";
+import streetsign from "../../assets/svgs/street-sign.svg";
 import {
   AddressContainer,
   Address,

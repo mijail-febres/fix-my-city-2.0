@@ -394,9 +394,6 @@ const Map = (props) => {
     options: { radius: 50, maxZoom: 20 },
   });
 
-  const handleOnResult = () =>{
-  }
-
   return (
     <>
 
@@ -431,7 +428,6 @@ const Map = (props) => {
             mapboxApiAccessToken={MAPBOX_TOKEN}
             zoom={17}
             marker={false}
-            onResult={handleOnResult}
           />
           {/* <FullscreenControl style={fullscreenControlStyle} /> */}
           <GeolocateControl
