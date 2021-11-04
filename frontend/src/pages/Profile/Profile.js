@@ -13,6 +13,7 @@ import ProfileMainInfo from "./components/ProfileMainInfo";
 import Navigation from "../../components/Navigation/Navigation";
 import { fetchLatestProfileInfoAndUpdateRedux } from "../../middleware/fetchUpdateRedux";
 import IssueList from "../../components/IssueList/issueList";
+import svgPlant from "../../components/Map/Svg";
 
 const Profile = () => {
   const dispatch = useDispatch();

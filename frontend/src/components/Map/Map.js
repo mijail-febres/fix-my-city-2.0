@@ -19,6 +19,7 @@ import {
   MainContainer,
   MarkerDivStyle,
   MarkerImgStyle,
+  markerSvg,
   SatelliteButton,
 } from "./MapStyled";
 import { FaSatelliteDish } from "react-icons/fa";
@@ -29,10 +30,6 @@ import insect from "../../assets/images/insect.png";
 import streetSign from "../../assets/images/street-sign.png";
 import broken from "../../assets/images/broken.png";
 import plant from "../../assets/images/plant.png";
-import RedMarker from "../../assets/map/markers/red-marker.png";
-import RedishOrangeMarker from "../../assets/map/markers/redish-orange-marker.png";
-import OrangeMarker from "../../assets/map/markers/orange-marker.png";
-import YellowMarker from "../../assets/map/markers/yellow-marker.png";
 import BlueMarker from "../../assets/map/markers/blue-marker.png";
 import PopupContent from "./Popup/PopupContent";
 import MoreDetails from "./Popup/MoreDetails";
@@ -40,6 +37,8 @@ import Navigation from "../Navigation/Navigation";
 import { fetchProfileInfo } from "../../Axios/fetches";
 import { getBounds } from "viewport-mercator-project";
 import { getViewPort, findCentroid, findMaxDist  } from "./Calculations";
+import { SvgAnimation } from "./MapStyled";
+import svgPlant from "../../assets/svgs/plant.svg"
 
 const Map = (props) => {
   const geolocateControlStyle = {
@@ -393,6 +392,7 @@ const Map = (props) => {
 
   return (
     <>
+
       <MainContainer height={props.height} width={props.width}>
         <Navigation position="absolute" />
         <div ref={geocoderContainerRef} />
@@ -514,24 +514,26 @@ const Map = (props) => {
                     offsetTop={-30}
                   >
                     <MarkerImgStyle
-                      src={
-                        cluster.properties.category === 'graffiti'?
-                        graffiti:
-                        cluster.properties.category === 'road_damage'?
-                        damage:
-                        cluster.properties.category === 'damage_to_public_property'?
-                        broken:
-                        cluster.properties.category === 'insects_and_animals'?
-                        insect:
-                        cluster.properties.category === 'street_sign_issues'?
-                        streetSign:
-                        cluster.properties.category === 'litter'?
-                        litter:
-                        cluster.properties.category === 'unmaintained_greenery'?
-                        plant:
-                        null
-                      }
-                      alt="marker"
+                      image={svgPlant}
+                      // src={
+                      //   // cluster.properties.category === 'graffiti'?
+                      //   // graffiti:
+                      //   // cluster.properties.category === 'road_damage'?
+                      //   // damage:
+                      //   // cluster.properties.category === 'damage_to_public_property'?
+                      //   // broken:
+                      //   // cluster.properties.category === 'insects_and_animals'?
+                      //   // insect:
+                      //   // cluster.properties.category === 'street_sign_issues'?
+                      //   // streetSign:
+                      //   // cluster.properties.category === 'litter'?
+                      //   // litter:
+                      //   cluster.properties.category === 'unmaintained_greenery'?
+                      //   plant:
+                      //   null
+                      // }
+
+                      // alt="marker"
                       onClick={(e) => {
                         e.preventDefault();
                         setSelectedIssue(cluster);
@@ -555,7 +557,9 @@ const Map = (props) => {
                               }
                         );
                       }}
-                    />
+                    >        
+                      <SvgAnimation/>
+                    </MarkerImgStyle>
                   </Marker>
                 )
               );
@@ -599,7 +603,7 @@ const Map = (props) => {
                 onDragEnd={onMarkerDragEnd}
               >
                 <MarkerImgStyle
-                  src={BlueMarker}
+                  // src={BlueMarker}
                   alt="marker"
                   onClick={(e) => {
                     e.preventDefault();
@@ -615,7 +619,8 @@ const Map = (props) => {
                   //   });
                   // }}
                   style={{ cursor: "auto" }}
-                />
+                >
+                </MarkerImgStyle>
               </Marker>
             )
           }
