@@ -28,7 +28,6 @@ export const Main = styled.div`
 
 export const NameContainer = styled.div`
   width: 90%;
-  //height: 150px;
   height: 22%;
   min-height: 150px;
   margin-top: 2%;
@@ -38,8 +37,6 @@ export const NameContainer = styled.div`
   margin-top: 0%;
   margin-bottom: 2%;
   border-bottom: solid 1px ${(props) => props.theme.darkGreyColor};
-
-
 
   .left {
     width: 35%;
@@ -76,7 +73,6 @@ export const NameContainer = styled.div`
           font-size: 24px;
           line-height: 28px;
           color: ${(props) => props.theme.greenColor};
-        
         }
     }  
   }
@@ -90,21 +86,14 @@ export const NameContainer = styled.div`
 
   #uploadInput {
     display: none;
-    /*display: flex;
-        font-size: 16px;
-        justify-content: center;
-        width: 100px;
-        border: 2px solid #F8CE46;
-        background: none;
-        padding: 7px 2px;   */
   }
+
   #uploadLabel {
     display: flex;
     height: 25px;
     font-size: 10px;
     justify-content: center;
     width: 100px;
-    /*border: 2px solid #F8CE46;*/
     background: none;
     padding: 5px 1px;
     #uploadIcon {
@@ -121,11 +110,21 @@ export const NameContainer = styled.div`
   
   #editButton {
     display:flex;
-    //display: inline;
-    background: none;
+    //width: 130px;
+    padding: 0px 5px;
+    height: 30px;
+    border-radius: 20px;   
+    background-color: ${(props) => props.theme.greenColor};
+    color: white;
+    justify-content: center;
+    align-items: center;
     border: none;
     cursor: pointer;
     font-size: 14px;
+
+    @media (min-width: 800px) {
+      font-size: 16px;
+    }
     
     #editIcon {
       width: 18px;
@@ -134,6 +133,7 @@ export const NameContainer = styled.div`
       cursor: pointer;
     }
   }
+
 }
 `;
 
@@ -143,11 +143,6 @@ export const StatusContainer = styled.div`
   display: flex;
   justify-content: space-around;
   border-bottom: solid 1px ${(props) => props.theme.darkGreyColor};
-
-  /* img {
-    width: 35%;
-    height: 50%;
-  } */
 
   p {
     font-style: normal;
@@ -273,12 +268,10 @@ export const UserDetails = styled.div`
 
   .left {
     width: 50%;
-    //margin-top: 2%;
   }
 
   .right {
     width: 50%;
-    //margin-top: 2%;
   }
 `;
 
@@ -454,6 +447,7 @@ export const IconAndLevelContainer = styled.div`
 export const LogoutButton = styled.div`
     display:flex;
     width: 100px;
+    padding: 0px 5px;
     height: 30px;
     border-radius: 20px;   
     background-color: ${(props) => props.theme.greenColor};
@@ -462,4 +456,9 @@ export const LogoutButton = styled.div`
     align-items: center;
     border: none;
     cursor: pointer;
+    font-size: 14px;
+
+    @media (min-width: 800px) {
+      font-size: 16px;
+    }
 `;

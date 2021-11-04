@@ -9,11 +9,12 @@ export const MenuContainer = styled.div`
     bottom: 0px;
     width: 100vw;
     height: 10vh;
-    border-radius: 20px;
     background-color: ${(props) => props.theme.greyColor};
     z-index:10;
     cursor: pointer;
     border-top: 0.5px solid white;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
 
     @media (min-width: 800px) {
         width: 30vw;
