@@ -147,7 +147,7 @@ const Homepage = () => {
                         <Text>Map</Text>
                     </Home>
                     <Filter>
-                        <Logo src={filter} alt="filter" onClick={() => setToggleFilter(true)} />
+                        <Logo src={filter} alt="filter" onClick={() => setToggleFilter(!toggleFilter)} />
                         <Text>Filter</Text>
                     </Filter>
                     <New>
