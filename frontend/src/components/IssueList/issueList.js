@@ -11,6 +11,7 @@ import newIssue from "../../assets/images/new.png";
 import listGreen from "../../assets/images/list-LG.png";
 import filter from "../../assets/images/filter.png";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import {defaultTheme} from '../../globalstyles/Styles.js';
 import {
     MenuContainer,
     Home,
@@ -41,6 +42,11 @@ import {
   Title
 } from "../IssueList/issueListStyled";
 
+const optionValue = ["litter","graffiti","road_damage","damage_to_public_property","insects_and_animals",
+                    "unmaintained_greenery","street_sign_issues"];
+const optionContent = ["Litter","Graffiti","Road Damage","Damage to Public Property","Insects and Animals",
+                      "Unmaintained Greenery","Street Sign Issues"];
+
 const IssueList = (props) => {
   const [issues, setIssues] = useState(null);
   const [selectedIssue, setSelectedIssue] = useState(null);
@@ -48,6 +54,8 @@ const IssueList = (props) => {
   const [issuesLength, setIssuesLength] = useState(0);
   const [toggleMoreDetails, setToggleMoreDetails] = useState(false);
   const [toggleShowIssues, setToggleShowIssues] = useState(true);
+  const [filteredIssues, setFilteredIssues] = useState([]);
+  const [toggleShowFilteredIssues, setToggleShowFilteredIssues] = useState(false)
 
   // Placeholder for MoreDetails
   const [fetchIssuesPlaceholder, setFetchIssuesPlaceholder] = useState(false);
@@ -92,17 +100,63 @@ const IssueList = (props) => {
         filterValueRedux === "default" ? "default" : filterValueRedux
     );
 
+    const [optionColor, setOptionColor] = useState(Array(7).fill(false));
+
     const ApplyClickEvent = () => {
-        handleFilter();
-        setToggleFilter(false);
+      setToggleShowIssues(!toggleShowIssues);
+      setToggleShowFilteredIssues(!toggleShowFilteredIssues);
     }
 
     const handleFilter = () => {
+
         dispatch({
         type: "applyFilter",
         payload: filterValue,
         });
     };
+
+    useEffect(() => {
+      if (filterValueRedux[0] === "default") {
+        setFilteredIssues(issues);
+      } else {
+        const filteredArray = issues.filter((issue) => filterValueRedux.indexOf(issue.category) > -1);
+        if (filteredArray.length >= 1) {
+          setFilteredIssues([...filteredArray]);
+        } else {
+          setFilteredIssues([]);
+        }
+      }
+  
+      setSelectedIssue(null);
+  
+    }, [filterValueRedux]);
+
+    useEffect(() => {
+      handleFilter();
+    }, [filterValue])
+
+     const handleClickOnFilter = (item,ind) => {
+        let currentFilterValue = [...filterValue];
+        if (currentFilterValue) {
+            if (currentFilterValue.length === 1 && currentFilterValue[0] === 'default') {
+                currentFilterValue = [];
+                currentFilterValue.push(item);
+            } else {
+                if (currentFilterValue.indexOf(item) === -1) {
+                    currentFilterValue.push(item);
+                } else {
+                    currentFilterValue.splice(currentFilterValue.indexOf(item),1);
+                    if (currentFilterValue.length === 0) { // In case the array is empty, default should be the default value
+                        currentFilterValue.push('default');
+                    }
+                }
+            }
+            let colors = [...optionColor];
+            colors[ind] = !colors[ind];
+            setOptionColor([...colors]);
+        }
+        setFilterValue([...currentFilterValue]);
+    }
 
 
     const history = useHistory();
@@ -147,9 +201,31 @@ const IssueList = (props) => {
                   />
                 ))
             ) : (
-              <h1>No issues reported</h1>
+              <h1>No current issues</h1>
             )}
           </ListWrapper>
+        )}
+        {toggleShowFilteredIssues && (
+          <ListWrapper>
+          {!props.profile && !props.userIdReadOnly && (
+            <Title>Hottest issues</Title>
+          )}
+          {filteredIssues && filteredIssues.length !== 0 ? (
+            filteredIssues
+              .slice(0, lastIndex())
+              .map((item, index) => (
+                <IssueComponent
+                  key={`${index}-${item.title}`}
+                  issue={item}
+                  setSelectedIssue={setSelectedIssue}
+                  setToggleMoreDetails={setToggleMoreDetails}
+                  setToggleShowIssues={setToggleShowIssues}
+                />
+              ))
+          ) : (
+            <h1>No current issues</h1>
+          )}
+        </ListWrapper>
         )}
       </Main>
       {toggleMoreDetails && (
@@ -177,33 +253,34 @@ const IssueList = (props) => {
       )}
       {toggleFilter && (
             <PopUpContainer>
-                <MdKeyboardArrowDown
-                style={{
-                    position: "absolute",
-                    right: "3%",
-                    height: "35px",
-                    width: "auto",
-                    cursor: "pointer",
-                }}
-                onClick={() => setToggleFilter(false)}
-                />
                 <FilterContainer>
                     <SubContainerButtons>
                         <FilterButtons>
-                            <Option1 value="litter" onClick={(e) => setFilterValue(e.target.value)} >Litter</Option1>
-                            <Option2 value="graffiti" onClick={(e) => setFilterValue(e.target.value)} >Graffiti</Option2>
+                          {optionContent.map((option,index) => {
+                            return(
+                              <Option1
+                                  key={index}
+                                  value={optionValue[index]}
+                                  onClick={(e) => handleClickOnFilter(e.target.value, index)}
+                                  style={{backgroundColor : optionColor[index]?defaultTheme.greenColor:defaultTheme.grayColor}}
+                              > 
+                                  {option}
+                              </Option1>
+                              )
+                            })}
+                            {/* <Option2 value="graffiti" onClick={(e) => setFilterValue(e.target.value)} >Graffiti</Option2>
                             <Option3 value="road_damage" onClick={(e) => setFilterValue(e.target.value)} >Road Damage</Option3>
                             <Option4 value="damage_to_public_property" onClick={(e) => setFilterValue(e.target.value)} >Damage to Public Property</Option4>
                             <Option5 value="insects_and_animals" onClick={(e) => setFilterValue(e.target.value)} >Insects and Animals</Option5>
                             <Option6 value="unmaintained_greenery" onClick={(e) => setFilterValue(e.target.value)} >Unmaintained Greenery</Option6>
-                            <Option7 value="street_sign_issues" onClick={(e) => setFilterValue(e.target.value)} >Street Sign Issues</Option7>
+                            <Option7 value="street_sign_issues" onClick={(e) => setFilterValue(e.target.value)} >Street Sign Issues</Option7> */}
                         </FilterButtons>
                     </SubContainerButtons>
-                    <SubContainer>
+                    {/* <SubContainer>
                     <FilterButtonStyle onClick={ApplyClickEvent}>
                         Apply filter
                     </FilterButtonStyle>
-                    </SubContainer>
+                    </SubContainer> */}
                 </FilterContainer>
             </PopUpContainer>
             )}
@@ -214,7 +291,7 @@ const IssueList = (props) => {
                         <Text>Map</Text>
                     </Home>
                     <Filter>
-                        <Logo src={filter} alt="filter" onClick={() => setToggleFilter(true)} />
+                        <Logo src={filter} alt="filter" onClick={() => {setToggleFilter(!toggleFilter); ApplyClickEvent()}} />
                         <Text>Filter</Text>
                     </Filter>
                     <New>
