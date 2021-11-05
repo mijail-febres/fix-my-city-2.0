@@ -264,6 +264,7 @@ const IssueList = (props) => {
                                   onClick={(e) => handleClickOnFilter(e.target.value, index)}
                                   style={{backgroundColor : optionColor[index]?defaultTheme.greenColorTransparent:defaultTheme.greyColorTransparent}}
                               > 
+                              
                                   {option}
                               </Option1>
                               )
