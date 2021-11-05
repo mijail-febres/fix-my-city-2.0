@@ -20,9 +20,11 @@ export const defaultTheme = {
     blackColor: '#121212',
     aquaColor: '#8affc1',
     greenColor: '#329f5b',
+    greenColorTransparent: 'rgba(50, 159, 91, 0.75)',
     brightGreenColor: '#5fff67',
     darkGreenColor: '#245b55',
     greyColor: '#f5f5f5',
+    greyColorTransparent: 'rgba(245, 245, 245, 0.75)',
     darkGreyColor: '#A5A5A5',
     haloGreen: '#32bf38',
 
