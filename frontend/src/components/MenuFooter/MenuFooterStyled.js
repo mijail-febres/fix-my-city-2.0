@@ -134,8 +134,10 @@ export const Option1 = styled.button`
     background-color: ${(props) => props.theme.greyColor};
     border-radius: 20px;
     justify-content: center;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     border:none;
 
     &:hover {
