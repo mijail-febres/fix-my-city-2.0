@@ -4,7 +4,7 @@ import {defaultTheme} from '../../globalstyles/Styles.js';
 
 const pulse = keyframes`
   0% {
-    transform: scale(0.9);
+    transform: scale(0.7);
     opacity: 1;
     transform-origin: center;
     stroke: ${defaultTheme.haloGreen};

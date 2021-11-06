@@ -66,6 +66,9 @@ const Navigation = (props) => {
       case "profile":
         history.push("/");
         break;
+      case "report":
+        history.push("/");
+        break;
       case "issues":
         history.push("/");
         break;

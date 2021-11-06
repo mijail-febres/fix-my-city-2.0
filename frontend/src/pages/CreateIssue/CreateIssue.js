@@ -23,17 +23,12 @@ import { useSelector } from "react-redux";
 import { StaticMap, Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { MarkerImgStyle } from "../../components/Map/MapStyled";
-import BlueMarker from "../../assets/map/markers/blue-marker.png";
-import reviewAddress from "../../assets/images/review_address.png";
-import reviewCategory from "../../assets/images/review_category.png";
-import reviewTitle from "../../assets/images/review_title.png";
-import reviewDescription from "../../assets/images/review_description.png";
-import confirmation from "../../assets/svgs/confirmation.svg";
 import Navigation from "../../components/Navigation_CreateIssue/NavigationCreateIssue";
 import Sad from "../../assets/images/sad.png";
 import Confirmation from "../../assets/images/confirmation.png";
 import Div100vh from "react-div-100vh";
 import { createIssue } from "../../Axios/fetches";
+import svgNewMarker from "../../assets/svgs/new-marker.svg"
 
 const StepOne = (props) => {
   const pinnedCoordinates = useSelector(
@@ -66,7 +61,7 @@ const StepOne = (props) => {
             offsetTop={-30}
           >
             <MarkerImgStyle
-              src={BlueMarker}
+              image={svgNewMarker}
               alt="marker"
               style={{ cursor: "auto" }}
             />

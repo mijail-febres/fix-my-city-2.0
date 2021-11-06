@@ -45,6 +45,10 @@ export const Profile = styled(Home)`
 
 `;
 
+export const Report = styled(Home)`
+
+`;
+
 export const Logo = styled.img`
     width: 25px;
     height: 25px;

@@ -6,9 +6,11 @@ import user from "../../assets/images/user.png";
 import newIssueGreen from "../../assets/images/new-LG.png";
 import list from "../../assets/images/list.png";
 import filter from "../../assets/images/filter.png";
+import svgReport from "../../assets/svgs/report.svg"
 import { MdKeyboardArrowDown } from "react-icons/md";
 import Div100vh from "react-div-100vh";
 import Map from "../../components/Map/Map";
+import { fetchProfileInfo } from "../../Axios/fetches";
 import {Main} from "./Styled"
 import {
     MenuContainer,
@@ -19,6 +21,7 @@ import {
     IssueText,
     IssueTextGreen,
     Profile,
+    Report,
     Logo,
     Text,
     PopUpContainer,
@@ -47,6 +50,12 @@ const Homepage = () => {
 
     const [toggleFilter, setToggleFilter] = useState(false);
 
+    // State to save current user's data
+    const [currentUser, setCurrentUser] = useState(null);
+
+    // Get token from redux state
+    const token = localStorage.getItem("token");
+
     const [filterValue, setFilterValue] = useState(
         filterValueRedux[0] === "default" ? ["default"] : [filterValueRedux]
     );
@@ -67,6 +76,18 @@ const Homepage = () => {
     useEffect(() => {
         handleFilter();
     }, [filterValue])
+
+    // Initial useEffect: Get current user's data and fetching in order to get the issues
+    useEffect(() => {
+        //current_location();
+        if (token) {
+        const fetchProfile = async () => {
+            const data = await fetchProfileInfo();
+            setCurrentUser(data);
+        };
+        fetchProfile();
+        }
+    }, [token]);
 
     const handleClickOnFilter = (item,ind) => {
         let currentFilterValue = [...filterValue];
@@ -113,58 +134,58 @@ const Homepage = () => {
         history.push("/profile");
     };
 
+    const handleReportClick = () => {
+        history.push("/report");
+    };
+
     return (
     <Div100vh>
         <Main>
             <Map height={"100%"} width={"100%"} setCoordinates={setCoordinates} newIssue={newIssue}/>
-            {coordinates === null ? (
-                <MenuContainer>
-                    <Home>
-                      <Logo src={home} alt="home" onClick={handleHomeClick}/>
-                      <Text>Map</Text>
-                    </Home>
-                    <Filter>
-                      <Logo src={filter} alt="filter" onClick={() => setToggleFilter(!toggleFilter)} />
-                      <Text>Filter</Text>
-                    </Filter>
-                    <New>
-                      <IssueTextGreen>Choose Location To Report Issue</IssueTextGreen>
-                    </New>
-                    <Issues>
-                      <Logo src={list} alt="issues" onClick={handleListClick}/>
-                      <Text>Issues</Text>
-                    </Issues>
-                    <Profile>
-                      <Logo src={user} alt="profile" onClick={handleUserClick}/>
-                      <Text>Profile</Text>
-                    </Profile>
-                </MenuContainer>
-                        )
-             : (
-                <MenuContainer>
-                    <Home>
-                        <Logo src={home} alt="home" onClick={handleHomeClick}/>
-                        <Text>Map</Text>
-                    </Home>
+
+            <MenuContainer>
+                <Home>
+                    <Logo src={home} alt="home" onClick={handleHomeClick}/>
+                    <Text>Map</Text>
+                </Home>
+                {coordinates === null?
                     <Filter>
                         <Logo src={filter} alt="filter" onClick={() => setToggleFilter(!toggleFilter)} />
                         <Text>Filter</Text>
                     </Filter>
+                :
+                    <Filter>
+                        <Logo src={filter} alt="filter" onClick={() => setToggleFilter(true)} />
+                        <Text>Filter</Text>
+                    </Filter>
+                }
+                {coordinates === null?
+                    <New>
+                        <IssueTextGreen>Choose Location To Report Issue</IssueTextGreen>
+                    </New>
+                :
                     <New>
                         <Logo src={newIssueGreen} alt="new issue" onClick={handleNewIssueClick}/>
                         <IssueText>New Issue</IssueText>
                     </New>
-                    <Issues>
-                        <Logo src={list} alt="issues" onClick={handleListClick}/>
-                        <Text>Issues</Text>
-                    </Issues>
-                    <Profile>
-                        <Logo src={user} alt="profile" onClick={handleUserClick}/>
-                        <Text>Profile</Text>
-                    </Profile>
-                </MenuContainer>
-            )
-            }
+                }
+                <Issues>
+                    <Logo src={list} alt="issues" onClick={handleListClick}/>
+                    <Text>Issues</Text>
+                </Issues>
+                <Profile>
+                    <Logo src={user} alt="profile" onClick={handleUserClick}/>
+                    <Text>Profile</Text>
+                </Profile>
+                {/* {currentUser?
+                    currentUser.is_superuser? */}
+                    <Report>
+                        <Logo src={svgReport} alt="report" onClick={handleReportClick}/>
+                        <Text>Report</Text>
+                    </Report>
+                    {/* :null
+                :null} */}
+            </MenuContainer>
 
             {toggleFilter && (
                 <PopUpContainer>
