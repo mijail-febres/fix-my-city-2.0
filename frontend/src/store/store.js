@@ -5,6 +5,7 @@ import createIssueCoordinatesReducer from "./createIssueCoordinatesReducer";
 import profileInfoReducer from "./profileInfoReducer";
 import filterReducer from "./filterReducer";
 import tokenReducer from "./tokenReducer";
+import reportReducer from "./reportReducer";
 
 const middleware = [thunk];
 
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   profileInfoReducer,
   filterReducer,
   tokenReducer,
+  reportReducer,
 });
 
 

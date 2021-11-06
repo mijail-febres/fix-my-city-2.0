@@ -520,9 +520,9 @@ const Map = (props) => {
                         cluster.properties.category === 'graffiti'?
                         svgGraffiti:
                         cluster.properties.category === 'road_damage'?
-                        svgDamage:
-                        cluster.properties.category === 'damage_to_public_property'?
                         svgBroken:
+                        cluster.properties.category === 'damage_to_public_property'?
+                        svgDamage:
                         cluster.properties.category === 'insects_and_animals'?
                         svgInsect:
                         cluster.properties.category === 'street_sign_issues'?
