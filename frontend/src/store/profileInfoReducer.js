@@ -10,6 +10,9 @@ const initialState = {
     email: "",
     firstName: "",
     lastName: "",
+    homeAddress: "",
+    homeLatitude: "",
+    homeLongitude:""
   },
 };
 
