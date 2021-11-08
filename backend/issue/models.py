@@ -32,7 +32,7 @@ class Issue(models.Model):
     image = models.ImageField(upload_to=user_directory_path)
     content = models.TextField(max_length=300, null=True, blank=True)
     category = models.TextField(choices=CATEGORY_CHOICES, default='litter')
-    adress = models.TextField(max_length=300, default=None)
+    address = models.TextField(max_length=300, default=None)
     zip = models.CharField(max_length=5)
     latitude = models.FloatField()
     longitude = models.FloatField()

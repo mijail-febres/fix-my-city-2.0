@@ -35,7 +35,7 @@ const Report = () => {
     const issueFields =
     [
         "id", "title", "content", "category",
-        "status", "adress", "longitude", "latitude",
+        "status", "address", "longitude", "latitude",
         "city", "zip", "image", "created",
         "modified", "issue_comments", "upvote_count",
     ];

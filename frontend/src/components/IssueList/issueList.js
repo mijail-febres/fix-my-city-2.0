@@ -237,7 +237,7 @@ const IssueList = (props) => {
           category={selectedIssue.category}
           image={selectedIssue.image}
           description={selectedIssue.content}
-          streetAndNumber={selectedIssue.adress}
+          streetAndNumber={selectedIssue.address}
           zip={selectedIssue.zip}
           city={selectedIssue.city}
         />

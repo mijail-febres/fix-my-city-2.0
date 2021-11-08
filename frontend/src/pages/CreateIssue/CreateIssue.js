@@ -342,7 +342,7 @@ const CreateIssue = () => {
     formdata.append("title", title);
     formdata.append("longitude", longitude);
     formdata.append("latitude", latitude);
-    formdata.append("adress", address);
+    formdata.append("address", address);
     formdata.append("city", city);
     formdata.append("zip", postcode);
     formdata.append("category", category);

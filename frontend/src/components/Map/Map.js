@@ -330,7 +330,7 @@ const Map = (props) => {
             image: issue.image,
             city: issue.city,
             zip: issue.zip,
-            streetAndNumber: issue.adress,
+            streetAndNumber: issue.address,
             category: issue.category,
             author: issue.user.username,
             userId: issue.user.id,
