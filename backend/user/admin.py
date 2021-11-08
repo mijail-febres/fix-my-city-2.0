@@ -17,7 +17,7 @@ class UserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'username', 'password')}),
         ('fixmycity Profile', {'fields': ('first_name', 'last_name', 'profile_picture', 'home_address',
-                                          'home_latitude', 'home_longitude', 'notifications')}),
+                                          'home_latitude', 'home_longitude', 'notifications', 'is_notified')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')})
     )
