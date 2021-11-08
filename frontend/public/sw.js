@@ -41,3 +41,33 @@ this.self.addEventListener('activate', event => {
      ))
    )
 });
+
+//receiving a push message
+function receivePushNotification(event) {
+  console.log("[Service Worker] Push Received.");
+
+  const { image, tag, url, title, text } = event.data.json();
+
+  const options = {
+    data: url,
+    body: text,
+    icon: image,
+    vibrate: [200, 100, 200],
+    tag: tag,
+    image: image,
+    badge: "../favicon.ico",
+    actions: [{ action: "Detail", title: "View", icon: "https://via.placeholder.com/128/ff0000" }] //change icon later
+  };
+  event.waitUntil(this.self.registration.showNotification(title, options)); //displays notif to user
+}
+
+//to receive the user click on the notification
+function openPushNotification(event) {
+  console.log("[Service Worker] Notification click Received.", event.notification.data);
+  
+  event.notification.close();
+  event.waitUntil(this.clients.openWindow(event.notification.data));
+}
+
+this.self.addEventListener("push", receivePushNotification);
+this.self.addEventListener("notificationclick", openPushNotification);
