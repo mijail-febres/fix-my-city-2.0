@@ -300,6 +300,43 @@ export const SaveBox = styled.div`
   height: 7%;
 `;
 
+export const EditAddressFieldContainer = styled.div`
+  top: 0px;
+  background-color: ${(props) => props.theme.greyColor};
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  #geocodermain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+
+    h1 {
+      font-size: 30px;
+      color: black;
+      font-weight: bold;
+    }
+
+    #fieldSection {
+      border: none;
+      outline: none;
+      border-bottom: 2px solid grey;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 21px;
+      margin-top: 50px;
+      background-color: ${(props) => props.theme.greyColor};
+    }
+  }
+`;
 export const EditProfileFieldContainer = styled.div`
   top: 0px;
   background-color: ${(props) => props.theme.greyColor};

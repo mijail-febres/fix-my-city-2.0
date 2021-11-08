@@ -16,6 +16,7 @@ const ProfileDetails = (props) => {
   const [currentEditFieldValue, setCurrentEditFieldValue] = useState("");
   const [currentEditFieldName, setCurrentEditFieldName] = useState("");
   const [currentEditFieldAPIName, setCurrentEditFieldAPIName] = useState("");
+  const [currentEditFieldAddress, setCurrentEditFieldAdress] = useState("");
   const [shouldIrender, setShouldIRender] = useState(false);
 
   const editButtonOnClickHandler = (field, displayName, APIName) => {
@@ -106,6 +107,21 @@ const ProfileDetails = (props) => {
             id="password"
             value="TO BE IMPLEMENTED"
           ></PassWordInput>
+          <div className='fieldAndEditButton'>
+            <h2>Adress</h2>
+            <button id="editButton"
+              onClick={() =>
+                editButtonOnClickHandler(
+                  "homeAdress", 
+                  "Home Address", 
+                  "home_address"
+                  )
+              }
+            >
+              <img id="editIcon" src={pen} alt="edit"></img>
+            </button>
+          </div>
+          <p>{info.homeAddress}</p>
         </aside>
       </UserDetails>
       {showEditProfileField === true ? (
