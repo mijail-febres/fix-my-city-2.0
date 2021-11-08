@@ -26,11 +26,14 @@ const EditProfileField = (props) => {
     }); 
 
     useEffect(() => {
-        geocoder.addTo('#geocodermain');
-        geocoder.on('result', (e) => {
-            setLatLong(e.result.center)
-            setHomeAddress(JSON.stringify(e.result.place_name, null, 2))
-        });
+        // if (props.curre)
+        if (props.currentEditFieldAPIName === 'home_address') {
+            geocoder.addTo('#geocodermain');
+            geocoder.on('result', (e) => {
+                setLatLong(e.result.center)
+                setHomeAddress(JSON.stringify(e.result.place_name, null, 2))
+            });
+        }
     });
 
     useEffect(() => {          
@@ -82,7 +85,8 @@ const EditProfileField = (props) => {
 
         const response = await fetch(url, config); //fething
         const data = await response.json(); // getting the user
-
+        props.setShouldIRender(true);
+        props.setShowEditProfileField(false);
     }
 
     return (

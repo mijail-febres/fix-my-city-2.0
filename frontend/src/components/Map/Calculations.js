@@ -46,7 +46,6 @@
     let latMax = -1000000;
     let lngMin = 1000000;
     let lngMax = -1000000;
-    let R = 6371;  // earth radius in km
 
     for (let i=0; i < list_markers.length; i++) {
       latMin = Math.min(latMin,list_markers[i].latitude);

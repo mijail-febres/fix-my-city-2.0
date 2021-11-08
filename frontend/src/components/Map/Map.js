@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback, useLayoutEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactMapGL, {
   Marker,
   Popup,
-  //FullscreenControl,
   GeolocateControl,
-  NavigationControl,
   ScaleControl,
   FlyToInterpolator,
-  LinearInterpolator
 } from "react-map-gl";
 import useSupercluster from "use-supercluster";
 import "./Geocoder.css";
@@ -19,23 +16,12 @@ import {
   MainContainer,
   MarkerDivStyle,
   MarkerImgStyle,
-  markerSvg,
   SatelliteButton,
 } from "./MapStyled";
 import { FaSatelliteDish } from "react-icons/fa";
-import damage from "../../assets/images/damage.png";
-import graffiti from "../../assets/images/graffiti.png";
-import litter from "../../assets/images/litter.png";
-import insect from "../../assets/images/insect.png";
-import streetSign from "../../assets/images/street-sign.png";
-import broken from "../../assets/images/broken.png";
-import plant from "../../assets/images/plant.png";
-import BlueMarker from "../../assets/map/markers/blue-marker.png";
 import PopupContent from "./Popup/PopupContent";
 import MoreDetails from "./Popup/MoreDetails";
-import Navigation from "../Navigation/Navigation";
 import { fetchProfileInfo } from "../../Axios/fetches";
-import { getBounds } from "viewport-mercator-project";
 import { getViewPort, findCentroid, findMaxDist  } from "./Calculations";
 import { SvgAnimation } from "./MapStyled";
 import svgPlant from "../../assets/svgs/plant.svg"
@@ -53,10 +39,6 @@ const Map = (props) => {
     top: "130px",
   };
 
-  const navControlStyle = {
-    left: "3%",
-    top: "175px",
-  };
 
   const scaleControlStyle = {
     left: "50%",
@@ -112,9 +94,6 @@ const Map = (props) => {
 
   // State that tells if a user marker has been set for the first time
   const [userMarkerHappen, setUserMarkerHappen] = useState(-1);
-
-  // State to take a screenshot
-  const [screenshot, setScreenshot] = useState(false);
 
   // State that tells if a user marker is being dragged
   const [userMarkerDrag, setUserMarkerDrag] = useState(false);

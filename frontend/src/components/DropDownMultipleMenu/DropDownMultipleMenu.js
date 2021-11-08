@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch} from "react-redux";
 import DropDownMenuContainer from "./DropDownMultipleMenuStyled";
 import { parsePropertyToHuman } from "../TextOperations/TextOperations";
@@ -10,7 +10,6 @@ const DropDownMultipleMenu = (props) => {
     const [expanded, setExpanded] = useState(false);
     const [selections, setSelections] = useState(null)
     const [checkedItems, setCheckedItems] = useState(null);
-    const [title, setTitle] = useState(null);
     const dispatch = useDispatch();
 
     const toggleExpanded = () => {
