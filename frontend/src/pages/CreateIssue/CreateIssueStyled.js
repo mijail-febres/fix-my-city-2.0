@@ -50,6 +50,27 @@ export const NextButton = styled.div`
     border-radius: 20px;   
     background-color: ${(props) => props.theme.greenColor};
     color: white;
+    justify-content: space-between;
+    padding: 0px 10px 0px 30px;
+    align-items: center;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+`;
+
+export const Arrow = styled.img`
+ display: flex;
+ width: 30px;
+ height: 30px;
+`
+
+export const SendButton = styled.div`
+    display:flex;
+    width: 200px;
+    height: 39px;
+    border-radius: 20px;   
+    background-color: ${(props) => props.theme.greenColor};
+    color: white;
     justify-content: center;
     align-items: center;
     border: none;
@@ -57,10 +78,7 @@ export const NextButton = styled.div`
     cursor: pointer;
 `;
 
-export const SendButton = styled(NextButton)`
-`;
-
-export const HomeButton = styled(NextButton)`
+export const HomeButton = styled(SendButton)`
 `;
 
 export const StepOneContainer = styled.div`
@@ -143,7 +161,12 @@ export const StepThreeContainer = styled.div`
             font-size: 16px;
             width: 90%;
             height: 40px;           
+            background-color: transparent;
             border: none;
+            border-bottom: 1px solid ${(props) => props.theme.darkGreyColor};
+            font-style: ${(props) => props.theme.greyColor};
+            font-size: ${(props) => props.theme.fontSizeM}; 
+            color: grey;          
             }
         }
        
@@ -153,10 +176,15 @@ export const StepThreeContainer = styled.div`
             margin-bottom: 30px;
             //height: 10%;
             #selectCategory{                
-                border: none;
                 width: 90%;
                 height: 40px;
                 font-size: 16px;
+                color: grey;
+                background-color: transparent;
+                border: none;
+                border-bottom: 1px solid ${(props) => props.theme.darkGreyColor};
+                font-style: ${(props) => props.theme.greyColor};
+                font-size: ${(props) => props.theme.fontSizeM};            
             }
             .fieldHeader{
                 font-size: 16px;
@@ -175,6 +203,12 @@ export const StepThreeContainer = styled.div`
                 min-height: 100px;
                 flex-grow: 1; 
                 border: none;
+                padding-top: 10px;
+                background-color: transparent;
+                border-bottom: 1px solid ${(props) => props.theme.darkGreyColor};
+                font-style: ${(props) => props.theme.greyColor};
+                font-size: ${(props) => props.theme.fontSizeM}; 
+                color: grey;
             }
 
             .fieldHeader{
