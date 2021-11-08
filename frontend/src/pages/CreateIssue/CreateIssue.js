@@ -10,6 +10,7 @@ import {
   ThankYouContainer,
   SomethingWentWrongContainer,
   NextButton,
+  Arrow,
   SendButton,
   HomeButton,
   PageTitle,
@@ -28,7 +29,8 @@ import Sad from "../../assets/images/sad.png";
 import Confirmation from "../../assets/images/confirmation.png";
 import Div100vh from "react-div-100vh";
 import { createIssue } from "../../Axios/fetches";
-import svgNewMarker from "../../assets/svgs/new-marker.svg"
+import svgNewMarker from "../../assets/svgs/new-marker.svg";
+import rightarrow from "../../assets/images/arrow-right.png";
 
 const StepOne = (props) => {
   const pinnedCoordinates = useSelector(
@@ -433,6 +435,7 @@ const CreateIssue = () => {
           toggleShowThankYou === false ? (
             <NextButton onClick={nextButtonHandler}>
               Next
+              <Arrow src={rightarrow} alt="next"/>
             </NextButton>
           ) : null}
 

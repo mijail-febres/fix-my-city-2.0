@@ -27,9 +27,10 @@ export const MainContainer = styled.div`
     flex-grow: 1;
 
     .step{
-      background-color: ${(props) => props.theme.greyColor};
-      font-size: 14px;
-      color: ${(props) => props.theme.darkGreyColor};
+      background-color: ${(props) => props.theme.darkGreyColor};
+      width: 15vw;
+      height: 2px;
+      border-radius: 20px;
       padding: 5px;
       display: flex;
       justify-content: center;
@@ -38,9 +39,10 @@ export const MainContainer = styled.div`
 
     .stepSelected{
       background-color: ${(props) => props.theme.greenColor};
-      color: white;
       font-weight: bold;
-      font-size: 14px;
+      border-radius: 20px;
+      width: 15vw;
+      height: 2px;
       padding:5px;
       display: flex;
       justify-content: center;

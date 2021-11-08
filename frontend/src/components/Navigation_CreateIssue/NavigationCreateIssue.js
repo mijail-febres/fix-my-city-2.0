@@ -53,10 +53,10 @@ const Navigation = (props) => {
           :null    
         }
         <div id="stepsContainer">
-          <div className={props.toggleShowStep1===true?"stepSelected":"step"}>Location</div>
-          <div className={props.toggleShowStep2===true?"stepSelected":"step"}>Picture</div>
-          <div className={props.toggleShowStep3===true?"stepSelected":"step"}>Description</div>
-          <div className={props.toggleShowReview===true?"stepSelected":"step"}>Review</div>
+          <div className={props.toggleShowStep1===true?"stepSelected":"step"}></div>
+          <div className={props.toggleShowStep2===true?"stepSelected":"step"}></div>
+          <div className={props.toggleShowStep3===true?"stepSelected":"step"}></div>
+          <div className={props.toggleShowReview===true?"stepSelected":"step"}></div>
         </div>        
       </MainContainer>          
     </>
