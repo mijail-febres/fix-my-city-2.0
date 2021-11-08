@@ -232,8 +232,8 @@ function displayNotification() {
   if (Notification.permission === 'granted') {
     navigator.serviceWorker.getRegistration().then(function(reg) {
       var options = {
-        body: 'This is a test!', //adds main description to notification
-        badge: "../assets/images/francesco.jpg", //can be any image to make notification appealing
+        body: 'Would you like to install Fix My City on your home screen?', //adds main description to notification
+        badge: "../../assets/svgs/fixmycitylogonew.svg", //can be any image to make notification appealing
         vibrate: [100, 50, 100], //vibrate pattern for phone receiving notification
         data: {
           dateOfArrival: Date.now(),
@@ -241,13 +241,13 @@ function displayNotification() {
         },
         requireInteraction: true,
         actions: [
-          {action: 'explore', title: 'Explore this new world'},
-          {action: 'close', title: 'Close notification'},
+          {action: 'yes', title: 'Yes, install'},
+          {action: 'no', title: 'Not now'},
         ]
         //can add actions here when it works
       };
       console.log ("display notification");
-      reg.showNotification('Hello!', options);
+      reg.showNotification('Add to Home Screen', options);
     });
   }
 }
