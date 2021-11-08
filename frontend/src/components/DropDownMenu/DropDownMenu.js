@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch} from "react-redux";
+import React, { useState } from "react";
 import DropDownMenuContainer from "./DropDownMenuStyled";
 import { parsePropertyToHuman } from "../TextOperations/TextOperations";
-import {defaultTheme} from "../../globalstyles/Styles.js";
 import svgArrowUp from "../../assets/svgs/arrow-up.svg"
 import svgArrowDown from "../../assets/svgs/arrow-down.svg"
 

@@ -10,7 +10,6 @@ import user from "../../assets/images/user.png";
 import newIssue from "../../assets/images/new.png";
 import listGreen from "../../assets/images/list-LG.png";
 import filter from "../../assets/images/filter.png";
-import { MdKeyboardArrowDown } from "react-icons/md";
 import {defaultTheme} from '../../globalstyles/Styles.js';
 import {
     MenuContainer,
@@ -23,17 +22,9 @@ import {
     IssuesText,
     Text,
     PopUpContainer,
-    SubContainer,
     SubContainerButtons,
     FilterContainer,
-    FilterButtonStyle,
     Option1,
-    Option2,
-    Option3,
-    Option4,
-    Option5,
-    Option6,
-    Option7,
     FilterButtons,
   } from "../../components/MenuFooter/MenuFooterStyled"
 import {

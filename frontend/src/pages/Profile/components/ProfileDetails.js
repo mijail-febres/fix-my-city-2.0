@@ -105,7 +105,7 @@ const ProfileDetails = (props) => {
           <PassWordInput
             type="password"
             id="password"
-            value="TO BE IMPLEMENTED"
+            // value="TO BE IMPLEMENTED"
           ></PassWordInput>
           <div className='fieldAndEditButton'>
             <h2>Adress</h2>
