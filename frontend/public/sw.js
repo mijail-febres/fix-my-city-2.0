@@ -56,10 +56,22 @@ function receivePushNotification(event) {
     tag: tag,
     image: image,
     badge: "../favicon.ico",
-    actions: [{ action: "Detail", title: "View", icon: "https://via.placeholder.com/128/ff0000" }] //change icon later
+    actions: [{ action: "Detail", title: "View", icon: "../favicon.ico" }] //change icon later
   };
   event.waitUntil(this.self.registration.showNotification(title, options)); //displays notif to user
 }
+
+let deferredPrompt;
+
+this.self.addEventListener('beforeinstallprompt', function(e) {
+  console.log('beforeinstallprompt Event fired');
+  e.preventDefault();
+
+  // Stash the event so it can be triggered later.
+  deferredPrompt = e;
+
+  return false;
+});
 
 //handle action on notification
 this.self.addEventListener('notificationclick', function(e) {
@@ -67,13 +79,33 @@ this.self.addEventListener('notificationclick', function(e) {
   var primaryKey = notification.data.primaryKey;
   var action = e.action;
 
-  if (action === 'close') {
+  if (action === 'no') {
     notification.close();
-  } else {
-    this.clients.openWindow('http://www.google.com');
+    console.log('user clicked no');
+  } 
+  else if (action === 'yes') {
+    console.log('user clicked yes');
+    deferredPrompt.prompt();
+
+    // Follow what the user has done with the prompt.
+    deferredPrompt.userChoice.then(function(choiceResult) {
+
+      console.log(choiceResult.outcome);
+
+      if(choiceResult.outcome === 'dismissed') {
+        console.log('User cancelled home screen install');
+      }
+      else {
+        console.log('User added to home screen');
+      }
+
+      deferredPrompt = null;
     notification.close();
-  }
-  console.log('notification: ' + primaryKey)
-});
+  },
+console.log('notification: ' + primaryKey),
+  )
+}
+}
+);
 
 this.self.addEventListener("push", receivePushNotification);
