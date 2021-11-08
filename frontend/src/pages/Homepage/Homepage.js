@@ -233,12 +233,17 @@ function displayNotification() {
     navigator.serviceWorker.getRegistration().then(function(reg) {
       var options = {
         body: 'This is a test!', //adds main description to notification
-        icon: "../assets/images/francesco.jpg", //can be any image to make notification appealing
+        badge: "../assets/images/francesco.jpg", //can be any image to make notification appealing
         vibrate: [100, 50, 100], //vibrate pattern for phone receiving notification
         data: {
           dateOfArrival: Date.now(),
           primaryKey: 1
-        }
+        },
+        requireInteraction: true,
+        actions: [
+          {action: 'explore', title: 'Explore this new world'},
+          {action: 'close', title: 'Close notification'},
+        ]
         //can add actions here when it works
       };
       console.log ("display notification");

@@ -61,13 +61,19 @@ function receivePushNotification(event) {
   event.waitUntil(this.self.registration.showNotification(title, options)); //displays notif to user
 }
 
-//to receive the user click on the notification
-function openPushNotification(event) {
-  console.log("[Service Worker] Notification click Received.", event.notification.data);
-  
-  event.notification.close();
-  event.waitUntil(this.clients.openWindow(event.notification.data));
-}
+//handle action on notification
+this.self.addEventListener('notificationclick', function(e) {
+  var notification = e.notification;
+  var primaryKey = notification.data.primaryKey;
+  var action = e.action;
+
+  if (action === 'close') {
+    notification.close();
+  } else {
+    this.clients.openWindow('http://www.google.com');
+    notification.close();
+  }
+  console.log('notification: ' + primaryKey)
+});
 
 this.self.addEventListener("push", receivePushNotification);
-this.self.addEventListener("notificationclick", openPushNotification);
