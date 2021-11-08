@@ -25,8 +25,6 @@ const DropDownMenuContainer = styled.div`
         }
     }
     .DivOptions {
-        /* width: 100%; */
-        /* height: 100%; */
         min-width: 100%;
         padding: 0px 10px;
         display: flex;
@@ -47,6 +45,7 @@ const DropDownMenuContainer = styled.div`
             align-self: center;
             padding: 0px 5px;
             margin: 1px;
+
             :hover {
                 background-color: ${(props) => props.theme.greenColorTransparent};
             }
@@ -56,13 +55,31 @@ const DropDownMenuContainer = styled.div`
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                align-self: center;
             }
             :hover .itemTag{
                 color: ${(props) => props.theme.greyColor};
                 cursor: pointer;
             }
         }
+    }
+    .up-arrow:after {
+        display: inline-block;
+        content: " ";
+        margin-left: 4px;
+        margin-bottom: 4px;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid black;
+    }
+    
+    .down-arrow:after {
+        display: inline-block;
+        content: " ";
+        margin-left: 4px;
+        margin-bottom: 4px;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid black;
     }
 `
 

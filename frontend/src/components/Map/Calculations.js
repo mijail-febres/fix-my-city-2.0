@@ -58,9 +58,14 @@
     return [[lngMin, latMin], [lngMax, latMax]];
   } 
 
-  export const getViewPort = (lat, long, dist) => {
+  export const getViewPort = (lat, long, dist, viewport=null) => {
     const boxy = getBoundsFromLatLng(lat, long, dist);
-    const loc_viewport = new WebMercatorViewport({ width: 800, height: 600 }).fitBounds(boxy)
+    // let loc_viewport;
+    // if (viewport) {
+    //   loc_viewport = new WebMercatorViewport({ width: viewport.width, height: viewport.height }).fitBounds(boxy)
+    // } else {
+      const loc_viewport = new WebMercatorViewport({ width: 800, height: 600 }).fitBounds(boxy)
+    // }
     const { longitude, latitude, zoom } = loc_viewport
     return { longitude, latitude, zoom };
   };

@@ -5,16 +5,26 @@ import ReactToPrint from 'react-to-print';
 import { useSelector, useDispatch } from "react-redux";
 import Navigation from "../../components/Navigation/Navigation";
 import { Header, SubHeader, Body } from "./ReportStyled";
+import DropDownMultipleMenu from "../../components/DropDownMultipleMenu/DropDownMultipleMenu";
+import svgAz from "../../assets/svgs/az-sort.svg"
+import svgZa from "../../assets/svgs/za-sort.svg"
 import DropDownMenu from "../../components/DropDownMenu/DropDownMenu";
 
 const Report = () => {
     const [listIssues,setListIssues] = useState(null);
     const [listUsers,setListUsers] = useState(null);
-    // const [subject, setSubject] = useState('users');
+    const [filteredSortedList,setFSList] = useState(null);
+    const [azSorted,setAzSorted] = useState(true);
     const [subject, setSubject] = useState(null);
     const [fields, setFields] = useState(null);
+    const [filter, setFilter] = useState(null);
+    const [sorter, setSorter] = useState(null);
     const selections = useSelector((state)=>state.reportReducer.selectedItems);
     const dispatch = useDispatch();
+    const [filterInput, setFilterInput] = useState('');
+    // const svgAz = "../../assets/svgs/az-sort.svg";
+    // const svgZa = "../../assets/svgs/za-sort.svg";
+    const subjects = ['users', 'issues']
     const userFields = 
     [
      "id", "username", "first_name", "last_name",
@@ -32,24 +42,64 @@ const Report = () => {
 
     const componentRef = useRef(null);
 
+    const handleFilterInput = (event) => {
+        setFilterInput(event.target.value)
+        if (event.target.value !== '' && subject && (filter && filter !== '0')) { // If there's something to filter and subject is choosen
+            if (subject === 'users'){
+                applyFilter(event.target.value,listUsers)
+            } else if (subject === 'issues') {
+                applyFilter(event.target.value,listIssues)
+            }
+        } else { // if there's no word to filter
+            if (subject === 'users'){
+                setFSList(listUsers)
+            } else if (subject === 'issues') {
+                setFSList(listIssues)
+            }
+        }
+    }
+
+    const applyFilter = (word, oldList) => {
+        let newList = [];
+        if (word !== '') {
+            newList = oldList.filter((item,ind) => {
+                if (item[filter].toString().substring(0,word.length).toUpperCase() === word.toUpperCase()) {
+                    return item;
+                }
+            });
+        } else {
+            newList = [...oldList];
+        }
+        setFSList(newList)
+    }
+
     useEffect(() => {
         getListIssues();
         getListUsers();
     }, [])
 
-    // useEffect(()=>{
-    // },[selections])
+    useEffect(() => {
+        if (sorter) {
+            sorting(sorter,azSorted?1:1)
+        }
+        setAzSorted(true);
+    }, [sorter || azSorted])
 
     useEffect(() => {
         if (subject) { // Default fields for the table
             let newSelections = [];
             if (subject === 'users') {
                 newSelections = ['id','username'];
+                setFSList(listUsers);
             } else if (subject ==='issues') {
                 newSelections = ['id','category'];
+                setFSList(listIssues);
             } else {
                 newSelections = [];
             }
+            
+            setFilter(null)
+            setFilterInput('')
             dispatch({ // sending the new selections
                 type: 'setItems',
                 payload: newSelections
@@ -92,6 +142,45 @@ const Report = () => {
         setSubject(newSubject)
     }
 
+    const changeFilter = (newFilter) => {
+        setFilter(newFilter);
+        setFilterInput('');
+    }
+
+    const changeSorter = (newSorter) => {
+        setSorter(newSorter); // Only to be able to change the direction of sorting
+    }
+
+    const sorting = (newSorter, direction = 1) => {
+        console.log(newSorter,direction,sorter,filteredSortedList)
+        let newList = [...filteredSortedList];
+        if (sorter) {
+            if (typeof newList[0][newSorter] === 'number') { // in case of numbers
+                newList.sort((item1,item2) => {
+                    if (item1[newSorter] < item2[newSorter]) {
+                        return -1 * direction;
+                    }
+                    if (item1[newSorter] > item2[newSorter]) {
+                        return  1 * direction;
+                    }
+                    return 0;
+                });
+            } else {
+                newList.sort((item1,item2) => { // in case of text
+                    if (item1[newSorter].toUpperCase() < item2[newSorter].toUpperCase()) {
+                        return -1 * direction;
+                    }
+                    if (item1[newSorter].toUpperCase() > item2[newSorter].toUpperCase()) {
+                        return  1 * direction;
+                    }
+                    return 0;
+                });
+            }
+        }
+        // }
+        setFSList(newList)
+    }
+
     const changeField = (event) => {
         let value = Array.from(
             event.target.selectedOptions,
@@ -100,40 +189,64 @@ const Report = () => {
         setFields(value)
     }
 
+    const handleClickSort = () => {
+        sorting(sorter,azSorted?-1:1);
+        setAzSorted(!azSorted);
+    }
+
     return (
         <ReportContainer>
-            <Header id='header'>
-                <Navigation
-                    showBackButton={true}
-                    page={'report'}
-                />
-                <Title>Report</Title>
-            </Header>
-            <SubHeader id='subheader'>
-                <div id='divSubject'>
-                    <label htmlFor="subject">Report:</label>
-                    <select
-                        name="subject"
-                        id="subject"
-                        onChange={(e) => changeSubject(e.target.value)}
-                    >
-                        <option className='SubjectOption' value="select option">--Select Option--</option>
-                        <option className='SubjectOption' value="users">Users</option>
-                        <option className='SubjectOption' value="issues">Issues</option>
-                    </select>
-                </div>
-                <div id='divFields' >
-                    <label htmlFor="fields">Fields:</label>
-                    <DropDownMenu selections={selections} subject={subject} items={subject==='users'?userFields:issueFields}/>
-                </div>
-                <ReactToPrint
-                    trigger={() => <button id='printButton'>Print</button>}
-                    content={() => componentRef.current}
-                />
-            </SubHeader>
-            <Body>
-                <Table ref={componentRef} listItems={subject==='users'?listUsers:listIssues} selections={selections}></Table>
-            </Body>
+            <div style={{width: '100%', height: '20%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                <Header id='header'>
+                    <Navigation
+                        showBackButton={true}
+                        page={'report'}
+                    />
+                    <Title>Report</Title>
+                </Header>
+            </div>
+            <div style={{width: '100%', height: '10%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                <SubHeader id='subheader'>
+                    {/* A subject selector */}
+                    <div id='divSubject'>
+                        <label id='labelSubject' htmlFor="subject">Report:</label>
+                        <div id='menuSubject'>
+                            <DropDownMenu  title = 'Subject' changeSubject={changeSubject} items={subjects}/>
+                        </div>
+                    </div>
+
+                    {/* A Field selector */}
+                    <div id='divFields' >
+                        <label id="labelField" htmlFor="menuFields">Fields:</label>
+                        <DropDownMultipleMenu id="menuFields" selections={selections} subject={subject} items={subject==='users'?userFields:issueFields}/>
+                    </div>
+                    {/* A Filter */}
+                    <div id='divFilter'>
+                        <label id='labelFilter' htmlFor="subject">Filter:</label>
+                        <DropDownMenu id='menuFilter' title='Filter' changeSubject={changeFilter} items={selections}/>
+                        <input id="inputFilter" type='text' onChange={(e) => handleFilterInput(e)} value={filterInput}></input>
+                    </div>
+                    {/* A sorter */}
+                    <div id='divSorter'>
+                        <label id='labelSorter'htmlFor="subject">Sort:</label>
+                        <DropDownMenu id='menuSorter' title='Sorter' changeSubject={changeSorter} items={selections}/>
+                        <button id='buttonSorter' onClick={handleClickSort}>
+                            <img id='iconSorter' src={azSorted?svgZa:svgAz} alt="my image"/>
+                        </button>
+                    </div>
+                    <div id = "printTrigger" >
+                        <ReactToPrint
+                            trigger={() => <button id='printButton'>Print</button>}
+                            content={() => componentRef.current}
+                        />
+                    </div>
+                </SubHeader>
+            </div>
+            <div style={{width: '100%', height: '70%', overflow: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                <Body>
+                    <Table ref={componentRef} listItems={filteredSortedList} selections={selections}></Table>
+                </Body>
+            </div>
         </ReportContainer>
     )
 }

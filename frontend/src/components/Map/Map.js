@@ -375,6 +375,7 @@ const Map = (props) => {
         dist = findMaxDist(filteredIssues, [lat, long])
       }
       setViewport({
+        // viewport,
         ...getViewPort(lat,long,dist),
         transitionInterpolator: new FlyToInterpolator(),
         transitionDuration: 900,

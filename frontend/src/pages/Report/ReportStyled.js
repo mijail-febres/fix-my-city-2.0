@@ -22,7 +22,7 @@ const ReportContainer = styled.div`
 ` 
 export const Header = styled.div`
     width: 90%;
-    height: 20%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     border-bottom: solid 1px ${(props) => props.theme.darkGreyColor};
@@ -30,37 +30,98 @@ export const Header = styled.div`
 
 export const SubHeader = styled.div`
     width: 90%;
-    height: 10%;
+    height: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     border-bottom: solid 1px ${(props) => props.theme.darkGreyColor};
+    box-sizing: border-box;
+
     #divSubject{
-        width: 30%; 
+        width: 20%; 
         height: 70%; 
         display: flex; 
         justify-content: center;
         align-items: center;
-        /* .SubjectOption {
-            appearance:none;
-            -moz-appearance:none;
-            -webkit-appearance:none;
-            color: green;
-            background: ${(props) => props.theme.greyColor};
-            border: ${(props) => `solid 1px ${props.theme.darkGreyColor}`};
-        } */
-        #subject{
-            background-color: ${(props) => props.theme.greyColor};
-            border: ${(props) => `solid 1px ${props.theme.darkGreyColor}`};
-            .SubjectOption {
-                background-color: green!important;
-                font-weight: bold!important;
-                color: red!important;
-            }
+        margin: 0px 10px;
+        #labelSubject{
+            width: 30%;
+            text-align: center;
+            margin: 0px 5px;
         }
+        #menuSubject{
+            width: 70%;
+            margin: 0px 5px;
+        }
+        border-bottom: 3px solid ${(props) => props.theme.greenColor};
     }
     #divFields{
-        width: 30%; 
+        width: 20%; 
+        height: 70%; 
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+        margin: 0px 10px;
+        #labelField{
+            width: 30%;
+            text-align: center;
+            margin: 0px 5px;
+        }
+        #menuFields{
+            width: 70%;
+            margin: 0px 5px;
+        }
+        border-bottom: 3px solid ${(props) => props.theme.greenColor};
+    }
+    #divFilter{
+        width: 20%; 
+        height: 70%; 
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+        margin: 0px 10px;
+        #labelFilter{
+            width: 30%;
+            margin: 0px 5px;
+        }
+        #menuFilter {
+            width: 40%;
+            margin: 0px 5px;
+        }
+        #inputFilter{
+            width: 30%;
+            margin: 0px 5px;
+        }
+        border-bottom: 3px solid ${(props) => props.theme.greenColor};
+    }
+    #divSorter{
+        width: 20%; 
+        height: 70%; 
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+        margin: 0px 10px;
+        #labelSorter{
+            width: 20%;
+            margin: 0px 5px;
+        }
+        #menuSorter {
+            margin: 0px 5px;
+        }
+        #buttonSorter{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0px 5px;
+            #iconSorter{
+                height: 100%;
+                width: 100%;
+            }
+        }
+        border-bottom: 3px solid ${(props) => props.theme.greenColor};
+    }
+    #printTrigger {
         height: 70%; 
         display: flex; 
         justify-content: center;
@@ -70,7 +131,7 @@ export const SubHeader = styled.div`
 
 export const Body = styled.div`
     width: 90%;
-    height: 70%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
