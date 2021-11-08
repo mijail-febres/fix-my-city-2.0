@@ -17,15 +17,15 @@ this.self.addEventListener('install', event => {
 });
  
 // Cache and return requests
-// this.self.addEventListener('fetch', event => {
-//  event.respondWith(
-//    caches.match(event.request) //cache all request our page is receiving e.g. fetch, API call, another image etc
-//      .then(() => {
-//         return fetch(event.request) //for all requests, fetch new data again
-//           .catch(() => caches.match('offline.html')) //if it cannot fetch data, there is no internet connection 
-//      })
-//  );
-// });
+this.self.addEventListener('fetch', event => {
+ event.respondWith(
+   caches.match(event.request) //cache all request our page is receiving e.g. fetch, API call, another image etc
+     .then(() => {
+        return fetch(event.request) //for all requests, fetch new data again
+          .catch(() => caches.match('offline.html')) //if it cannot fetch data, there is no internet connection 
+     })
+ );
+});
  
 // Update a service worker
 this.self.addEventListener('activate', event => {
