@@ -57,14 +57,10 @@
     return [[lngMin, latMin], [lngMax, latMax]];
   } 
 
-  export const getViewPort = (lat, long, dist, viewport=null) => {
+  export const getViewPort = (lat, long, dist, deviceWidth, deviceHeight) => {
     const boxy = getBoundsFromLatLng(lat, long, dist);
-    // let loc_viewport;
-    // if (viewport) {
-    //   loc_viewport = new WebMercatorViewport({ width: viewport.width, height: viewport.height }).fitBounds(boxy)
-    // } else {
-      const loc_viewport = new WebMercatorViewport({ width: 800, height: 600 }).fitBounds(boxy)
-    // }
+    let loc_viewport;
+    loc_viewport = new WebMercatorViewport({ width: deviceHeight, height: deviceWidth }).fitBounds(boxy)
     const { longitude, latitude, zoom } = loc_viewport
     return { longitude, latitude, zoom };
   };
@@ -88,4 +84,31 @@
     return 2.0*R*Math.asin(Math.sqrt(Math.sin(0.5*(lat2-lat1))*Math.sin(0.5*(lat2-lat1))
                                                  +Math.cos(lat1)*Math.cos(lat2)
                                                  *Math.sin(0.5*(lng2-lng1))*Math.sin(0.5*(lng2-lng1))));
+  }
+
+  export const thresholdAnimation = (upvoteAvg, upvoteCount) => {
+    if (upvoteCount > upvoteAvg) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  export const findAvgUpvoteCount = (limitAnim, issues) => {
+    let sum = 0;
+    let avg = 10000000;
+
+    for (let i=0; i<issues.length; i++) {
+      sum += issues[i].upvoteCount;
+    }
+
+    if (issues.length>0){
+      avg = sum / issues.length;
+    }
+
+    if (avg > limitAnim) {
+      return avg;
+    } else {
+      return 10000000;
+    }
   }

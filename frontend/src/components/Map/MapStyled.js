@@ -4,14 +4,14 @@ import {defaultTheme} from '../../globalstyles/Styles.js';
 
 const pulse = keyframes`
   0% {
-    transform: scale(0.7);
+    transform: scale(1.0);
     opacity: 1;
     transform-origin: center;
     stroke: ${defaultTheme.haloGreen};
   }
   100% {
-    transform: scale(1.15);
-    opacity: 0.4;
+    transform: scale(1.4);
+    opacity: 0.6;
     transform-origin: center;
     stroke: ${defaultTheme.haloGreen};
   }
@@ -20,12 +20,13 @@ export const SvgAnimation = styled(svgMarkers)`
   height: 100%;
   width: 100%;
   .circle {
-    animation: ${pulse} infinite 1s linear;
+    animation: ${pulse} infinite ${props => `${props.upvotecount}s`} linear;
     &:hover {
       animation-play-state: paused;
       cursor: pointer;
     }
   }
+  z-index: -1;
 `
 
 export const MainContainer = styled.div`

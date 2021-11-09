@@ -45,7 +45,7 @@ export const Profile = styled(Home)`
 
 `;
 
-export const Report = styled(Home)`
+export const Analytics = styled(Home)`
 
 `;
 
@@ -81,6 +81,9 @@ export const IssueTextGreen = styled(Text)`
     color: ${(props) => props.theme.greenColor};
     font-weight : bold ;
     justify-self: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     border-radius: 20px;
 `
 
@@ -110,7 +113,6 @@ export const PopUpContainer = styled.div`
 export const SubContainerButtons = styled.div`
     display: flex;
     flex-direction: row;
-    overflow: scroll;
     justify-content: center;
 `;
 
@@ -128,7 +130,6 @@ export const FilterButtons = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    
 `;
 
 export const Option1 = styled.button`

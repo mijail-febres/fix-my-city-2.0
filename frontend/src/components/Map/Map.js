@@ -22,7 +22,14 @@ import { FaSatelliteDish } from "react-icons/fa";
 import PopupContent from "./Popup/PopupContent";
 import MoreDetails from "./Popup/MoreDetails";
 import { fetchProfileInfo } from "../../Axios/fetches";
-import { getViewPort, findCentroid, findMaxDist  } from "./Calculations";
+import { 
+  getViewPort, 
+  findAvgUpvoteCount, 
+  findCentroid, 
+  findMaxDist,
+  thresholdAnimation
+  } 
+from "./Calculations";
 import { SvgAnimation } from "./MapStyled";
 import svgPlant from "../../assets/svgs/plant.svg"
 import svgBroken from "../../assets/svgs/broken.svg"
@@ -32,8 +39,13 @@ import svgStreetSign from "../../assets/svgs/street-sign.svg"
 import svgLitter from "../../assets/svgs/litter.svg"
 import svgGraffiti from "../../assets/svgs/graffiti.svg"
 import svgNewMarker from "../../assets/svgs/new-marker.svg"
+import useWindowDimensions from "./useWindowDimensions";
 
 const Map = (props) => {
+  // call width and height
+  let deviceHeight = window.innerHeight;
+  let deviceWidth = window.innerWidth;
+
   const geolocateControlStyle = {
     left: "3%",
     top: "130px",
@@ -51,9 +63,9 @@ const Map = (props) => {
     "pk.eyJ1IjoiYWxleDI2MCIsImEiOiJja3FxazJuYnQwcnRxMzFxYXNpaHV2NHR3In0.sClUCkiGXj9AQubDvnv68A";
 
   const [viewport, setViewport] = useState({
-    width: '100%',
+    width: '100vw',
     height: '100vh',
-    ...getViewPort(47.3769,8.5417,0.2)
+    ...getViewPort(47.3769,8.5417,0.2,deviceWidth,deviceHeight)
   })
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -115,6 +127,10 @@ const Map = (props) => {
   // State to display or not the MoreDetails component
   const [toggleMoreDetails, setToggleMoreDetails] = useState(false);
 
+  const limitAnim = 10;
+
+  const [upvoteAvg, setUpvoteAvg] = useState(10000000);
+
   // Functions
   const handleOnLoad = (evt) => {
     setIsLoaded(true)
@@ -174,7 +190,7 @@ const Map = (props) => {
         setToggleUserMarker(true);
         setViewport({
           ...viewport,
-          ...getViewPort(latitude,longitude,0.05),
+          ...getViewPort(latitude,longitude,0.05,deviceWidth,deviceHeight),
           transitionInterpolator: new FlyToInterpolator(),
           transitionDuration: 800,
         });
@@ -231,6 +247,7 @@ const Map = (props) => {
 
   useEffect(() => {
     const urlIssues = `https://fix-my-city.app.propulsion-learn.ch/backend/api/issues/`;
+
 
     fetch(urlIssues)
       .then((res) => res.json())
@@ -320,6 +337,11 @@ const Map = (props) => {
   // Prepare data for clustering (from json to geojson)
   useEffect(() => {
     if (filteredIssues.length > 0) {
+      // find average
+      let avg = 0.0;
+      avg = findAvgUpvoteCount(limitAnim, filteredIssues);
+      setUpvoteAvg(avg);
+      
       setPoints(
         filteredIssues.map((issue) => ({
           type: "Feature",
@@ -330,7 +352,7 @@ const Map = (props) => {
             image: issue.image,
             city: issue.city,
             zip: issue.zip,
-            streetAndNumber: issue.adress,
+            streetAndNumber: issue.address,
             category: issue.category,
             author: issue.user.username,
             userId: issue.user.id,
@@ -344,7 +366,8 @@ const Map = (props) => {
             type: "Point",
             coordinates: [issue.longitude, issue.latitude],
           },
-        }))
+        }
+        ))
       );
       const [lat,long] = findCentroid(filteredIssues);
       let dist = 0.0;
@@ -355,7 +378,7 @@ const Map = (props) => {
       }
       setViewport({
         // viewport,
-        ...getViewPort(lat,long,dist),
+        ...getViewPort(lat,long,dist,deviceWidth,deviceHeight),
         transitionInterpolator: new FlyToInterpolator(),
         transitionDuration: 900,
       })
@@ -434,10 +457,10 @@ const Map = (props) => {
             />
           </SatelliteButton>
           {filteredIssues.length >= 1 &&
-            clusters.map((cluster) => {
+            clusters.map(cluster => {
+              const upvoteCount = cluster.properties.upvoteCount;
               const [longitude, latitude] = cluster.geometry.coordinates;
-              const { cluster: isCluster, point_count: pointCount } =
-                cluster.properties;
+              const { cluster: isCluster, point_count: pointCount } = cluster.properties;
 
               // Clustering
               // It creates clusters if there is more than 1 marker in radius: 75 (check useSupercluster)
@@ -539,7 +562,7 @@ const Map = (props) => {
                         );
                       }}
                     >        
-                      <SvgAnimation/>
+                    <SvgAnimation upvotecount={thresholdAnimation(upvoteAvg, upvoteCount)}/>
                     </MarkerImgStyle>
                   </Marker>
                 )

@@ -1,16 +1,16 @@
 import React, {useState, useEffect, useRef} from "react";
 import Table from "../../components/Table/Table";
-import ReportContainer, { Title } from './ReportStyled';
+import AnalyticsContainer, { Title } from './AnalyticsStyled';
 import ReactToPrint from 'react-to-print';
 import { useSelector, useDispatch } from "react-redux";
 import Navigation from "../../components/Navigation/Navigation";
-import { Header, SubHeader, Body } from "./ReportStyled";
+import { Header, SubHeader, Body } from "./AnalyticsStyled";
 import DropDownMultipleMenu from "../../components/DropDownMultipleMenu/DropDownMultipleMenu";
 import svgAz from "../../assets/svgs/az-sort.svg"
 import svgZa from "../../assets/svgs/za-sort.svg"
 import DropDownMenu from "../../components/DropDownMenu/DropDownMenu";
 
-const Report = () => {
+const Analytics = () => {
     const [listIssues,setListIssues] = useState(null);
     const [listUsers,setListUsers] = useState(null);
     const [filteredSortedList,setFSList] = useState(null);
@@ -35,7 +35,7 @@ const Report = () => {
     const issueFields =
     [
         "id", "title", "content", "category",
-        "status", "adress", "longitude", "latitude",
+        "status", "address", "longitude", "latitude",
         "city", "zip", "image", "created",
         "modified", "issue_comments", "upvote_count",
     ];
@@ -195,21 +195,21 @@ const Report = () => {
     }
 
     return (
-        <ReportContainer>
+        <AnalyticsContainer>
             <div style={{width: '100%', height: '20%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
                 <Header id='header'>
                     <Navigation
                         showBackButton={true}
                         page={'report'}
                     />
-                    <Title>Report</Title>
+                    <Title>Analytics</Title>
                 </Header>
             </div>
             <div style={{width: '100%', height: '10%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
                 <SubHeader id='subheader'>
                     {/* A subject selector */}
                     <div id='divSubject'>
-                        <label id='labelSubject' htmlFor="subject">Report:</label>
+                        <label id='labelSubject' htmlFor="subject">Analytics:</label>
                         <div id='menuSubject'>
                             <DropDownMenu  title = 'Subject' changeSubject={changeSubject} items={subjects}/>
                         </div>
@@ -247,8 +247,8 @@ const Report = () => {
                     <Table ref={componentRef} listItems={filteredSortedList} selections={selections}></Table>
                 </Body>
             </div>
-        </ReportContainer>
+        </AnalyticsContainer>
     )
 }
 
-export default Report;
+export default Analytics;

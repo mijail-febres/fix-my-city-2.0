@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ReportContainer = styled.div`
+const AnalyticsContainer = styled.div`
     width: 100%;
     height: 100%;
     background-color: ${(props) => props.theme.greyColor};
@@ -145,4 +145,4 @@ export const Title = styled.div`
   color: ${(props) => props.theme.greenColor};
 `;
 
-export default ReportContainer
+export default AnalyticsContainer

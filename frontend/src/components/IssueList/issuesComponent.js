@@ -43,7 +43,7 @@ const IssueComponent = (props) => {
           {props.issue.category === "street_sign_issues"? <StreetSignIcon src={streetsign} alt ="street sign"/> : " "}
           <IssueandAddress>
           <p className="issue">{props.issue.title}</p>
-          <Address>{props.issue.adress}, {props.issue.zip} {props.issue.city}</Address>
+          <Address>{props.issue.address}, {props.issue.zip} {props.issue.city}</Address>
           </IssueandAddress>
         </AddressContainer>
 

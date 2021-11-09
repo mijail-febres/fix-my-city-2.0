@@ -6,7 +6,7 @@ import user from "../../assets/images/user.png";
 import newIssueGreen from "../../assets/images/new-LG.png";
 import list from "../../assets/images/list.png";
 import filter from "../../assets/images/filter.png";
-import svgReport from "../../assets/svgs/report.svg"
+import svgAnalytics from "../../assets/svgs/report.svg"
 import { MdKeyboardArrowDown } from "react-icons/md";
 import Div100vh from "react-div-100vh";
 import Map from "../../components/Map/Map";
@@ -21,7 +21,7 @@ import {
     IssueText,
     IssueTextGreen,
     Profile,
-    Report,
+    Analytics,
     Logo,
     Text,
     PopUpContainer,
@@ -134,8 +134,8 @@ const Homepage = () => {
         history.push("/profile");
     };
 
-    const handleReportClick = () => {
-        history.push("/report");
+    const handleAnalyticsClick = () => {
+        history.push("/analytics");
     };
 
     return (
@@ -159,16 +159,19 @@ const Homepage = () => {
                         <Text>Filter</Text>
                     </Filter>
                 }
-                {coordinates === null?
-                    <New>
-                        <IssueTextGreen>Choose Location To Report Issue</IssueTextGreen>
-                    </New>
-                :
-                    <New>
-                        <Logo src={newIssueGreen} alt="new issue" onClick={handleNewIssueClick}/>
-                        <IssueText>New Issue</IssueText>
-                    </New>
-                }
+                {currentUser?
+                    ! currentUser.is_superuser?
+                        coordinates === null?
+                            <New>
+                                <IssueTextGreen>Choose Location To Report Issue</IssueTextGreen>
+                            </New>
+                        :
+                            <New>
+                                <Logo src={newIssueGreen} alt="new issue" onClick={handleNewIssueClick}/>
+                                <IssueText>New Issue</IssueText>
+                            </New>
+                    :null
+                :null}
                 <Issues>
                     <Logo src={list} alt="issues" onClick={handleListClick}/>
                     <Text>Issues</Text>
@@ -177,14 +180,14 @@ const Homepage = () => {
                     <Logo src={user} alt="profile" onClick={handleUserClick}/>
                     <Text>Profile</Text>
                 </Profile>
-                {/* {currentUser?
-                    currentUser.is_superuser? */}
-                    <Report>
-                        <Logo src={svgReport} alt="report" onClick={handleReportClick}/>
-                        <Text>Report</Text>
-                    </Report>
-                    {/* :null
-                :null} */}
+                {currentUser?
+                    currentUser.is_superuser?
+                    <Analytics>
+                        <Logo src={svgAnalytics} alt="report" onClick={handleAnalyticsClick}/>
+                        <Text>Analytics</Text>
+                    </Analytics>
+                    :null
+                :null}
             </MenuContainer>
 
             {toggleFilter && (
