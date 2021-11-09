@@ -15,11 +15,7 @@ import {
   HomeButton,
   PageTitle,
 } from "./CreateIssueStyled";
-import leftArrow from "../../assets/images/left-arrow.png";
-import rightArrow from "../../assets/images/right-arrow.png";
-import Map from "../../components/Map/Map";
 import Camera from "../../components/Camera/Camera";
-import Axios from "../../Axios/index";
 import { useSelector } from "react-redux";
 import { StaticMap, Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -27,10 +23,10 @@ import { MarkerImgStyle } from "../../components/Map/MapStyled";
 import Navigation from "../../components/Navigation_CreateIssue/NavigationCreateIssue";
 import Sad from "../../assets/images/sad.png";
 import Confirmation from "../../assets/images/confirmation.png";
-import Div100vh from "react-div-100vh";
 import { createIssue } from "../../Axios/fetches";
 import svgNewMarker from "../../assets/svgs/new-marker.svg";
 import rightarrow from "../../assets/images/arrow-right.png";
+import { distanceTwoPoints } from "../../components/Map/Calculations";
 
 const StepOne = (props) => {
   const pinnedCoordinates = useSelector(
@@ -237,6 +233,45 @@ const CreateIssue = () => {
   const MAPBOX_TOKEN =
     "pk.eyJ1IjoiYWxleDI2MCIsImEiOiJja3FxazJuYnQwcnRxMzFxYXNpaHV2NHR3In0.sClUCkiGXj9AQubDvnv68A";
 
+  const [listUsers,setListUsers] = useState(null);
+
+  const getListUsers = async() => {
+      const url = 'https://fix-my-city.app.propulsion-learn.ch/backend/api/users/';
+
+      const method = 'GET'; // method
+
+      const config = { // configuration
+      method : method,
+      }
+
+      const response = await fetch(url, config);  //fetching
+      const data     = await response.json();  // getting the user
+
+      setListUsers(data)
+  }
+
+  useEffect(() => {
+    getListUsers();
+  }, [])
+
+  const findUsersClosetoThisIssue = (longitude,latitude) => {
+    const min_distance = 0.2 //200m?? good?
+
+    const lat1 = latitude * Math.PI;
+    const lng1 = longitude * Math.PI;
+
+    let usersToNotify = [];
+    listUsers.forEach(user => {
+      const lat2 = user.home_latitude * Math.PI;
+      const lng2 = user.home_longitude * Math.PI;
+      ;
+      if (distanceTwoPoints(lat1, lng1, lat2, lng2)<= min_distance) {
+        usersToNotify.push(user);  
+      }
+    })
+    console.log('users',usersToNotify)
+  }
+
   useEffect(() => {
     console.log(pinnedCoordinates);
     setLatitude(pinnedCoordinates.latitude);
@@ -356,6 +391,8 @@ const CreateIssue = () => {
         setToggleShowReview(false);
         setToggleShowNavigation(false);
         setToggleShowThankyou(true);
+        // find user(s) close to this new issue
+        findUsersClosetoThisIssue(longitude,latitude);
       }
     } catch (err) {
       if (err) {

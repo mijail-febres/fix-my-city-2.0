@@ -9,7 +9,7 @@ import {withAuth} from "../src/withAuth/withAuth"
 import SignUp from "../src/pages/SignUp/SignUp";
 import SignUpForm from './pages/SignUp/SignUpForm';
 import IssueList from './components/IssueList/issueList';
-import Report from './pages/Report/Report';
+import Analytics from './pages/Analytics/Analytics';
 
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
         <Route exact path="/issues" component={withAuth(IssueList)}/>
         <Route exact path="/signup" component={SignUp} /> 
         <Route exact path="/signupform" component={SignUpForm} />     
-        <Route exact path="/report" component={Report} />     
+        <Route exact path="/analytics" component={Analytics} />     
       </Switch>
     </BrowserRouter>
   );
