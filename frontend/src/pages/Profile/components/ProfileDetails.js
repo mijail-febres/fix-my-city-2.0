@@ -112,7 +112,7 @@ const ProfileDetails = (props) => {
             <button id="editButton"
               onClick={() =>
                 editButtonOnClickHandler(
-                  "homeAddress", 
+                  "homeAddress",
                   "Home Address", 
                   "home_address"
                   )

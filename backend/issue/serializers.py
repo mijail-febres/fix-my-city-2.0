@@ -16,7 +16,7 @@ class IssueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Issue
-        fields = ['id', 'title', 'content', 'category', 'status', 'adress', 'longitude', 'latitude', 'city', 'zip', 'image', 'created', 'modified', 'issue_comments', 'upvoted_by', 'upvote_count', 'user']
+        fields = ['id', 'title', 'content', 'category', 'status', 'address', 'longitude', 'latitude', 'city', 'zip', 'image', 'created', 'modified', 'issue_comments', 'upvoted_by', 'upvote_count', 'user']
         read_only_fields = ['id', 'created', 'modified', 'user', 'upvoted_by', 'upvote_count']
         ordering = ['upvote_count']
 
@@ -24,6 +24,6 @@ class IssueSerializer(serializers.ModelSerializer):
 class CreateIssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Issue
-        fields = ['id', 'title', 'longitude', 'latitude', 'category', 'adress', 'city', 'zip', 'image', 'created',
+        fields = ['id', 'title', 'longitude', 'latitude', 'category', 'address', 'city', 'zip', 'image', 'created',
                   'modified', 'content']
         read_only_fields = ['id', 'created', 'modified']

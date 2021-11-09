@@ -24,6 +24,7 @@ class User(AbstractUser):
     profile_picture = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
     points = models.IntegerField(default=0)
     notifications = models.BooleanField(default=False)
+    is_notified = models.BooleanField(default=False)
 
     @property
     def status(self):

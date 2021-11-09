@@ -447,6 +447,7 @@ const Map = (props) => {
             style={scaleControlStyle}
           />
           <SatelliteButton
+            aria-label = "Sattellite Button"
             onClick={() => {
               setExpandCluster(true);
               setToggleSatellite(!toggleSatellite);
