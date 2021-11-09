@@ -41,10 +41,10 @@ export const FetchingContainer = styled.div`
 export const DateContainer = styled.div`
   display:flex;
   font-size: 14px;
-  font-weight: 300;
+  /* font-weight: 300; */
   font-weight: bold;
   padding-top: 3%;
-  padding-bottom: 5%;
+  padding-bottom: 1%;
 `;
 
 export const UpvotesContainer = styled.div`
@@ -53,6 +53,7 @@ export const UpvotesContainer = styled.div`
   width: 25%;
   display: flex;
   flex-direction: column;
+  padding-top: 3%;
   padding-bottom: 1%;
 
   p {
