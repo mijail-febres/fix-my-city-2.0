@@ -61,19 +61,6 @@ function receivePushNotification(event) {
   event.waitUntil(this.self.registration.showNotification(title, options)); //displays notif to user
 }
 
-let deferredPrompt;
-
-this.self.addEventListener('beforeinstallprompt', function(e) {
-  console.log('beforeinstallprompt Event fired');
-  e.preventDefault();
-
-  // Stash the event so it can be triggered later.
-  deferredPrompt = e;
-
-  return false;
-});
-
-//handle action on notification
 this.self.addEventListener('notificationclick', function(e) {
   var notification = e.notification;
   var primaryKey = notification.data.primaryKey;
@@ -81,31 +68,15 @@ this.self.addEventListener('notificationclick', function(e) {
 
   if (action === 'no') {
     notification.close();
-    console.log('user clicked no');
+    console.log('user clicked no')
   } 
-  else if (action === 'yes') {
-    console.log('user clicked yes');
-    deferredPrompt.prompt();
-
-    // Follow what the user has done with the prompt.
-    deferredPrompt.userChoice.then(function(choiceResult) {
-
-      console.log(choiceResult.outcome);
-
-      if(choiceResult.outcome === 'dismissed') {
-        console.log('User cancelled home screen install');
-      }
-      else {
-        console.log('User added to home screen');
-      }
-
-      deferredPrompt = null;
+  else if (action === 'ok') {
+    // this.clients.navigate("https://fix-my-city.app.propulsion-learn.ch/");
+    this.clients.openWindow("https://fix-my-city.app.propulsion-learn.ch/");
     notification.close();
-  },
-console.log('notification: ' + primaryKey),
-  )
-}
-}
-);
+    console.log('user clicked ok')
+  }
+  console.log('notification: ' + primaryKey)
+});
 
 this.self.addEventListener("push", receivePushNotification);
