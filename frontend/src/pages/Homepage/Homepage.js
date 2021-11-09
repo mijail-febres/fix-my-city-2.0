@@ -39,6 +39,7 @@ import {
     FilterButtons,
   } from "../../components/MenuFooter/MenuFooterStyled";
 import {defaultTheme} from '../../globalstyles/Styles.js';
+import {displayInstallNotification} from "../../pushnotifications";
 
 const Homepage = () => {
 
@@ -216,50 +217,4 @@ const Homepage = () => {
   
   export default Homepage;
 
-  //check in console whether the service worker exists and push notifications are possible
-function isPushNotificationSupported(){return "serviceWorker" in navigator && "PushManager" in window}
-
-console.log(isPushNotificationSupported()); 
-
-//push notification to ask user to allow for further notifications
-async function askUserPermission() {
-    return await Notification.requestPermission();
-  }
-askUserPermission();
-
-//display 
-function displayNotification() {
-  if (Notification.permission === 'granted') {
-    navigator.serviceWorker.getRegistration().then(function(reg) {
-      var options = {
-        body: 'Would you like to install Fix My City on your home screen?', //adds main description to notification
-        badge: "../../assets/svgs/fixmycitylogonew.svg", //can be any image to make notification appealing
-        vibrate: [100, 50, 100], //vibrate pattern for phone receiving notification
-        data: {
-          dateOfArrival: Date.now(),
-          primaryKey: 1
-        },
-        requireInteraction: true,
-        actions: [
-          {action: 'yes', title: 'Yes, install'},
-          {action: 'no', title: 'Not now'},
-        ]
-        //can add actions here when it works
-      };
-      console.log ("display notification");
-      reg.showNotification('Add to Home Screen', options);
-    });
-  }
-}
-displayNotification();
-
-function registerServiceWorker() {
-    return navigator.serviceWorker.register("/sw.js");
-}
-
-export {
-    displayNotification,
-    isPushNotificationSupported,
-    askUserPermission,
-    registerServiceWorker,
-}
+  displayInstallNotification();
