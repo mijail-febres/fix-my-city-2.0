@@ -12,7 +12,7 @@ export const MenuContainer = styled.div`
     background: ${(props) => props.theme.greyColorGradient};
     z-index:10;
     cursor: pointer;
-    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+    /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
     /* border-top: 0.5px solid white; */
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
@@ -137,7 +137,7 @@ export const Option1 = styled.button`
     margin-top: 5px;
     display:flex;
     cursor: pointer;
-    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+    /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
     background-color: ${(props) => props.theme.greyColor};
     border-radius: 20px;
     justify-content: center;
@@ -149,7 +149,7 @@ export const Option1 = styled.button`
 
     &:hover {
         cursor: pointer;
-        -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+        /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
         border: 2px solid ${(props) => props.theme.greenColor};
     }
 
@@ -201,6 +201,6 @@ export const FilterButtonStyle = styled(LoginSignUpButton)`
 
     &:hover {
         cursor: pointer;
-        -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+        /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
     }
 `;
