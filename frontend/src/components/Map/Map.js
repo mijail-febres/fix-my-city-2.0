@@ -127,7 +127,7 @@ const Map = (props) => {
   // State to display or not the MoreDetails component
   const [toggleMoreDetails, setToggleMoreDetails] = useState(false);
 
-  const limitAnim = 10;
+  const limitAnim = 4;
 
   const [upvoteAvg, setUpvoteAvg] = useState(10000000);
 
