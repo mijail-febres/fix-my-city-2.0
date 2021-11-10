@@ -9,10 +9,10 @@ export const MenuContainer = styled.div`
     bottom: 0px;
     width: 100vw;
     height: 10vh;
-    background-color: ${(props) => props.theme.greyColor};
+    background: ${(props) => props.theme.greyColorGradient};
     z-index:10;
     cursor: pointer;
-    border-top: 0.5px solid white;
+    /* border-top: 0.5px solid white; */
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
 

@@ -25,6 +25,7 @@ export const defaultTheme = {
     darkGreenColor: '#245b55',
     greyColor: '#f5f5f5',
     greyColorTransparent: 'rgba(245, 245, 245, 0.75)',
+    greyColorGradient: 'linear-gradient(0deg, rgba(245,245,245,1) 40%, rgba(245,245,245,0.5) 90%)',
     darkGreyColor: '#A5A5A5',
     haloGreen: '#32bf38',
 

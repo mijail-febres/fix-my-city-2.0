@@ -60,7 +60,12 @@
   export const getViewPort = (lat, long, dist, deviceWidth, deviceHeight) => {
     const boxy = getBoundsFromLatLng(lat, long, dist);
     let loc_viewport;
-    loc_viewport = new WebMercatorViewport({ width: deviceHeight, height: deviceWidth }).fitBounds(boxy)
+    if (deviceWidth>deviceHeight) {
+      deviceHeight-=200;
+      loc_viewport = new WebMercatorViewport({ width: deviceHeight, height: deviceWidth }).fitBounds(boxy)
+    } else {
+      loc_viewport = new WebMercatorViewport({ width: deviceHeight, height: deviceWidth }).fitBounds(boxy)
+    }
     const { longitude, latitude, zoom } = loc_viewport
     return { longitude, latitude, zoom };
   };
