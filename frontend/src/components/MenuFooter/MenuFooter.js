@@ -42,7 +42,7 @@ const MenuFooter = () => {
 
     const [filterValue, setFilterValue] = useState(
         filterValueRedux === "default" ? "default" : filterValueRedux
-    );
+    ); 
 
     const [coordinates, setCoordinates] = useState(null);
 
