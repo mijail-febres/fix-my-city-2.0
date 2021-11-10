@@ -61,7 +61,7 @@
     const boxy = getBoundsFromLatLng(lat, long, dist);
     let loc_viewport;
     if (deviceWidth>deviceHeight) {
-      deviceHeight-=200;
+      // deviceHeight-=200;
       loc_viewport = new WebMercatorViewport({ width: deviceHeight, height: deviceWidth }).fitBounds(boxy)
     } else {
       loc_viewport = new WebMercatorViewport({ width: deviceHeight, height: deviceWidth }).fitBounds(boxy)
