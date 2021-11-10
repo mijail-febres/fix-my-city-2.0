@@ -2,17 +2,19 @@ import styled, {keyframes} from "styled-components";
 import { ReactComponent as svgMarkers } from "../../assets/svgs/svgMarker.svg"
 import {defaultTheme} from '../../globalstyles/Styles.js';
 
-const pulse = keyframes`
+const pulse = (color) => keyframes`
   0% {
     transform: scale(1.0);
     opacity: 1;
     transform-origin: center;
+    /* stroke: ${color}; */
     stroke: ${defaultTheme.haloGreen};
   }
   100% {
     transform: scale(1.4);
     opacity: 0.6;
     transform-origin: center;
+    stroke: ${color};
     stroke: ${defaultTheme.haloGreen};
   }
 `
@@ -20,7 +22,7 @@ export const SvgAnimation = styled(svgMarkers)`
   height: 100%;
   width: 100%;
   .circle {
-    animation: ${pulse} infinite ${props => `${props.upvotecount}s`} linear;
+    animation: ${pulse('red')} infinite ${props => `${props.upvotecount}s`} linear;
     &:hover {
       animation-play-state: paused;
       cursor: pointer;

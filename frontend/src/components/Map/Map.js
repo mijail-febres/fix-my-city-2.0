@@ -24,7 +24,7 @@ import MoreDetails from "./Popup/MoreDetails";
 import { fetchProfileInfo } from "../../Axios/fetches";
 import { 
   getViewPort, 
-  findAvgUpvoteCount, 
+  maxUpvoteCount, 
   findCentroid, 
   findMaxDist,
   thresholdAnimation
@@ -129,7 +129,7 @@ const Map = (props) => {
 
   const limitAnim = 4;
 
-  const [upvoteAvg, setUpvoteAvg] = useState(10000000);
+  const [upvoteMax, setUpvoteMax] = useState(10000000);
 
   // Functions
   const handleOnLoad = (evt) => {
@@ -253,6 +253,10 @@ const Map = (props) => {
       .then((res) => res.json())
       .then((data) => {
         setIssues(data);
+        // find max
+        let uMax = 0.0;
+        uMax = maxUpvoteCount(data);
+        setUpvoteMax(uMax);
         setFilteredIssues(data);
       });
   }, []);
@@ -336,12 +340,8 @@ const Map = (props) => {
 
   // Prepare data for clustering (from json to geojson)
   useEffect(() => {
-    if (filteredIssues.length > 0) {
-      // find average
-      let avg = 0.0;
-      avg = findAvgUpvoteCount(limitAnim, filteredIssues);
-      setUpvoteAvg(avg);
       
+    if (filteredIssues.length > 0) {
       setPoints(
         filteredIssues.map((issue) => ({
           type: "Feature",
@@ -563,7 +563,7 @@ const Map = (props) => {
                         );
                       }}
                     >        
-                    <SvgAnimation upvotecount={thresholdAnimation(upvoteAvg, upvoteCount)}/>
+                    <SvgAnimation upvotecount={thresholdAnimation(upvoteMax, upvoteCount)}/>
                     </MarkerImgStyle>
                   </Marker>
                 )
