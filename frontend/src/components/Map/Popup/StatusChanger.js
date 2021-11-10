@@ -30,6 +30,7 @@ const SubContainer = styled.div`
   align-items: center;
   &:hover {
         cursor: pointer;
+        -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
     }
 `;
 
@@ -39,6 +40,7 @@ const Text = styled.p`
   text-align: center;
   &:hover {
         cursor: pointer;
+        -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
         color: ${(props) => props.theme.greenColor};
     }
 `;
@@ -55,6 +57,7 @@ const StatusButton = styled.button`
     border: none;
     font-weight: bold;
     cursor: pointer;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 `;
 
 const StatusChanger = (props) => {

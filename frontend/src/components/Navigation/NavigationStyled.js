@@ -16,6 +16,7 @@ export const MainContainer = styled.div`
     height: auto;
     margin-left: 10px;
     cursor: pointer;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
   }
 
   #back {
@@ -27,6 +28,7 @@ export const MainContainer = styled.div`
     background: none;
     border: none;
     cursor: pointer;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
     margin-right: 10px;
     margin-left: auto;
   }

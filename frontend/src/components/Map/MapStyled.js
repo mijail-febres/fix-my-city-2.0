@@ -24,6 +24,7 @@ export const SvgAnimation = styled(svgMarkers)`
     &:hover {
       animation-play-state: paused;
       cursor: pointer;
+      -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
     }
   }
   z-index: -1;
@@ -54,6 +55,7 @@ export const MarkerImgStyle = styled.div`
   width: 50px;
   height: 50px;
   cursor: pointer;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,6 +67,7 @@ export const MarkerImgStyle = styled.div`
   background-position-y: center;
   :hover{
     cursor: pointer;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
   }
 `;
 // export const MarkerImgStyle = styled.img`
@@ -98,6 +101,7 @@ export const SatelliteButton = styled.button`
   box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.08);
   background-color: #ffffff;
   cursor: pointer;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 
   position: absolute;
   right: 3%;
