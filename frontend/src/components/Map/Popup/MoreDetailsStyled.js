@@ -78,4 +78,5 @@ export const UpvoteButton = styled.button`
     border: none;
     font-weight: bold;
     cursor: pointer;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 `;

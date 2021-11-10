@@ -61,6 +61,7 @@ const DropDownMenuContainer = styled.div`
             :hover .itemTag{
                 color: ${(props) => props.theme.greyColor};
                 cursor: pointer;
+                -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
             }
         }
     }

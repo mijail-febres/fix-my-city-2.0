@@ -24,6 +24,7 @@ export const ReportButton = styled.button`
   height: 40px;
   background-color: #ffffff;
   cursor: pointer;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
   font-size: 13px;
   font-weight: bold;
   border: 2px solid ${(props) => props.theme.yellowColor};
@@ -64,6 +65,7 @@ export const Search = styled.div`
     border: none;
     margin-left: 30px;
     cursor: pointer;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
   }
 `;
 
