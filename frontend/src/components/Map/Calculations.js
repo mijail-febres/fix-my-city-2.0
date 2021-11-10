@@ -104,7 +104,7 @@
     let avg = 10000000;
 
     for (let i=0; i<issues.length; i++) {
-      sum += issues[i].upvoteCount;
+      sum += issues[i].upvote_count;
     }
 
     if (issues.length>0){
