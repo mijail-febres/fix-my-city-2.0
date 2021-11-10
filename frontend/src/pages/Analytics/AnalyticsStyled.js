@@ -17,7 +17,7 @@ const AnalyticsContainer = styled.div`
         color: white;
         :hover{
             cursor: pointer;
-            -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+            /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
         }
     }
 ` 
