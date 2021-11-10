@@ -9,7 +9,7 @@ export const MenuContainer = styled.div`
     bottom: 0px;
     width: 100vw;
     height: 10vh;
-    background: ${(props) => props.theme.greyColorGradient};
+    background: ${(props) => props.theme.greyColor};
     z-index:10;
     cursor: pointer;
     /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
