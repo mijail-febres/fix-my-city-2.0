@@ -91,12 +91,20 @@
                                                  *Math.sin(0.5*(lng2-lng1))*Math.sin(0.5*(lng2-lng1))));
   }
 
-  export const thresholdAnimation = (upvoteAvg, upvoteCount) => {
-    if (upvoteCount > upvoteAvg) {
+  export const thresholdAnimation = (upvoteMax, upvoteCount) => {
+    if (upvoteCount > upvoteMax) {
       return 1;
     } else {
       return 0;
     }
+  }
+
+  export const maxUpvoteCount = (issues) => {
+    let maxUpvote = -100000;
+    for (let i=0; i<issues.length; i++) {
+      maxUpvote = Math.max(maxUpvote, issues[i].upvote_count);
+    }
+    return 3.0*maxUpvote/4.0; 
   }
 
   export const findAvgUpvoteCount = (limitAnim, issues) => {
