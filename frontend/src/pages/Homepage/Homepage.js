@@ -181,14 +181,14 @@ const Homepage = () => {
                     <Logo src={user} alt="profile" onClick={handleUserClick}/>
                     <Text>Profile</Text>
                 </Profile>
-                {/* {currentUser?
-                    currentUser.is_superuser? */}
+                {currentUser?
+                    currentUser.is_superuser?
                     <Analytics>
                         <Logo src={svgAnalytics} alt="report" onClick={handleAnalyticsClick}/>
                         <Text>Analytics</Text>
                     </Analytics>
-                    {/* :null
-                :null} */}
+                    :null
+                :null}
             </MenuContainer>
 
             {toggleFilter && (
