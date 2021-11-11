@@ -153,32 +153,33 @@ const Analytics = () => {
 
     const sorting = (newSorter, direction = 1) => {
         console.log(newSorter,direction,sorter,filteredSortedList)
-        let newList = [...filteredSortedList];
-        if (sorter) {
-            if (typeof newList[0][newSorter] === 'number') { // in case of numbers
-                newList.sort((item1,item2) => {
-                    if (item1[newSorter] < item2[newSorter]) {
-                        return -1 * direction;
-                    }
-                    if (item1[newSorter] > item2[newSorter]) {
-                        return  1 * direction;
-                    }
-                    return 0;
-                });
-            } else {
-                newList.sort((item1,item2) => { // in case of text
-                    if (item1[newSorter].toUpperCase() < item2[newSorter].toUpperCase()) {
-                        return -1 * direction;
-                    }
-                    if (item1[newSorter].toUpperCase() > item2[newSorter].toUpperCase()) {
-                        return  1 * direction;
-                    }
-                    return 0;
-                });
+        if (filteredSortedList) {
+            let newList = [...filteredSortedList];
+            if (sorter) {
+                if (typeof newList[0][newSorter] === 'number') { // in case of numbers
+                    newList.sort((item1,item2) => {
+                        if (item1[newSorter] < item2[newSorter]) {
+                            return -1 * direction;
+                        }
+                        if (item1[newSorter] > item2[newSorter]) {
+                            return  1 * direction;
+                        }
+                        return 0;
+                    });
+                } else {
+                    newList.sort((item1,item2) => { // in case of text
+                        if (item1[newSorter].toUpperCase() < item2[newSorter].toUpperCase()) {
+                            return -1 * direction;
+                        }
+                        if (item1[newSorter].toUpperCase() > item2[newSorter].toUpperCase()) {
+                            return  1 * direction;
+                        }
+                        return 0;
+                    });
+                }
             }
+            setFSList(newList)
         }
-        // }
-        setFSList(newList)
     }
 
     const changeField = (event) => {
@@ -205,48 +206,52 @@ const Analytics = () => {
                     <Title>Analytics</Title>
                 </Header>
             </div>
-            <div style={{width: '100%', height: '10%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                <SubHeader id='subheader'>
-                    {/* A subject selector */}
-                    <div id='divSubject'>
-                        <label id='labelSubject' htmlFor="subject">Analytics:</label>
-                        <div id='menuSubject'>
-                            <DropDownMenu  title = 'Subject' changeSubject={changeSubject} items={subjects}/>
-                        </div>
-                    </div>
+            <div style={{width: '100%', height: '80%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
 
-                    {/* A Field selector */}
-                    <div id='divFields' >
-                        <label id="labelField" htmlFor="menuFields">Fields:</label>
-                        <DropDownMultipleMenu id="menuFields" selections={selections} subject={subject} items={subject==='users'?userFields:issueFields}/>
-                    </div>
-                    {/* A Filter */}
-                    <div id='divFilter'>
-                        <label id='labelFilter' htmlFor="subject">Filter:</label>
-                        <DropDownMenu id='menuFilter' title='Filter' changeSubject={changeFilter} items={selections}/>
-                        <input id="inputFilter" type='text' onChange={(e) => handleFilterInput(e)} value={filterInput}></input>
-                    </div>
-                    {/* A sorter */}
-                    <div id='divSorter'>
-                        <label id='labelSorter'htmlFor="subject">Sort:</label>
-                        <DropDownMenu id='menuSorter' title='Sorter' changeSubject={changeSorter} items={selections}/>
-                        <button id='buttonSorter' onClick={handleClickSort}>
-                            <img id='iconSorter' src={azSorted?svgZa:svgAz} alt="my image"/>
-                        </button>
-                    </div>
-                    <div id = "printTrigger" >
-                        <ReactToPrint
-                            trigger={() => <button id='printButton'>Print</button>}
-                            content={() => componentRef.current}
-                        />
-                    </div>
-                </SubHeader>
+                <div style={{width: '80%', height: '100%', overflow: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', border: '1px solid #A5A5A5'}}>
+                    <Body>
+                        <Table ref={componentRef} listItems={filteredSortedList} selections={selections}></Table>
+                    </Body>
+                </div>
+                <div style={{width: '20%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                    <SubHeader id='subheader'>
+                        {/* A subject selector */}
+                        <div id='divSubject'>
+                            <label id='labelSubject' htmlFor="subject">Analytics</label>
+                            <div id='menuSubject'>
+                                <DropDownMenu  title = 'Subject' changeSubject={changeSubject} items={subjects}/>
+                            </div>
+                        </div>
+
+                        {/* A Field selector */}
+                        <div id='divFields' >
+                            <label id="labelField" htmlFor="menuFields">Fields</label>
+                            <DropDownMultipleMenu id="menuFields" selections={selections} subject={subject} items={subject==='users'?userFields:issueFields}/>
+                        </div>
+                        {/* A Filter */}
+                        <div id='divFilter'>
+                            <label id='labelFilter' htmlFor="subject">Filter</label>
+                            <DropDownMenu id='menuFilter' title='Filter' changeSubject={changeFilter} items={selections}/>
+                            <input id="inputFilter" type='text' onChange={(e) => handleFilterInput(e)} value={filterInput}></input>
+                        </div>
+                        {/* A sorter */}
+                        <div id='divSorter'>
+                            <label id='labelSorter'htmlFor="subject">Sort</label>
+                            <DropDownMenu id='menuSorter' title='Sorter' changeSubject={changeSorter} items={selections}/>
+                            <button id='buttonSorter' onClick={handleClickSort}>
+                                <img id='iconSorter' src={azSorted?svgZa:svgAz} alt="my image"/>
+                            </button>
+                        </div>
+                        <div id = "printTrigger" >
+                            <ReactToPrint
+                                trigger={() => <button id='printButton'>Print</button>}
+                                content={() => componentRef.current}
+                            />
+                        </div>
+                    </SubHeader>
+                </div>
             </div>
-            <div style={{width: '100%', height: '70%', overflow: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                <Body>
-                    <Table ref={componentRef} listItems={filteredSortedList} selections={selections}></Table>
-                </Body>
-            </div>
+
         </AnalyticsContainer>
     )
 }

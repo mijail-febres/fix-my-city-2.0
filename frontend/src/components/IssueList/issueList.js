@@ -116,7 +116,8 @@ const IssueList = (props) => {
           setFilteredIssues([...filteredArray]);
         } else {
           setFilteredIssues([]);
-        }}
+        }
+        }
       }
   
       setSelectedIssue(null);
