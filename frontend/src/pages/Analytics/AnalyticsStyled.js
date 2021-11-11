@@ -8,6 +8,7 @@ const AnalyticsContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     #printButton {
         width: 120px;
         height: 40px;
@@ -26,88 +27,100 @@ export const Header = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    border-bottom: solid 1px ${(props) => props.theme.darkGreyColor};
+    /* border-bottom: solid 1px ${(props) => props.theme.darkGreyColor}; */
 `
 
 export const SubHeader = styled.div`
-    width: 90%;
+    width: 100%;
     height: 100%;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-bottom: solid 1px ${(props) => props.theme.darkGreyColor};
+    border: solid 1px ${(props) => props.theme.darkGreyColor};
     box-sizing: border-box;
 
     #divSubject{
-        width: 20%; 
+        width: 70%; 
         height: 70%; 
-        display: flex; 
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 0px 10px;
         #labelSubject{
-            width: 30%;
+            width: 100%;
             text-align: center;
             margin: 0px 5px;
         }
         #menuSubject{
-            width: 70%;
+            width: 100%;
             margin: 0px 5px;
+            font-size: 16px;
+            font-size: 4vw;
         }
-        border-bottom: 3px solid ${(props) => props.theme.greenColor};
+        /* border-bottom: 3px solid ${(props) => props.theme.greenColor}; */
     }
     #divFields{
-        width: 20%; 
+        width: 70%; 
         height: 70%; 
         display: flex; 
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 0px 10px;
         #labelField{
-            width: 30%;
+            width: 100%;
             text-align: center;
             margin: 0px 5px;
         }
         #menuFields{
-            width: 70%;
+            width: 100%;
             margin: 0px 5px;
         }
-        border-bottom: 3px solid ${(props) => props.theme.greenColor};
+        /* border-bottom: 3px solid ${(props) => props.theme.greenColor}; */
     }
     #divFilter{
-        width: 20%; 
+        width: 70%; 
         height: 70%; 
         display: flex; 
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 0px 10px;
         #labelFilter{
-            width: 30%;
+            text-align: center;
+            width: 100%;
             margin: 0px 5px;
         }
         #menuFilter {
-            width: 40%;
+            width: 100%;
             margin: 0px 5px;
         }
         #inputFilter{
-            width: 30%;
+            width: 100%;
             margin: 0px 5px;
+            border: 1px solid ${(props) => props.theme.darkGreyColor};
+            border-radius: 20px;
         }
-        border-bottom: 3px solid ${(props) => props.theme.greenColor};
+        /* border-bottom: 3px solid ${(props) => props.theme.greenColor}; */
     }
     #divSorter{
-        width: 20%; 
+        width: 70%; 
         height: 70%; 
         display: flex; 
         justify-content: center;
+        flex-direction: column;
         align-items: center;
         margin: 0px 10px;
         #labelSorter{
-            width: 20%;
+            text-align: center;
+            width: 100%;
             margin: 0px 5px;
         }
         #menuSorter {
+            width: 100%;
             margin: 0px 5px;
         }
         #buttonSorter{
@@ -120,7 +133,7 @@ export const SubHeader = styled.div`
                 width: 100%;
             }
         }
-        border-bottom: 3px solid ${(props) => props.theme.greenColor};
+        /* border-bottom: 3px solid ${(props) => props.theme.greenColor}; */
     }
     #printTrigger {
         height: 70%; 
@@ -137,6 +150,7 @@ export const Body = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 20px;
 `
 export const Title = styled.div`
   width: 100%;

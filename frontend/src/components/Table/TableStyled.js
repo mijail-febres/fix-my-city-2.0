@@ -26,7 +26,8 @@ const TableContainer = styled.div`
         padding: 8px;
     }
     table tr:nth-child(odd){
-        background-color: ${(props) => props.theme.brightGreenColor};
+        /* background-color: ${(props) => props.theme.brightGreenColor}; */
+        background-color: #E7E7E7;
     }
     table tr:hover {
         background-color: ${(props) => props.theme.darkGreyColor};

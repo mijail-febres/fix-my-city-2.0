@@ -70,7 +70,7 @@ const DropDownMultipleMenu = (props) => {
                                 className= "menuItems" 
                                 key={ind} 
                                 onClick={(e) => handleClick(e,ind)}
-                                style={{backgroundColor: checkedItems[ind]?defaultTheme.greenColorTransparent:defaultTheme.greyColorTransparent}}
+                                style={{backgroundColor: checkedItems[ind]?defaultTheme.greenColor:defaultTheme.greyColor}}
                                 checked={checkedItems[ind]}
                             >
                                 <span className="itemTag" style={{color: checkedItems[ind]?defaultTheme.greyColor:'black'}}>{parsePropertyToHuman(item)}</span>

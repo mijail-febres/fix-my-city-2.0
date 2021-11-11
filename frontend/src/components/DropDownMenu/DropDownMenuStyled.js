@@ -34,7 +34,7 @@ const DropDownMenuContainer = styled.div`
         justify-content: flex-end;
         align-items:flex-start;
         box-sizing: border-box;
-        background-color: ${(props) => props.theme.greyColorTransparent};
+        background-color: ${(props) => props.theme.greyColor};
         border: ${(props) => `solid 1px ${props.theme.darkGreyColor}`};
         z-index: 1;
         .menuItems {
@@ -48,7 +48,7 @@ const DropDownMenuContainer = styled.div`
             padding: 0px 5px;
             margin: 1px;
             :hover {
-                background-color: ${(props) => props.theme.greenColorTransparent};
+                background-color: ${(props) => props.theme.greenColor};
             }
             .itemTag {
                 width: 100%;
