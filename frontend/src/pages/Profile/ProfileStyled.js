@@ -120,7 +120,7 @@ export const NameContainer = styled.div`
     align-items: center;
     border: none;
     cursor: pointer;
-    /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
     font-size: 14px;
 
     @media (min-width: 800px) {
@@ -132,7 +132,7 @@ export const NameContainer = styled.div`
       height: 18px;
       margin-left: 5px;
       cursor: pointer;
-      /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
+      -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
     }
   }
 
@@ -289,7 +289,7 @@ export const MenuContainer = styled.div`
     background-color: ${(props) => props.theme.greyColor};
     z-index:11;
     cursor: pointer;
-    /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
     border-top: 0.5px solid white;
 
     @media (min-width: 800px) {
@@ -496,7 +496,7 @@ export const LogoutButton = styled.div`
     align-items: center;
     border: none;
     cursor: pointer;
-    /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
     font-size: 14px;
 
     @media (min-width: 800px) {
