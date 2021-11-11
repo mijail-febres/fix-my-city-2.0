@@ -60,7 +60,7 @@
   export const getViewPort = (lat, long, dist, deviceWidth, deviceHeight) => {
     const boxy = getBoundsFromLatLng(lat, long, dist);
     let loc_viewport;
-    if (deviceWidth>deviceHeight) {
+    if (deviceWidth>deviceHeight) { //desktop
       deviceHeight-=200;
       loc_viewport = new WebMercatorViewport({ width: deviceHeight, height: deviceWidth }).fitBounds(boxy)
     } else {
