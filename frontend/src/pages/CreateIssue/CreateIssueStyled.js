@@ -56,7 +56,7 @@ export const NextButton = styled.div`
     border: none;
     font-weight: bold;
     cursor: pointer;
-    /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 `;
 
 export const Arrow = styled.img`
@@ -77,7 +77,7 @@ export const SendButton = styled.div`
     border: none;
     font-weight: bold;
     cursor: pointer;
-    /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 `;
 
 export const HomeButton = styled(SendButton)`

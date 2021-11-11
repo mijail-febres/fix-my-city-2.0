@@ -110,5 +110,5 @@ export const CreateAccount = styled.div`
     font-weight: bold;
     font-size: ${(props) => props.theme.fontSizeM};
     cursor: pointer;
-    /* -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); */
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 `;
