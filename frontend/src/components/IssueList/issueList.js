@@ -110,12 +110,13 @@ const IssueList = (props) => {
       if (filterValueRedux[0] === "default") {
         setFilteredIssues(issues);
       } else {
+        if (issues){
         const filteredArray = issues.filter((issue) => filterValueRedux.indexOf(issue.category) > -1);
         if (filteredArray.length >= 1) {
           setFilteredIssues([...filteredArray]);
         } else {
           setFilteredIssues([]);
-        }
+        }}
       }
   
       setSelectedIssue(null);
