@@ -19,7 +19,7 @@ CATEGORY_CHOICES = [
     ('insects_and_animals', 'Insects and Animals'),
     ('unmaintained_greenery', 'Unmaintained Greenery'),
     ('street_sign_issues', 'Street Sign Issues'),
-    ('urgent_issues', 'Urgent issues')
+    ('critical_issues', 'Critical')
 ]
 
 STATUS_CHOICES = [
