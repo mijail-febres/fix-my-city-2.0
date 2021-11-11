@@ -27,7 +27,6 @@ export const Header = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: blue;
     /* background-image: linear-gradient( rgba(36, 91, 85, 0.7), rgba(245, 245, 245, 0.7)), url(${map}); */
     background-image: linear-gradient( rgba(245, 245, 245, 0.7), rgba(36, 91, 85, 0.7) ), url(${map});
     background-repeat: no-repeat;
