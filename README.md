@@ -7,9 +7,9 @@ This is how it works:
 - Municipal authority see the issue and act accordingly to fix it
 
 This version now includes the next features:
-- It is now a progresie web app (it doesn't require a web browser, if you authorize it's installation)
+- It is now a progresive web app, PWA (it doesn't require a web browser, if you authorize it's installation)
 - It pushes notifications
 - Improved in performance
 - Modern look
-- Markers replace by icons for each issue category
+- Markers replaced by icons for each issue category
 - An urgent issue is now shown as a pulsating alert
