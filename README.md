@@ -5,7 +5,6 @@ This is how it works:
 - A user finds and issue on the street
 - Opens fix my city, takes a picture of the problem and sends it
 - Municipal authority see the issue and act accordingly to fix it
-- that simple
 
 This version now includes the next features:
 - It is now a progresie web app (it doesn't require a web browser, if you authorize it's installation)
