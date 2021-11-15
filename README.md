@@ -15,14 +15,14 @@ This version now includes the next features:
 - An urgent issue is now shown as a pulsating alert
 
 ## Snapshots
-![Login page](frontend/src/assets/images/snapshots/Screenshot_2021-11-15-16-38-44-740_com.android.chrome.jpg){ width=50% }
-![Issues View](frontend/src/assets/images/snapshots/Screenshot_20211115-155807_Chrome.jpg)
-![Filters](frontend/src/assets/images/snapshots/Screenshot_20211115-155829_Chrome.jpg)
-![multiple filters](frontend/src/assets/images/snapshots/Screenshot_20211115-155847_Chrome.jpg)
-![Profile view](frontend/src/assets/images/snapshots/Screenshot_20211115-160424_Chrome.jpg)
-![Issue Location](frontend/src/assets/images/snapshots/Screenshot_20211115-160514_Chrome.jpg)
-![take/upload picture](frontend/src/assets/images/snapshots/Screenshot_20211115-160533_Chrome.jpg)
-![describe picture](frontend/src/assets/images/snapshots/Screenshot_20211115-160555_Chrome.jpg)
-![Check issues](frontend/src/assets/images/snapshots/Screenshot_20211115-160600_Chrome.jpg)
-![Pwa view](frontend/src/assets/images/snapshots/Screenshot_20211115-160838_One UI Home.jpg)
-![Notification view](frontend/src/assets/images/snapshots/Screenshot_20211115-161057_One UI Home.jpg)
+![<img src="frontend/src/assets/images/snapshots/Screenshot_2021-11-15-16-38-44-740_com.android.chrome.jpg" widht="190">](frontend/src/assets/images/snapshots/Screenshot_2021-11-15-16-38-44-740_com.android.chrome.jpg)
+![<img src="frontend/src/assets/images/snapshots/Screenshot_20211115-155807_Chrome.jpg" widht="190">](frontend/src/assets/images/snapshots/Screenshot_20211115-155807_Chrome.jpg)
+![<img src="frontend/src/assets/images/snapshots/Screenshot_20211115-155829_Chrome.jpg" widht="190">](frontend/src/assets/images/snapshots/Screenshot_20211115-155829_Chrome.jpg)
+![<img src="frontend/src/assets/images/snapshots/Screenshot_20211115-155847_Chrome.jpg" widht="190">](frontend/src/assets/images/snapshots/Screenshot_20211115-155847_Chrome.jpg)
+![<img src="frontend/src/assets/images/snapshots/Screenshot_20211115-160424_Chrome.jpg" widht="190">](frontend/src/assets/images/snapshots/Screenshot_20211115-160424_Chrome.jpg)
+![<img src="frontend/src/assets/images/snapshots/Screenshot_20211115-160514_Chrome.jpg" widht="190">](frontend/src/assets/images/snapshots/Screenshot_20211115-160514_Chrome.jpg)
+![<img src="frontend/src/assets/images/snapshots/Screenshot_20211115-160533_Chrome.jpg" widht="190">](frontend/src/assets/images/snapshots/Screenshot_20211115-160533_Chrome.jpg)
+![<img src="frontend/src/assets/images/snapshots/Screenshot_20211115-160555_Chrome.jpg" widht="190">](frontend/src/assets/images/snapshots/Screenshot_20211115-160555_Chrome.jpg)
+![<img src="frontend/src/assets/images/snapshots/Screenshot_20211115-160600_Chrome.jpg" widht="190">](frontend/src/assets/images/snapshots/Screenshot_20211115-160600_Chrome.jpg)
+![<img src="frontend/src/assets/images/snapshots/Screenshot_20211115-160838_One UI Home.jpg" widht="190">](frontend/src/assets/images/snapshots/Screenshot_20211115-160838_One UI Home.jpg)
+![<img src="frontend/src/assets/images/snapshots/Screenshot_20211115-161057_One UI Home.jpg" widht="190">](frontend/src/assets/images/snapshots/Screenshot_20211115-161057_One UI Home.jpg)
