@@ -15,7 +15,7 @@ This version now includes the next features:
 - An urgent issue is now shown as a pulsating alert
 
 ## Snapshots
-![Login page](frontend/src/assets/images/snapshots/Screenshot_2021-11-15-16-38-44-740_com.android.chrome.jpg)
+![Login page](frontend/src/assets/images/snapshots/Screenshot_2021-11-15-16-38-44-740_com.android.chrome.jpg){ width=50% }
 ![Issues View](frontend/src/assets/images/snapshots/Screenshot_20211115-155807_Chrome.jpg)
 ![Filters](frontend/src/assets/images/snapshots/Screenshot_20211115-155829_Chrome.jpg)
 ![multiple filters](frontend/src/assets/images/snapshots/Screenshot_20211115-155847_Chrome.jpg)
